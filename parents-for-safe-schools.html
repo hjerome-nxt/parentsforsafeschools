@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parents for Safe Schools | Beyond Good Intentions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #0D1B2A;
@@ -19,1621 +19,718 @@
             --text-light: #5C6378;
             --white: #FFFFFF;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        body[data-lang="hi"] { font-family: 'Noto Sans Devanagari', 'DM Sans', sans-serif; }
+        body[data-lang="ta"] { font-family: 'Noto Sans Tamil', 'DM Sans', sans-serif; }
+        body[data-lang="te"] { font-family: 'Noto Sans Telugu', 'DM Sans', sans-serif; }
+        body[data-lang="bn"] { font-family: 'Noto Sans Bengali', 'DM Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; }
+        body[data-lang="hi"] h1, body[data-lang="hi"] h2, body[data-lang="hi"] h3 { font-family: 'Noto Sans Devanagari', serif; }
+        body[data-lang="ta"] h1, body[data-lang="ta"] h2, body[data-lang="ta"] h3 { font-family: 'Noto Sans Tamil', serif; }
+        body[data-lang="te"] h1, body[data-lang="te"] h2, body[data-lang="te"] h3 { font-family: 'Noto Sans Telugu', serif; }
+        body[data-lang="bn"] h1, body[data-lang="bn"] h2, body[data-lang="bn"] h3 { font-family: 'Noto Sans Bengali', serif; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+        nav.scrolled { background: rgba(13, 27, 42, 0.98); padding: 16px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--amber), var(--amber-light)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .nav-logo-icon svg { width: 24px; height: 24px; fill: var(--white); }
+        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--white); }
+        .nav-links { display: flex; align-items: center; gap: 40px; }
+        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--amber-light); }
+        .nav-cta { background: var(--amber); color: var(--white) !important; padding: 12px 24px; border-radius: 8px; font-weight: 600 !important; }
+        .nav-cta:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+        .language-selector { position: relative; margin-left: 20px; }
+        .language-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+        .language-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--amber-light); }
+        .language-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; transition: transform 0.3s; }
+        .language-selector.open .language-btn svg { transform: rotate(180deg); }
+        .language-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--white); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s; min-width: 180px; z-index: 1001; overflow: hidden; }
+        .language-selector.open .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .language-option { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: var(--text); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .language-option:last-child { border-bottom: none; }
+        .language-option:hover { background: var(--cream); }
+        .language-option.active { background: linear-gradient(135deg, rgba(197, 135, 46, 0.1), rgba(197, 135, 46, 0.05)); color: var(--amber-dark); }
+        .language-option .flag { font-size: 20px; }
+        .language-option .check { width: 18px; height: 18px; stroke: var(--amber); opacity: 0; }
+        .language-option.active .check { opacity: 1; }
+
+        .hero { min-height: 100vh; background: var(--navy); position: relative; display: flex; align-items: center; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(197, 135, 46, 0.08), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(27, 58, 95, 0.2), transparent 50%); }
+        .hero-pattern { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; }
+        .hero-content { max-width: 1400px; margin: 0 auto; padding: 140px 60px 80px; position: relative; z-index: 2; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(197, 135, 46, 0.15); border: 1px solid rgba(197, 135, 46, 0.3); padding: 10px 20px; border-radius: 50px; margin-bottom: 32px; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .hero-eyebrow-dot { width: 8px; height: 8px; background: var(--amber); border-radius: 50%; animation: pulse 2s infinite; }
+        .hero-eyebrow span { color: var(--amber-light); font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+        .hero h1 { font-size: clamp(48px, 7vw, 88px); color: var(--white); max-width: 900px; margin-bottom: 28px; letter-spacing: -2px; animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .hero h1 em { font-style: italic; color: var(--amber-light); }
+        .hero-subtitle { font-size: clamp(18px, 2vw, 22px); color: rgba(255,255,255,0.7); max-width: 620px; margin-bottom: 48px; line-height: 1.8; animation: fadeInUp 0.8s ease-out 0.6s both; }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 700px; animation: fadeInUp 0.8s ease-out 0.8s both; }
+        .hero-stat { border-left: 2px solid var(--amber); padding-left: 24px; }
+        .hero-stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 8px; }
+        .hero-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+        .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; color: rgba(255,255,255,0.4); }
+        .hero-scroll span { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-scroll-line { width: 1px; height: 60px; background: linear-gradient(180deg, var(--amber), transparent); animation: scrollPulse 2s infinite; }
+
+        section { padding: 120px 60px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .section-label-line { width: 40px; height: 2px; background: var(--amber); }
+        .section-label span { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-dark); }
+        .section-title { font-size: clamp(36px, 5vw, 56px); color: var(--navy); margin-bottom: 24px; letter-spacing: -1px; }
+        .section-subtitle { font-size: 18px; color: var(--text-light); max-width: 600px; line-height: 1.8; }
+
+        .crisis { background: var(--cream-dark); }
+        .crisis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+        .crisis-quote { background: var(--white); padding: 48px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.06); position: relative; }
+        .crisis-quote::before { content: '"'; position: absolute; top: 20px; left: 30px; font-family: 'Cormorant Garamond', serif; font-size: 120px; color: var(--amber); opacity: 0.2; line-height: 1; }
+        .crisis-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: var(--navy); margin-bottom: 24px; position: relative; z-index: 1; }
+        .crisis-quote cite { font-style: normal; font-size: 14px; color: var(--text-light); }
+        .crisis-quote cite strong { color: var(--text); display: block; margin-bottom: 4px; }
+        .crisis-content h3 { font-size: 32px; color: var(--navy); margin-bottom: 20px; }
+        .crisis-content p { color: var(--text-light); margin-bottom: 16px; font-size: 17px; }
+        .crisis-highlight { background: linear-gradient(135deg, var(--red-muted), #6B2A2A); color: var(--white); padding: 32px; border-radius: 16px; margin-top: 32px; }
+        .crisis-highlight-stat { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+        .crisis-highlight p { color: rgba(255,255,255,0.85); font-size: 15px; margin: 0; }
+
+        .paradox { background: var(--navy); color: var(--white); }
+        .paradox .section-label span { color: var(--amber-light); }
+        .paradox .section-title { color: var(--white); }
+        .paradox .section-subtitle { color: rgba(255,255,255,0.7); }
+        .paradox-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
+        .paradox-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; transition: all 0.4s; }
+        .paradox-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-8px); border-color: rgba(197, 135, 46, 0.3); }
+        .paradox-card-icon { width: 64px; height: 64px; background: linear-gradient(135deg, rgba(197, 135, 46, 0.2), rgba(197, 135, 46, 0.05)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+        .paradox-card-icon svg { width: 32px; height: 32px; stroke: var(--amber-light); }
+        .paradox-card-hours { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: var(--amber-light); margin-bottom: 8px; }
+        .paradox-card h3 { font-size: 22px; margin-bottom: 12px; }
+        .paradox-card p { color: rgba(255,255,255,0.6); font-size: 15px; }
+        .paradox-card-training { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .paradox-card-training-badge { background: rgba(139, 58, 58, 0.3); color: #F5A5A5; padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+        .paradox-bottom { background: rgba(197, 135, 46, 0.1); border: 1px solid rgba(197, 135, 46, 0.2); border-radius: 20px; padding: 48px; margin-top: 60px; text-align: center; }
+        .paradox-bottom h3 { font-size: 32px; margin-bottom: 16px; }
+        .paradox-bottom p { color: rgba(255,255,255,0.7); font-size: 18px; max-width: 700px; margin: 0 auto; }
+
+        .cta { background: var(--navy); color: var(--white); text-align: center; }
+        .cta-content { max-width: 800px; margin: 0 auto; }
+        .cta h2 { font-size: clamp(40px, 5vw, 56px); color: var(--white); margin-bottom: 20px; }
+        .cta h2 em { color: var(--amber-light); font-style: italic; }
+        .cta-content > p { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.8; }
+        .cta-actions { display: flex; justify-content: center; gap: 20px; margin-bottom: 48px; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
+        .btn svg { width: 20px; height: 20px; }
+        .btn-primary { background: var(--amber); color: var(--white); box-shadow: 0 8px 30px rgba(197, 135, 46, 0.4); }
+        .btn-primary:hover { background: var(--amber-light); transform: translateY(-3px); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--amber-light); }
+        .cta-trust { display: flex; justify-content: center; gap: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .cta-trust-item { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.6); font-size: 14px; }
+        .cta-trust-item svg { width: 20px; height: 20px; stroke: var(--amber-light); }
+
+        footer { background: var(--navy-light); padding: 40px 60px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { display: flex; align-items: center; gap: 12px; }
+        .footer-logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .footer-logo-icon svg { width: 20px; height: 20px; fill: var(--white); }
+        .footer-logo span { color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
+        .footer-text { color: rgba(255,255,255,0.5); font-size: 14px; }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
+        .footer-links a:hover { color: var(--amber-light); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'DM Sans', -apple-system, sans-serif;
-            background: var(--cream);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(13, 27, 42, 0.98);
-            padding: 16px 60px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .nav-logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(197, 135, 46, 0.3);
-        }
-
-        .nav-logo-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--white);
-        }
-
-        .nav-logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.85);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--amber-light);
-        }
-
-        .nav-cta {
-            background: var(--amber);
-            color: var(--white) !important;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .nav-cta:hover {
-            background: var(--amber-light);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: var(--navy);
-            position: relative;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 30% 20%, rgba(197, 135, 46, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(27, 58, 95, 0.2) 0%, transparent 50%);
-        }
-
-        .hero-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 140px 60px 80px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(197, 135, 46, 0.15);
-            border: 1px solid rgba(197, 135, 46, 0.3);
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin-bottom: 32px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero-eyebrow-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--amber);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .hero-eyebrow span {
-            color: var(--amber-light);
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 7vw, 88px);
-            color: var(--white);
-            max-width: 900px;
-            margin-bottom: 28px;
-            letter-spacing: -2px;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--amber-light);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(18px, 2vw, 22px);
-            color: rgba(255,255,255,0.7);
-            max-width: 620px;
-            margin-bottom: 48px;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 700px;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-
-        .hero-stat {
-            border-left: 2px solid var(--amber);
-            padding-left: 24px;
-        }
-
-        .hero-stat-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--white);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .hero-stat-label {
-            font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.4;
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255,255,255,0.4);
-            animation: fadeIn 1s ease-out 1.2s both;
-        }
-
-        .hero-scroll span {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero-scroll-line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(180deg, var(--amber) 0%, transparent 100%);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 120px 60px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .section-label-line {
-            width: 40px;
-            height: 2px;
-            background: var(--amber);
-        }
-
-        .section-label span {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--amber-dark);
-        }
-
-        .section-title {
-            font-size: clamp(36px, 5vw, 56px);
-            color: var(--navy);
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            font-size: 18px;
-            color: var(--text-light);
-            max-width: 600px;
-            line-height: 1.8;
-        }
-
-        /* Crisis Section */
-        .crisis {
-            background: var(--cream-dark);
-            position: relative;
-        }
-
-        .crisis-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            margin-top: 60px;
-        }
-
-        .crisis-quote {
-            background: var(--white);
-            padding: 48px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
-            position: relative;
-        }
-
-        .crisis-quote::before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 30px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 120px;
-            color: var(--amber);
-            opacity: 0.2;
-            line-height: 1;
-        }
-
-        .crisis-quote blockquote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-style: italic;
-            color: var(--navy);
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .crisis-quote cite {
-            font-style: normal;
-            font-size: 14px;
-            color: var(--text-light);
-        }
-
-        .crisis-quote cite strong {
-            color: var(--text);
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .crisis-content h3 {
-            font-size: 32px;
-            color: var(--navy);
-            margin-bottom: 20px;
-        }
-
-        .crisis-content p {
-            color: var(--text-light);
-            margin-bottom: 16px;
-            font-size: 17px;
-        }
-
-        .crisis-highlight {
-            background: linear-gradient(135deg, var(--red-muted) 0%, #6B2A2A 100%);
-            color: var(--white);
-            padding: 32px;
-            border-radius: 16px;
-            margin-top: 32px;
-        }
-
-        .crisis-highlight-stat {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 56px;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .crisis-highlight p {
-            color: rgba(255,255,255,0.85);
-            font-size: 15px;
-            margin: 0;
-        }
-
-        /* Paradox Section */
-        .paradox {
-            background: var(--navy);
-            color: var(--white);
-        }
-
-        .paradox .section-label span {
-            color: var(--amber-light);
-        }
-
-        .paradox .section-title {
-            color: var(--white);
-        }
-
-        .paradox .section-subtitle {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .paradox-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 60px;
-        }
-
-        .paradox-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.4s ease;
-        }
-
-        .paradox-card:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-8px);
-            border-color: rgba(197, 135, 46, 0.3);
-        }
-
-        .paradox-card-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, rgba(197, 135, 46, 0.2) 0%, rgba(197, 135, 46, 0.05) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-
-        .paradox-card-icon svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--amber-light);
-        }
-
-        .paradox-card-hours {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--amber-light);
-            margin-bottom: 8px;
-        }
-
-        .paradox-card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-        }
-
-        .paradox-card p {
-            color: rgba(255,255,255,0.6);
-            font-size: 15px;
-        }
-
-        .paradox-card-training {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .paradox-card-training-badge {
-            background: rgba(139, 58, 58, 0.3);
-            color: #F5A5A5;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .paradox-bottom {
-            background: rgba(197, 135, 46, 0.1);
-            border: 1px solid rgba(197, 135, 46, 0.2);
-            border-radius: 20px;
-            padding: 48px;
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .paradox-bottom h3 {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .paradox-bottom p {
-            color: rgba(255,255,255,0.7);
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Governance Section */
-        .governance {
-            background: var(--cream);
-        }
-
-        .governance-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 80px;
-        }
-
-        .governance-header .section-label {
-            justify-content: center;
-        }
-
-        .governance-header .section-title {
-            margin-bottom: 20px;
-        }
-
-        .governance-header .section-subtitle {
-            max-width: 100%;
-        }
-
-        .governance-comparison {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 40px;
-            align-items: stretch;
-        }
-
-        .governance-column {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 48px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
-        }
-
-        .governance-column.problem {
-            border-top: 4px solid var(--red-muted);
-        }
-
-        .governance-column.solution {
-            border-top: 4px solid #2E7D32;
-        }
-
-        .governance-column-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .governance-column-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .problem .governance-column-icon {
-            background: rgba(139, 58, 58, 0.1);
-        }
-
-        .problem .governance-column-icon svg {
-            stroke: var(--red-muted);
-        }
-
-        .solution .governance-column-icon {
-            background: rgba(46, 125, 50, 0.1);
-        }
-
-        .solution .governance-column-icon svg {
-            stroke: #2E7D32;
-        }
-
-        .governance-column h3 {
-            font-size: 24px;
-            color: var(--navy);
-        }
-
-        .governance-list {
-            list-style: none;
-        }
-
-        .governance-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
-
-        .governance-list li:last-child {
-            border-bottom: none;
-        }
-
-        .governance-list-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .problem .governance-list-icon {
-            background: rgba(139, 58, 58, 0.1);
-        }
-
-        .problem .governance-list-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--red-muted);
-        }
-
-        .solution .governance-list-icon {
-            background: rgba(46, 125, 50, 0.1);
-        }
-
-        .solution .governance-list-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: #2E7D32;
-        }
-
-        .governance-list span {
-            font-size: 15px;
-            color: var(--text-light);
-        }
-
-        .governance-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .governance-arrow-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--amber);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 30px rgba(197, 135, 46, 0.3);
-        }
-
-        .governance-arrow-icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: var(--white);
-        }
-
-        /* Standards Section */
-        .standards {
-            background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
-        }
-
-        .standards-intro {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-            align-items: center;
-            margin-bottom: 80px;
-        }
-
-        .standards-intro-content .section-title {
-            margin-bottom: 24px;
-        }
-
-        .standards-intro-content p {
-            color: var(--text-light);
-            font-size: 17px;
-            margin-bottom: 16px;
-        }
-
-        .standards-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--white);
-            padding: 12px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-top: 24px;
-        }
-
-        .standards-badge img {
-            height: 40px;
-        }
-
-        .standards-badge span {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-
-        .standards-badge span strong {
-            display: block;
-            color: var(--navy);
-            font-size: 14px;
-        }
-
-        .standards-visual {
-            background: var(--navy);
-            border-radius: 24px;
-            padding: 48px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .standards-visual::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(197, 135, 46, 0.15) 0%, transparent 60%);
-        }
-
-        .standards-pyramid {
-            position: relative;
-            z-index: 1;
-        }
-
-        .standards-pyramid-level {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .standards-pyramid-level:hover {
-            background: rgba(255,255,255,0.12);
-        }
-
-        .standards-pyramid-level.foundation {
-            background: linear-gradient(135deg, rgba(197, 135, 46, 0.2) 0%, rgba(197, 135, 46, 0.05) 100%);
-            border-color: rgba(197, 135, 46, 0.3);
-        }
-
-        .standards-pyramid-num {
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .foundation .standards-pyramid-num {
-            background: var(--amber);
-        }
-
-        .standards-pyramid-content h4 {
-            font-size: 16px;
-            color: var(--white);
-            margin-bottom: 4px;
-        }
-
-        .standards-pyramid-content p {
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            margin: 0;
-        }
-
-        .standards-pyramid-arrow {
-            text-align: center;
-            color: var(--amber);
-            margin: 16px 0;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .standards-requirements {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-        }
-
-        .standards-req {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 28px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-            transition: all 0.3s ease;
-        }
-
-        .standards-req:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-        }
-
-        .standards-req-num {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .standards-req h4 {
-            font-size: 15px;
-            color: var(--navy);
-            margin-bottom: 8px;
-        }
-
-        .standards-req p {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(197, 135, 46, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(197, 135, 46, 0.08) 0%, transparent 50%);
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-size: clamp(36px, 5vw, 52px);
-            color: var(--white);
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .cta-content h2 em {
-            font-style: italic;
-            color: var(--amber-light);
-        }
-
-        .cta-content p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .cta-actions {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 18px 36px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
-            color: var(--white);
-            box-shadow: 0 8px 30px rgba(197, 135, 46, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(197, 135, 46, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--white);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.3);
-        }
-
-        .btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .cta-trust {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .cta-trust-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
-        }
-
-        .cta-trust-item svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--amber-light);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--navy);
-            padding: 60px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .footer-logo-icon svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--white);
-        }
-
-        .footer-logo span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .footer-text {
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--amber-light);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Responsive */
         @media (max-width: 1024px) {
-            section {
-                padding: 80px 40px;
-            }
-
-            nav {
-                padding: 16px 30px;
-            }
-
-            .hero-content {
-                padding: 120px 40px 60px;
-            }
-
-            .hero-stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
-            }
-
-            .crisis-grid,
-            .standards-intro {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .paradox-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .governance-comparison {
-                grid-template-columns: 1fr;
-            }
-
-            .governance-arrow {
-                transform: rotate(90deg);
-                padding: 20px 0;
-            }
-
-            .standards-requirements {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            section { padding: 80px 40px; }
+            nav { padding: 16px 30px; }
+            .hero-content { padding: 120px 40px 60px; }
+            .crisis-grid { grid-template-columns: 1fr; gap: 40px; }
+            .paradox-cards { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 768px) {
-            section {
-                padding: 60px 24px;
-            }
-
-            nav {
-                padding: 16px 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
-                padding: 100px 24px 60px;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .hero-stat {
-                padding-left: 20px;
-            }
-
-            .hero-stat-number {
-                font-size: 36px;
-            }
-
-            .crisis-quote {
-                padding: 32px;
-            }
-
-            .crisis-quote blockquote {
-                font-size: 20px;
-            }
-
-            .governance-column {
-                padding: 32px;
-            }
-
-            .standards-visual {
-                padding: 32px;
-            }
-
-            .standards-requirements {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .cta-trust {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 24px;
-                text-align: center;
-            }
+            section { padding: 60px 24px; }
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .language-selector { margin-left: auto; }
+            .hero-content { padding: 100px 24px 60px; }
+            .hero-stats { grid-template-columns: 1fr; gap: 20px; }
+            .hero-stat-number { font-size: 36px; }
+            .crisis-quote { padding: 32px; }
+            .crisis-quote blockquote { font-size: 20px; }
+            .cta-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .cta-trust { flex-direction: column; gap: 20px; }
+            .footer-content { flex-direction: column; gap: 24px; text-align: center; }
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
+<body data-lang="en">
     <nav id="navbar">
         <a href="#" class="nav-logo">
             <div class="nav-logo-icon">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             </div>
-            <span class="nav-logo-text">Parents for Safe Schools</span>
+            <span class="nav-logo-text" data-i18n="siteName">Parents for Safe Schools</span>
         </a>
         <div class="nav-links">
-            <a href="#crisis">The Crisis</a>
-            <a href="#paradox">The Paradox</a>
-            <a href="#standards">Standards</a>
-            <a href="#action" class="nav-cta">Take Action</a>
+            <a href="#crisis" data-i18n="navCrisis">The Crisis</a>
+            <a href="#paradox" data-i18n="navParadox">The Paradox</a>
+            <a href="#action" class="nav-cta" data-i18n="navAction">Take Action</a>
+        </div>
+        <div class="language-selector" id="langSelector">
+            <button class="language-btn" onclick="toggleLanguageDropdown()">
+                <span id="currentLangFlag">🇬🇧</span>
+                <span id="currentLangName">English</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="language-dropdown">
+                <div class="language-option active" data-lang="en" onclick="changeLanguage('en')">
+                    <span class="flag">🇬🇧</span><span class="lang-name">English</span>
+                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">
+                    <span class="flag">🇮🇳</span><span class="lang-name">हिन्दी</span>
+                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="language-option" data-lang="ta" onclick="changeLanguage('ta')">
+                    <span class="flag">🇮🇳</span><span class="lang-name">தமிழ்</span>
+                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="language-option" data-lang="te" onclick="changeLanguage('te')">
+                    <span class="flag">🇮🇳</span><span class="lang-name">తెలుగు</span>
+                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="language-option" data-lang="bn" onclick="changeLanguage('bn')">
+                    <span class="flag">🇮🇳</span><span class="lang-name">বাংলা</span>
+                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <div class="hero-eyebrow">
                 <div class="hero-eyebrow-dot"></div>
-                <span>A Parent Advocacy Initiative</span>
+                <span data-i18n="heroEyebrow">A Parent Advocacy Initiative</span>
             </div>
-            <h1>Beyond Good Intentions: <em>A Governance Imperative</em></h1>
-            <p class="hero-subtitle">Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standards—starting with the adults who spend the most time with our children.</p>
+            <h1 data-i18n="heroTitle">Beyond Good Intentions: <em>A Governance Imperative</em></h1>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standards—starting with the adults who spend the most time with our children.</p>
             <div class="hero-stats">
                 <div class="hero-stat">
                     <div class="hero-stat-number" id="counter1">13,892</div>
-                    <div class="hero-stat-label">Student suicides in India in 2023</div>
+                    <div class="hero-stat-label" data-i18n="stat1Label">Student suicides in India in 2023</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-number">65%</div>
-                    <div class="hero-stat-label">Increase over the past decade</div>
+                    <div class="hero-stat-label" data-i18n="stat2Label">Increase over the past decade</div>
                 </div>
                 <div class="hero-stat">
-                    <div class="hero-stat-number">~1/hour</div>
-                    <div class="hero-stat-label">One student life lost every hour</div>
+                    <div class="hero-stat-number">~1/hr</div>
+                    <div class="hero-stat-label" data-i18n="stat3Label">One student life lost every hour</div>
                 </div>
             </div>
         </div>
         <div class="hero-scroll">
-            <span>Scroll to learn more</span>
+            <span data-i18n="scrollMore">Scroll to learn more</span>
             <div class="hero-scroll-line"></div>
         </div>
     </section>
 
-    <!-- Crisis Section -->
     <section class="crisis" id="crisis">
         <div class="container">
             <div class="section-label">
                 <div class="section-label-line"></div>
-                <span>The Reality</span>
+                <span data-i18n="crisisLabel">The Reality</span>
             </div>
-            <h2 class="section-title">This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.</h2>
-            <p class="section-subtitle">Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.</p>
+            <h2 class="section-title" data-i18n="crisisTitle">This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.</h2>
+            <p class="section-subtitle" data-i18n="crisisSubtitle">Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.</p>
             
             <div class="crisis-grid">
                 <div class="crisis-quote">
-                    <blockquote>"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being."</blockquote>
+                    <blockquote data-i18n="crisisQuote">"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being."</blockquote>
                     <cite>
-                        <strong>Delhi Education Minister</strong>
-                        Following the November 2025 student tragedy
+                        <strong data-i18n="crisisQuoteAuthor">Delhi Education Minister</strong>
+                        <span data-i18n="crisisQuoteContext">Following the November 2025 student tragedy</span>
                     </cite>
                 </div>
                 <div class="crisis-content">
-                    <h3>The Pattern Repeats</h3>
-                    <p>When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.</p>
-                    <p>We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.</p>
+                    <h3 data-i18n="crisisPattern">The Pattern Repeats</h3>
+                    <p data-i18n="crisisPatternText1">When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.</p>
+                    <p data-i18n="crisisPatternText2">We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.</p>
                     <div class="crisis-highlight">
-                        <div class="crisis-highlight-stat">0 Hours</div>
-                        <p>Mental health training most teachers receive—despite spending 1,000+ hours annually with students</p>
+                        <div class="crisis-highlight-stat" data-i18n="crisisHighlightStat">0 Hours</div>
+                        <p data-i18n="crisisHighlightText">Mental health training most teachers receive—despite spending 1,000+ hours annually with students</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Paradox Section -->
     <section class="paradox" id="paradox">
         <div class="container">
             <div class="section-label">
                 <div class="section-label-line"></div>
-                <span>The Contact Hours Paradox</span>
+                <span data-i18n="paradoxLabel">The Contact Hours Paradox</span>
             </div>
-            <h2 class="section-title">The People Who See Everything,<br>Trained for Nothing</h2>
-            <p class="section-subtitle">Those who spend the most time with vulnerable populations typically receive zero mental health training.</p>
+            <h2 class="section-title" data-i18n="paradoxTitle">The People Who See Everything,<br>Trained for Nothing</h2>
+            <p class="section-subtitle" data-i18n="paradoxSubtitle">Those who spend the most time with vulnerable populations typically receive zero mental health training.</p>
             
             <div class="paradox-cards">
                 <div class="paradox-card">
                     <div class="paradox-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <div class="paradox-card-hours">1,000+</div>
-                    <h3>Teachers with Students</h3>
-                    <p>More waking hours than parents see their children during school weeks. First to notice changes.</p>
+                    <h3 data-i18n="paradoxCard1Title">Teachers with Students</h3>
+                    <p data-i18n="paradoxCard1Text">More waking hours than parents see their children during school weeks. First to notice changes.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
                     </div>
                 </div>
                 <div class="paradox-card">
                     <div class="paradox-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                     </div>
                     <div class="paradox-card-hours">600+</div>
-                    <h3>Faculty with College Students</h3>
-                    <p>The critical 18-25 age group when mental health issues often first emerge.</p>
+                    <h3 data-i18n="paradoxCard2Title">Faculty with College Students</h3>
+                    <p data-i18n="paradoxCard2Text">The critical 18-25 age group when mental health issues often first emerge.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
                     </div>
                 </div>
                 <div class="paradox-card">
                     <div class="paradox-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                     </div>
                     <div class="paradox-card-hours">2,000+</div>
-                    <h3>Managers with Employees</h3>
-                    <p>Often more time than with family. Positioned to notice distress early.</p>
+                    <h3 data-i18n="paradoxCard3Title">Managers with Employees</h3>
+                    <p data-i18n="paradoxCard3Text">Often more time than with family. Positioned to notice distress early.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
                     </div>
                 </div>
             </div>
             
             <div class="paradox-bottom">
-                <h3>This Is a Governance Failure</h3>
-                <p>We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.</p>
+                <h3 data-i18n="paradoxBottomTitle">This Is a Governance Failure</h3>
+                <p data-i18n="paradoxBottomText">We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.</p>
             </div>
         </div>
     </section>
 
-    <!-- Governance Section -->
-    <section class="governance" id="governance">
-        <div class="container">
-            <div class="governance-header">
-                <div class="section-label">
-                    <div class="section-label-line"></div>
-                    <span>The Shift Required</span>
-                </div>
-                <h2 class="section-title">From Reactive Response to<br>Proactive Governance</h2>
-                <p class="section-subtitle">Student safety must move from an afterthought to a governance priority—with the same rigor we apply to financial audits and building codes.</p>
-            </div>
-            
-            <div class="governance-comparison">
-                <div class="governance-column problem">
-                    <div class="governance-column-header">
-                        <div class="governance-column-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                            </svg>
-                        </div>
-                        <h3>Today's Reality</h3>
-                    </div>
-                    <ul class="governance-list">
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>No written, board-approved wellbeing policies</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>Teachers untrained in distress recognition</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>No defined crisis response protocols</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>Informal, undocumented escalation paths</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>No third-party verification or audits</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <span>React only after tragedy strikes</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="governance-arrow">
-                    <div class="governance-arrow-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                <div class="governance-column solution">
-                    <div class="governance-column-header">
-                        <div class="governance-column-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <h3>What We Need</h3>
-                    </div>
-                    <ul class="governance-list">
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>Board-approved, annually reviewed policies</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>100% of teachers trained as gatekeepers</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>Documented crisis response teams</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>Clear escalation protocols and training</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>Independent certification and annual audits</span>
-                        </li>
-                        <li>
-                            <div class="governance-list-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <span>Prevention through systematic standards</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Standards Section -->
-    <section class="standards" id="standards">
-        <div class="container">
-            <div class="standards-intro">
-                <div class="standards-intro-content">
-                    <div class="section-label">
-                        <div class="section-label-line"></div>
-                        <span>The Solution</span>
-                    </div>
-                    <h2 class="section-title">Institutional Safety Standards:<br>Teacher Training First</h2>
-                    <p>The research is clear: gatekeeper training works. Meta-analysis of 16 randomized controlled trials shows significant improvements in knowledge (effect size 0.72), confidence (0.73), and preparedness (0.69).</p>
-                    <p>When we train teachers to recognize warning signs and respond appropriately, every other safety measure becomes more effective. Without trained teachers, technology generates alerts no one can handle. Students ask for help from unprepared adults.</p>
-                    <div class="standards-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" width="40" height="40">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="M9 12l2 2 4-4"/>
-                        </svg>
-                        <span><strong>Evidence-Based Approach</strong>Backed by peer-reviewed research</span>
-                    </div>
-                </div>
-                <div class="standards-visual">
-                    <div class="standards-pyramid">
-                        <div class="standards-pyramid-level">
-                            <div class="standards-pyramid-num">3</div>
-                            <div class="standards-pyramid-content">
-                                <h4>Technology Integration</h4>
-                                <p>AI monitoring, analytics, digital tools</p>
-                            </div>
-                        </div>
-                        <div class="standards-pyramid-level">
-                            <div class="standards-pyramid-num">2</div>
-                            <div class="standards-pyramid-content">
-                                <h4>Student Programs</h4>
-                                <p>Peer support, SEL curriculum, awareness</p>
-                            </div>
-                        </div>
-                        <div class="standards-pyramid-arrow">▼ BUILD ON THIS FOUNDATION ▼</div>
-                        <div class="standards-pyramid-level foundation">
-                            <div class="standards-pyramid-num">1</div>
-                            <div class="standards-pyramid-content">
-                                <h4>Trained Teachers</h4>
-                                <p>The essential foundation — start here</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="standards-requirements">
-                <div class="standards-req">
-                    <div class="standards-req-num">1</div>
-                    <h4>Gatekeeper Training</h4>
-                    <p>100% of teachers certified in recognizing warning signs and crisis response</p>
-                </div>
-                <div class="standards-req">
-                    <div class="standards-req-num">2</div>
-                    <h4>Ongoing Reinforcement</h4>
-                    <p>Quarterly workshops on psychological safety and burnout prevention</p>
-                </div>
-                <div class="standards-req">
-                    <div class="standards-req-num">3</div>
-                    <h4>Written Policies</h4>
-                    <p>Board-approved wellbeing, grievance, and anti-bullying policies</p>
-                </div>
-                <div class="standards-req">
-                    <div class="standards-req-num">4</div>
-                    <h4>Crisis Response Team</h4>
-                    <p>Trained team with clear protocols and annual simulation exercises</p>
-                </div>
-                <div class="standards-req">
-                    <div class="standards-req-num">5</div>
-                    <h4>Designated Coordinator</h4>
-                    <p>Staff member accountable for program compliance and student wellbeing</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
     <section class="cta" id="action">
         <div class="container">
             <div class="cta-content">
-                <h2>Your Voice <em>Matters</em></h2>
-                <p>Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.</p>
+                <h2 data-i18n="ctaTitle">Your Voice <em>Matters</em></h2>
+                <p data-i18n="ctaText">Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.</p>
                 
                 <div class="cta-actions">
-                    <a href="mailto:swiss@mysafespaces.org?subject=Parent%20Inquiry%20-%20SWISS%20Certification&body=Hello%2C%0A%0AI%20am%20a%20parent%20interested%20in%20learning%20more%20about%20SWISS%20certification%20standards%20for%20my%20child%27s%20school.%0A%0ASchool%20Name%3A%20%0ACity%3A%20%0A%0APlease%20send%20me%20information%20on%3A%0A-%20How%20to%20introduce%20SWISS%20to%20my%20school%0A-%20Questions%20to%20ask%20school%20leadership%0A-%20Parent%20advocacy%20resources%0A%0AThank%20you." class="btn btn-primary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                        Request School Assessment
+                    <a href="#" class="btn btn-primary" onclick="downloadChecklist(); return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-i18n="ctaBtn1">Download Parent Checklist</span>
                     </a>
-                    <a href="https://mysafespaces.org/swiss" target="_blank" class="btn btn-secondary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                        </svg>
-                        Learn About SWISS Standards
+                    <a href="mailto:swiss@mysafespaces.org" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span data-i18n="ctaBtn2">Contact Us</span>
                     </a>
                 </div>
                 
                 <div class="cta-trust">
                     <div class="cta-trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                        <span>Internationally Accredited (CPD Standards Office UK)</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span data-i18n="trust1">International CPD Accreditation</span>
                     </div>
                     <div class="cta-trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                        <span>Evidence-Based Research Foundation</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <span data-i18n="trust2">Evidence-Based Research Foundation</span>
                     </div>
                     <div class="cta-trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        <span>University of Michigan Partnership</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span data-i18n="trust3">Mindful Dignity Lab Partnership</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
                 <div class="footer-logo-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 </div>
-                <span>Parents for Safe Schools</span>
+                <span data-i18n="footerLogo">Parents for Safe Schools</span>
             </div>
-            <p class="footer-text">In partnership with My Safe Spaces | Wellbeing Where It Counts</p>
+            <p class="footer-text" data-i18n="footerText">Advocating for evidence-based institutional safety standards</p>
             <div class="footer-links">
-                <a href="mailto:swiss@mysafespaces.org">Contact</a>
-                <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Standards</a>
-                <a href="https://mysafespaces.org" target="_blank">My Safe Spaces</a>
+                <a href="mailto:swiss@mysafespaces.org" data-i18n="footerContact">Contact</a>
+                <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Certification</a>
+                <a href="https://mindfuldignity.com/" target="_blank" data-i18n="footerLab">Mindful Dignity Lab</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        const translations = {
+            en: {
+                siteName: "Parents for Safe Schools",
+                navCrisis: "The Crisis",
+                navParadox: "The Paradox",
+                navAction: "Take Action",
+                heroEyebrow: "A Parent Advocacy Initiative",
+                heroTitle: "Beyond Good Intentions: <em>A Governance Imperative</em>",
+                heroSubtitle: "Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standards—starting with the adults who spend the most time with our children.",
+                stat1Label: "Student suicides in India in 2023",
+                stat2Label: "Increase over the past decade",
+                stat3Label: "One student life lost every hour",
+                scrollMore: "Scroll to learn more",
+                crisisLabel: "The Reality",
+                crisisTitle: "This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.",
+                crisisSubtitle: "Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.",
+                crisisQuote: "\"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being.\"",
+                crisisQuoteAuthor: "Delhi Education Minister",
+                crisisQuoteContext: "Following the November 2025 student tragedy",
+                crisisPattern: "The Pattern Repeats",
+                crisisPatternText1: "When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.",
+                crisisPatternText2: "We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.",
+                crisisHighlightStat: "0 Hours",
+                crisisHighlightText: "Mental health training most teachers receive—despite spending 1,000+ hours annually with students",
+                paradoxLabel: "The Contact Hours Paradox",
+                paradoxTitle: "The People Who See Everything,<br>Trained for Nothing",
+                paradoxSubtitle: "Those who spend the most time with vulnerable populations typically receive zero mental health training.",
+                paradoxCard1Title: "Teachers with Students",
+                paradoxCard1Text: "More waking hours than parents see their children during school weeks. First to notice changes.",
+                paradoxCard2Title: "Faculty with College Students",
+                paradoxCard2Text: "The critical 18-25 age group when mental health issues often first emerge.",
+                paradoxCard3Title: "Managers with Employees",
+                paradoxCard3Text: "Often more time than with family. Positioned to notice distress early.",
+                paradoxBadge: "Zero MH Training",
+                paradoxBottomTitle: "This Is a Governance Failure",
+                paradoxBottomText: "We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.",
+                ctaTitle: "Your Voice <em>Matters</em>",
+                ctaText: "Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.",
+                ctaBtn1: "Download Parent Checklist",
+                ctaBtn2: "Contact Us",
+                trust1: "International CPD Accreditation",
+                trust2: "Evidence-Based Research Foundation",
+                trust3: "Mindful Dignity Lab Partnership",
+                footerLogo: "Parents for Safe Schools",
+                footerText: "Advocating for evidence-based institutional safety standards",
+                footerContact: "Contact",
+                footerLab: "Mindful Dignity Lab"
+            },
+            hi: {
+                siteName: "सुरक्षित स्कूलों के लिए माता-पिता",
+                navCrisis: "संकट",
+                navParadox: "विरोधाभास",
+                navAction: "कार्रवाई करें",
+                heroEyebrow: "एक अभिभावक वकालत पहल",
+                heroTitle: "अच्छे इरादों से परे: <em>एक शासन अनिवार्यता</em>",
+                heroSubtitle: "छात्र सुरक्षा अब व्यक्तिगत वीरता या प्रतिक्रियाशील उपायों पर निर्भर नहीं रह सकती। व्यवस्थित, जवाबदेह और सत्यापन योग्य संस्थागत मानकों का समय आ गया है।",
+                stat1Label: "2023 में भारत में छात्र आत्महत्याएं",
+                stat2Label: "पिछले दशक में वृद्धि",
+                stat3Label: "हर घंटे एक छात्र की जान",
+                scrollMore: "अधिक जानने के लिए स्क्रॉल करें",
+                crisisLabel: "वास्तविकता",
+                crisisTitle: "यह देखभाल का संकट नहीं है।<br>यह क्षमता का संकट है।",
+                crisisSubtitle: "हर स्कूल में देखभाल करने वाले शिक्षक हैं। हर प्रधानाचार्य चाहते हैं कि उनके छात्र सुरक्षित रहें। लेकिन अच्छे इरादे अकेले हमारे बच्चों की रक्षा नहीं कर सकते।",
+                crisisQuote: "\"किसी भी बच्चे को हमारे स्कूलों में कभी भी अनसुना या अनदेखा महसूस नहीं करना चाहिए। हम उन्हें एक ऐसा वातावरण देने के लिए बाध्य हैं जो उनकी भावनात्मक भलाई का भी पोषण करे।\"",
+                crisisQuoteAuthor: "दिल्ली शिक्षा मंत्री",
+                crisisQuoteContext: "नवंबर 2025 की छात्र त्रासदी के बाद",
+                crisisPattern: "पैटर्न दोहराता है",
+                crisisPatternText1: "जब त्रासदी होती है, तो प्रतिक्रिया हमेशा एक जैसी होती है: कर्मचारियों का निलंबन, समितियों का गठन। फिर सुर्खियां फीकी पड़ जाती हैं।",
+                crisisPatternText2: "हम संकटों पर प्रतिक्रिया करते हैं। हम उन्हें रोकते नहीं हैं। हम शिक्षकों को पाठ्यक्रम पढ़ाने के लिए प्रशिक्षित करते हैं, संकट में छात्र को पहचानने के लिए नहीं।",
+                crisisHighlightStat: "0 घंटे",
+                crisisHighlightText: "अधिकांश शिक्षकों को मिलने वाला मानसिक स्वास्थ्य प्रशिक्षण—छात्रों के साथ 1,000+ घंटे बिताने के बावजूद",
+                paradoxLabel: "संपर्क घंटे विरोधाभास",
+                paradoxTitle: "जो लोग सब कुछ देखते हैं,<br>किसी चीज़ के लिए प्रशिक्षित नहीं",
+                paradoxSubtitle: "जो लोग कमजोर आबादी के साथ सबसे अधिक समय बिताते हैं, उन्हें आमतौर पर शून्य मानसिक स्वास्थ्य प्रशिक्षण मिलता है।",
+                paradoxCard1Title: "छात्रों के साथ शिक्षक",
+                paradoxCard1Text: "स्कूल के हफ्तों में माता-पिता अपने बच्चों को जितने जागने के घंटे देखते हैं उससे अधिक।",
+                paradoxCard2Title: "कॉलेज छात्रों के साथ फैकल्टी",
+                paradoxCard2Text: "महत्वपूर्ण 18-25 आयु वर्ग जब मानसिक स्वास्थ्य समस्याएं अक्सर पहली बार उभरती हैं।",
+                paradoxCard3Title: "कर्मचारियों के साथ प्रबंधक",
+                paradoxCard3Text: "अक्सर परिवार के साथ बिताए समय से अधिक। जल्दी संकट को नोटिस करने की स्थिति में।",
+                paradoxBadge: "शून्य MH प्रशिक्षण",
+                paradoxBottomTitle: "यह एक शासन विफलता है",
+                paradoxBottomText: "हम अग्नि सुरक्षा के लिए इमारतों को प्रमाणित करते हैं। लेकिन हमारे बच्चों की मनोवैज्ञानिक सुरक्षा के लिए कोई व्यवस्थित मानक नहीं हैं।",
+                ctaTitle: "आपकी आवाज़ <em>मायने रखती है</em>",
+                ctaText: "स्कूल माता-पिता की अपेक्षाओं का जवाब देते हैं। जब माता-पिता सवाल पूछते हैं और मानकों की वकालत करते हैं, तो बदलाव होता है।",
+                ctaBtn1: "अभिभावक चेकलिस्ट डाउनलोड करें",
+                ctaBtn2: "संपर्क करें",
+                trust1: "अंतर्राष्ट्रीय CPD मान्यता",
+                trust2: "साक्ष्य-आधारित अनुसंधान नींव",
+                trust3: "माइंडफुल डिग्निटी लैब साझेदारी",
+                footerLogo: "सुरक्षित स्कूलों के लिए माता-पिता",
+                footerText: "साक्ष्य-आधारित संस्थागत सुरक्षा मानकों की वकालत",
+                footerContact: "संपर्क",
+                footerLab: "माइंडफुल डिग्निटी लैब"
+            },
+            ta: {
+                siteName: "பாதுகாப்பான பள்ளிகளுக்கான பெற்றோர்கள்",
+                navCrisis: "நெருக்கடி",
+                navParadox: "முரண்பாடு",
+                navAction: "நடவடிக்கை எடுங்கள்",
+                heroEyebrow: "ஒரு பெற்றோர் வக்காலத்து முயற்சி",
+                heroTitle: "நல்ல நோக்கங்களுக்கு அப்பால்: <em>ஒரு ஆளுகை கட்டாயம்</em>",
+                heroSubtitle: "மாணவர் பாதுகாப்பு இனி தனிப்பட்ட வீரம் அல்லது எதிர்வினை நடவடிக்கைகளில் தங்கியிருக்க முடியாது. முறையான நிறுவன தரநிலைகளுக்கான நேரம் இது.",
+                stat1Label: "2023ல் இந்தியாவில் மாணவர் தற்கொலைகள்",
+                stat2Label: "கடந்த தசாப்தத்தில் அதிகரிப்பு",
+                stat3Label: "ஒவ்வொரு மணி நேரமும் ஒரு மாணவர் உயிர்",
+                scrollMore: "மேலும் அறிய ஸ்க்ரோல் செய்யவும்",
+                crisisLabel: "உண்மை",
+                crisisTitle: "இது அக்கறையின் நெருக்கடி அல்ல.<br>இது திறனின் நெருக்கடி.",
+                crisisSubtitle: "ஒவ்வொரு பள்ளியிலும் அக்கறையுள்ள ஆசிரியர்கள் உள்ளனர். ஆனால் நல்ல நோக்கங்கள் மட்டுமே நம் குழந்தைகளைப் பாதுகாக்க முடியாது.",
+                crisisQuote: "\"எந்த குழந்தையும் நம் பள்ளிகளில் கேட்கப்படாமல் அல்லது பார்க்கப்படாமல் உணரக்கூடாது. அவர்களின் உணர்ச்சி நல்வாழ்வையும் வளர்க்கும் சூழலை நாம் அவர்களுக்குக் கொடுக்க வேண்டும்.\"",
+                crisisQuoteAuthor: "டெல்லி கல்வி அமைச்சர்",
+                crisisQuoteContext: "நவம்பர் 2025 மாணவர் சோகத்தைத் தொடர்ந்து",
+                crisisPattern: "முறை மீண்டும் மீண்டும் வருகிறது",
+                crisisPatternText1: "சோகம் நிகழும்போது, பதில் எப்போதும் ஒன்றே: ஊழியர்களை இடைநீக்கம், குழுக்களை அமைப்பது. பின்னர் தலைப்புச் செய்திகள் மறைந்துவிடும்.",
+                crisisPatternText2: "நாம் நெருக்கடிகளுக்கு எதிர்வினையாற்றுகிறோம். நாம் அவற்றைத் தடுப்பதில்லை.",
+                crisisHighlightStat: "0 மணி நேரம்",
+                crisisHighlightText: "பெரும்பாலான ஆசிரியர்கள் பெறும் மனநல பயிற்சி—மாணவர்களுடன் 1,000+ மணி நேரம் செலவழித்தாலும்",
+                paradoxLabel: "தொடர்பு நேர முரண்பாடு",
+                paradoxTitle: "எல்லாவற்றையும் பார்க்கும் மக்கள்,<br>எதற்கும் பயிற்சி பெறவில்லை",
+                paradoxSubtitle: "பாதிக்கப்படக்கூடிய மக்களுடன் அதிக நேரம் செலவிடுபவர்கள் பொதுவாக மனநல பயிற்சி பெறுவதில்லை.",
+                paradoxCard1Title: "மாணவர்களுடன் ஆசிரியர்கள்",
+                paradoxCard1Text: "பள்ளி வாரங்களில் பெற்றோர் தங்கள் குழந்தைகளைப் பார்ப்பதை விட அதிக விழிப்பு நேரம்.",
+                paradoxCard2Title: "கல்லூரி மாணவர்களுடன் ஆசிரியர் குழு",
+                paradoxCard2Text: "மனநல பிரச்சினைகள் முதலில் வெளிப்படும் முக்கியமான 18-25 வயது குழு.",
+                paradoxCard3Title: "பணியாளர்களுடன் மேலாளர்கள்",
+                paradoxCard3Text: "பெரும்பாலும் குடும்பத்துடன் செலவிடும் நேரத்தை விட அதிகம்.",
+                paradoxBadge: "மனநல பயிற்சி இல்லை",
+                paradoxBottomTitle: "இது ஒரு ஆளுகை தோல்வி",
+                paradoxBottomText: "தீ பாதுகாப்புக்கு கட்டிடங்களை சான்றளிக்கிறோம். ஆனால் நம் குழந்தைகளின் உளவியல் பாதுகாப்புக்கு முறையான தரநிலைகள் இல்லை.",
+                ctaTitle: "உங்கள் குரல் <em>முக்கியம்</em>",
+                ctaText: "பள்ளிகள் பெற்றோர் எதிர்பார்ப்புகளுக்கு பதிலளிக்கின்றன. பெற்றோர் கேள்விகள் கேட்கும்போது, மாற்றம் நிகழ்கிறது.",
+                ctaBtn1: "பெற்றோர் சரிபார்ப்பு பட்டியல் பதிவிறக்கம்",
+                ctaBtn2: "தொடர்பு கொள்ளுங்கள்",
+                trust1: "சர்வதேச CPD அங்கீகாரம்",
+                trust2: "சான்று-அடிப்படையிலான ஆராய்ச்சி",
+                trust3: "மைண்ட்ஃபுல் டிக்னிட்டி லேப் கூட்டாண்மை",
+                footerLogo: "பாதுகாப்பான பள்ளிகளுக்கான பெற்றோர்கள்",
+                footerText: "சான்று-அடிப்படையிலான நிறுவன பாதுகாப்பு தரநிலைகளுக்கு வக்காலத்து",
+                footerContact: "தொடர்பு",
+                footerLab: "மைண்ட்ஃபுல் டிக்னிட்டி லேப்"
+            },
+            te: {
+                siteName: "సురక్షిత పాఠశాలల కోసం తల్లిదండ్రులు",
+                navCrisis: "సంక్షోభం",
+                navParadox: "విరుద్ధత",
+                navAction: "చర్య తీసుకోండి",
+                heroEyebrow: "ఒక తల్లిదండ్రుల న్యాయవాద చొరవ",
+                heroTitle: "మంచి ఉద్దేశాలకు అతీతంగా: <em>ఒక పాలనా అవసరం</em>",
+                heroSubtitle: "విద్యార్థి భద్రత ఇకపై వ్యక్తిగత వీరత్వం లేదా ప్రతిస్పందన చర్యలపై ఆధారపడలేదు. క్రమబద్ధమైన సంస్థాగత ప్రమాణాల సమయం వచ్చింది.",
+                stat1Label: "2023లో భారతదేశంలో విద్యార్థి ఆత్మహత్యలు",
+                stat2Label: "గత దశాబ్దంలో పెరుగుదల",
+                stat3Label: "ప్రతి గంటకు ఒక విద్యార్థి ప్రాణాలు",
+                scrollMore: "మరింత తెలుసుకోవడానికి స్క్రోల్ చేయండి",
+                crisisLabel: "వాస్తవికత",
+                crisisTitle: "ఇది శ్రద్ధ యొక్క సంక్షోభం కాదు.<br>ఇది సామర్థ్యం యొక్క సంక్షోభం.",
+                crisisSubtitle: "ప్రతి పాఠశాలలో శ్రద్ధగల ఉపాధ్యాయులు ఉన్నారు. కానీ మంచి ఉద్దేశాలు మాత్రమే మన పిల్లలను రక్షించలేవు.",
+                crisisQuote: "\"ఏ పిల్లవాడు మన పాఠశాలల్లో వినబడకుండా లేదా చూడబడకుండా ఉండకూడదు. వారి భావోద్వేగ శ్రేయస్సును కూడా పెంపొందించే వాతావరణాన్ని మేము వారికి అందించాలి.\"",
+                crisisQuoteAuthor: "ఢిల్లీ విద్యా మంత్రి",
+                crisisQuoteContext: "నవంబర్ 2025 విద్యార్థి విషాదం తర్వాత",
+                crisisPattern: "నమూనా పునరావృతమవుతోంది",
+                crisisPatternText1: "విషాదం జరిగినప్పుడు, స్పందన ఎల్లప్పుడూ ఒకే విధంగా ఉంటుంది: సిబ్బంది సస్పెన్షన్, కమిటీల ఏర్పాటు.",
+                crisisPatternText2: "మేము సంక్షోభాలకు స్పందిస్తాము. మేము వాటిని నివారించము.",
+                crisisHighlightStat: "0 గంటలు",
+                crisisHighlightText: "చాలా మంది ఉపాధ్యాయులు పొందే మానసిక ఆరోగ్య శిక్షణ—విద్యార్థులతో 1,000+ గంటలు గడిపినప్పటికీ",
+                paradoxLabel: "సంపర్క గంటల విరుద్ధత",
+                paradoxTitle: "ప్రతిదీ చూసే వ్యక్తులు,<br>ఏదానికీ శిక్షణ పొందలేదు",
+                paradoxSubtitle: "దుర్బల జనాభాతో ఎక్కువ సమయం గడిపేవారు సాధారణంగా మానసిక ఆరోగ్య శిక్షణ పొందరు.",
+                paradoxCard1Title: "విద్యార్థులతో ఉపాధ్యాయులు",
+                paradoxCard1Text: "పాఠశాల వారాల్లో తల్లిదండ్రులు తమ పిల్లలను చూడటం కంటే ఎక్కువ మేల్కొన్న గంటలు.",
+                paradoxCard2Title: "కళాశాల విద్యార్థులతో అధ్యాపకులు",
+                paradoxCard2Text: "మానసిక ఆరోగ్య సమస్యలు తరచుగా మొదట కనిపించే కీలకమైన 18-25 వయస్సు వర్గం.",
+                paradoxCard3Title: "ఉద్యోగులతో మేనేజర్లు",
+                paradoxCard3Text: "తరచుగా కుటుంబంతో కంటే ఎక్కువ సమయం.",
+                paradoxBadge: "మానసిక ఆరోగ్య శిక్షణ లేదు",
+                paradoxBottomTitle: "ఇది ఒక పాలనా వైఫల్యం",
+                paradoxBottomText: "మేము అగ్ని భద్రత కోసం భవనాలను ధృవీకరిస్తాము. కానీ మన పిల్లల మానసిక భద్రత కోసం క్రమబద్ధమైన ప్రమాణాలు లేవు.",
+                ctaTitle: "మీ గొంతు <em>ముఖ్యం</em>",
+                ctaText: "పాఠశాలలు తల్లిదండ్రుల అంచనాలకు స్పందిస్తాయి. తల్లిదండ్రులు ప్రశ్నలు అడిగినప్పుడు, మార్పు జరుగుతుంది.",
+                ctaBtn1: "తల్లిదండ్రుల చెక్‌లిస్ట్ డౌన్‌లోడ్",
+                ctaBtn2: "సంప్రదించండి",
+                trust1: "అంతర్జాతీయ CPD గుర్తింపు",
+                trust2: "సాక్ష్యం-ఆధారిత పరిశోధన",
+                trust3: "మైండ్‌ఫుల్ డిగ్నిటీ లాబ్ భాగస్వామ్యం",
+                footerLogo: "సురక్షిత పాఠశాలల కోసం తల్లిదండ్రులు",
+                footerText: "సాక్ష్యం-ఆధారిత సంస్థాగత భద్రతా ప్రమాణాల కోసం వాదించడం",
+                footerContact: "సంప్రదించండి",
+                footerLab: "మైండ్‌ఫుల్ డిగ్నిటీ లాబ్"
+            },
+            bn: {
+                siteName: "নিরাপদ স্কুলের জন্য অভিভাবক",
+                navCrisis: "সংকট",
+                navParadox: "বিরোধাভাস",
+                navAction: "পদক্ষেপ নিন",
+                heroEyebrow: "একটি অভিভাবক সমর্থন উদ্যোগ",
+                heroTitle: "ভালো উদ্দেশ্যের বাইরে: <em>একটি শাসন অপরিহার্যতা</em>",
+                heroSubtitle: "ছাত্র নিরাপত্তা আর ব্যক্তিগত বীরত্ব বা প্রতিক্রিয়াশীল পদক্ষেপের উপর নির্ভর করতে পারে না। পদ্ধতিগত প্রাতিষ্ঠানিক মানদণ্ডের সময় এসেছে।",
+                stat1Label: "২০২৩ সালে ভারতে ছাত্র আত্মহত্যা",
+                stat2Label: "গত দশকে বৃদ্ধি",
+                stat3Label: "প্রতি ঘণ্টায় একজন ছাত্রের জীবন",
+                scrollMore: "আরও জানতে স্ক্রোল করুন",
+                crisisLabel: "বাস্তবতা",
+                crisisTitle: "এটি যত্নের সংকট নয়।<br>এটি সক্ষমতার সংকট।",
+                crisisSubtitle: "প্রতিটি স্কুলে যত্নশীল শিক্ষক আছেন। কিন্তু শুধু ভালো উদ্দেশ্য আমাদের সন্তানদের রক্ষা করতে পারে না।",
+                crisisQuote: "\"কোনো শিশু আমাদের স্কুলে কখনোই অশ্রুত বা অদেখা অনুভব করা উচিত নয়। আমরা তাদের এমন একটি পরিবেশ দিতে বাধ্য যা তাদের মানসিক কল্যাণকেও লালন করে।\"",
+                crisisQuoteAuthor: "দিল্লি শিক্ষামন্ত্রী",
+                crisisQuoteContext: "নভেম্বর ২০২৫ ছাত্র ট্র্যাজেডির পরে",
+                crisisPattern: "প্যাটার্ন পুনরাবৃত্তি হয়",
+                crisisPatternText1: "যখন ট্র্যাজেডি ঘটে, প্রতিক্রিয়া সবসময় একই: কর্মচারীদের সাসপেনশন, কমিটি গঠন। তারপর শিরোনাম ম্লান হয়ে যায়।",
+                crisisPatternText2: "আমরা সংকটে প্রতিক্রিয়া করি। আমরা তাদের প্রতিরোধ করি না।",
+                crisisHighlightStat: "০ ঘণ্টা",
+                crisisHighlightText: "বেশিরভাগ শিক্ষক যে মানসিক স্বাস্থ্য প্রশিক্ষণ পান—ছাত্রদের সাথে ১,০০০+ ঘণ্টা কাটানো সত্ত্বেও",
+                paradoxLabel: "যোগাযোগ সময়ের বিরোধাভাস",
+                paradoxTitle: "যারা সবকিছু দেখেন,<br>কিছুর জন্য প্রশিক্ষিত নন",
+                paradoxSubtitle: "যারা দুর্বল জনগোষ্ঠীর সাথে সবচেয়ে বেশি সময় কাটান তারা সাধারণত কোনো মানসিক স্বাস্থ্য প্রশিক্ষণ পান না।",
+                paradoxCard1Title: "ছাত্রদের সাথে শিক্ষক",
+                paradoxCard1Text: "স্কুল সপ্তাহে অভিভাবকরা তাদের সন্তানদের যতটা জাগ্রত সময় দেখেন তার চেয়ে বেশি।",
+                paradoxCard2Title: "কলেজ ছাত্রদের সাথে অনুষদ",
+                paradoxCard2Text: "গুরুত্বপূর্ণ ১৮-২৫ বয়সের গ্রুপ যখন মানসিক স্বাস্থ্য সমস্যা প্রায়ই প্রথম দেখা দেয়।",
+                paradoxCard3Title: "কর্মচারীদের সাথে ম্যানেজার",
+                paradoxCard3Text: "প্রায়ই পরিবারের সাথে চেয়ে বেশি সময়।",
+                paradoxBadge: "কোনো MH প্রশিক্ষণ নেই",
+                paradoxBottomTitle: "এটি একটি শাসন ব্যর্থতা",
+                paradoxBottomText: "আমরা অগ্নি নিরাপত্তার জন্য ভবন সার্টিফাই করি। কিন্তু আমাদের সন্তানদের মানসিক নিরাপত্তার জন্য কোনো পদ্ধতিগত মানদণ্ড নেই।",
+                ctaTitle: "আপনার কণ্ঠস্বর <em>গুরুত্বপূর্ণ</em>",
+                ctaText: "স্কুলগুলি অভিভাবকদের প্রত্যাশায় সাড়া দেয়। যখন অভিভাবকরা প্রশ্ন করেন, পরিবর্তন হয়।",
+                ctaBtn1: "অভিভাবক চেকলিস্ট ডাউনলোড",
+                ctaBtn2: "যোগাযোগ করুন",
+                trust1: "আন্তর্জাতিক CPD স্বীকৃতি",
+                trust2: "প্রমাণ-ভিত্তিক গবেষণা",
+                trust3: "মাইন্ডফুল ডিগনিটি ল্যাব অংশীদারিত্ব",
+                footerLogo: "নিরাপদ স্কুলের জন্য অভিভাবক",
+                footerText: "প্রমাণ-ভিত্তিক প্রাতিষ্ঠানিক নিরাপত্তা মানদণ্ডের পক্ষে কথা বলা",
+                footerContact: "যোগাযোগ",
+                footerLab: "মাইন্ডফুল ডিগনিটি ল্যাব"
+            }
+        };
+
+        const languageNames = {
+            en: { name: "English", flag: "🇬🇧" },
+            hi: { name: "हिन्दी", flag: "🇮🇳" },
+            ta: { name: "தமிழ்", flag: "🇮🇳" },
+            te: { name: "తెలుగు", flag: "🇮🇳" },
+            bn: { name: "বাংলা", flag: "🇮🇳" }
+        };
+
+        function toggleLanguageDropdown() {
+            document.getElementById('langSelector').classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(event) {
+            const selector = document.getElementById('langSelector');
+            if (!selector.contains(event.target)) {
+                selector.classList.remove('open');
             }
         });
 
-        // Smooth scroll for anchor links
+        function changeLanguage(lang) {
+            document.body.setAttribute('data-lang', lang);
+            
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            document.getElementById('currentLangFlag').textContent = languageNames[lang].flag;
+            document.getElementById('currentLangName').textContent = languageNames[lang].name;
+            
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                }
+            });
+            
+            document.getElementById('langSelector').classList.remove('open');
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && translations[savedLang]) {
+                changeLanguage(savedLang);
+            }
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Animate statistics counter
+        function downloadChecklist() {
+            const content = `PARENTS FOR SAFE SCHOOLS
+Questions to Ask Your School About Student Safety Standards
+═══════════════════════════════════════════════════════════
+
+GOVERNANCE & POLICIES
+□ Does the school have written, board-approved policies for student wellbeing?
+□ Are grievance redressal mechanisms documented and accessible?
+□ Is there an anti-bullying policy that addresses teacher-student interactions?
+
+TEACHER TRAINING
+□ What percentage of teachers have received mental health gatekeeper training?
+□ How many hours of training have teachers received?
+□ Is this training accredited by a recognized professional body?
+
+CRISIS RESPONSE
+□ Is there a documented crisis response protocol?
+□ Does the school have a trained crisis response team?
+□ When was the last crisis simulation exercise conducted?
+
+REPORTING & ESCALATION
+□ Do students have access to confidential reporting mechanisms?
+□ Are escalation paths clearly defined and documented?
+□ Who is the designated wellbeing coordinator?
+
+VERIFICATION & ACCOUNTABILITY
+□ Is the school certified by any third-party safety standards body?
+□ Are there annual audits of safety protocols?
+
+═══════════════════════════════════════════════════════════
+Remember: Good intentions are not enough. Ask for evidence.
+
+Parents for Safe Schools | swiss@mysafespaces.org
+SWISS Certification | mysafespaces.org/swiss`;
+
+            const blob = new Blob([content], { type: 'text/plain; charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Parent_Safety_Standards_Checklist.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
         function animateCounter(element, target, duration = 2000) {
-            const start = 0;
             const increment = target / (duration / 16);
-            let current = start;
-            
+            let current = 0;
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -1645,37 +742,25 @@
             }, 16);
         }
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    
-                    // Animate counter if it's the stat
-                    if (entry.target.id === 'counter1') {
-                        animateCounter(entry.target, 13892);
-                    }
+                    if (entry.target.id === 'counter1') animateCounter(entry.target, 13892);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.2 });
 
-        // Observe elements for animation
-        document.querySelectorAll('.crisis-grid, .paradox-cards, .governance-comparison, .standards-intro, .standards-requirements').forEach(el => {
+        document.querySelectorAll('.crisis-grid, .paradox-cards, .paradox-bottom').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.8s ease-out';
             observer.observe(el);
         });
 
-        // Observe the counter
-        const counter1 = document.getElementById('counter1');
-        observer.observe(counter1);
+        const counter = document.getElementById('counter1');
+        if (counter) observer.observe(counter);
     </script>
 </body>
 </html>
