@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parents for Safe Schools | Beyond Good Intentions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0D1B2A;
+            --navy-light: #1B3A5F;
+            --cream: #FBF8F3;
+            --cream-dark: #F5F0E8;
+            --amber: #C5872E;
+            --amber-light: #E9A84A;
+            --amber-dark: #9E6B23;
+            --red-muted: #8B3A3A;
+            --text: #2D3142;
+            --text-light: #5C6378;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 16px 60px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(197, 135, 46, 0.3);
+        }
+
+        .nav-logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        .nav-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--amber-light);
+        }
+
+        .nav-cta {
+            background: var(--amber);
+            color: var(--white) !important;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--amber-light);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--navy);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(197, 135, 46, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(27, 58, 95, 0.2) 0%, transparent 50%);
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 140px 60px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(197, 135, 46, 0.15);
+            border: 1px solid rgba(197, 135, 46, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--amber);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-eyebrow span {
+            color: var(--amber-light);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 88px);
+            color: var(--white);
+            max-width: 900px;
+            margin-bottom: 28px;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--amber-light);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2vw, 22px);
+            color: rgba(255,255,255,0.7);
+            max-width: 620px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .hero-stat {
+            border-left: 2px solid var(--amber);
+            padding-left: 24px;
+        }
+
+        .hero-stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.4);
+            animation: fadeIn 1s ease-out 1.2s both;
+        }
+
+        .hero-scroll span {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--amber) 0%, transparent 100%);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-label-line {
+            width: 40px;
+            height: 2px;
+            background: var(--amber);
+        }
+
+        .section-label span {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--amber-dark);
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 56px);
+            color: var(--navy);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Crisis Section */
+        .crisis {
+            background: var(--cream-dark);
+            position: relative;
+        }
+
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .crisis-quote {
+            background: var(--white);
+            padding: 48px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .crisis-quote::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 120px;
+            color: var(--amber);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .crisis-quote blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .crisis-quote cite {
+            font-style: normal;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .crisis-quote cite strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .crisis-content h3 {
+            font-size: 32px;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .crisis-content p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+            font-size: 17px;
+        }
+
+        .crisis-highlight {
+            background: linear-gradient(135deg, var(--red-muted) 0%, #6B2A2A 100%);
+            color: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            margin-top: 32px;
+        }
+
+        .crisis-highlight-stat {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .crisis-highlight p {
+            color: rgba(255,255,255,0.85);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Paradox Section */
+        .paradox {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .paradox .section-label span {
+            color: var(--amber-light);
+        }
+
+        .paradox .section-title {
+            color: var(--white);
+        }
+
+        .paradox .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .paradox-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .paradox-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .paradox-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-8px);
+            border-color: rgba(197, 135, 46, 0.3);
+        }
+
+        .paradox-card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(197, 135, 46, 0.2) 0%, rgba(197, 135, 46, 0.05) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .paradox-card-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--amber-light);
+        }
+
+        .paradox-card-hours {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--amber-light);
+            margin-bottom: 8px;
+        }
+
+        .paradox-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .paradox-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 15px;
+        }
+
+        .paradox-card-training {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .paradox-card-training-badge {
+            background: rgba(139, 58, 58, 0.3);
+            color: #F5A5A5;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .paradox-bottom {
+            background: rgba(197, 135, 46, 0.1);
+            border: 1px solid rgba(197, 135, 46, 0.2);
+            border-radius: 20px;
+            padding: 48px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .paradox-bottom h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .paradox-bottom p {
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Governance Section */
+        .governance {
+            background: var(--cream);
+        }
+
+        .governance-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .governance-header .section-label {
+            justify-content: center;
+        }
+
+        .governance-header .section-title {
+            margin-bottom: 20px;
+        }
+
+        .governance-header .section-subtitle {
+            max-width: 100%;
+        }
+
+        .governance-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .governance-column {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+        }
+
+        .governance-column.problem {
+            border-top: 4px solid var(--red-muted);
+        }
+
+        .governance-column.solution {
+            border-top: 4px solid #2E7D32;
+        }
+
+        .governance-column-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .governance-column-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .problem .governance-column-icon {
+            background: rgba(139, 58, 58, 0.1);
+        }
+
+        .problem .governance-column-icon svg {
+            stroke: var(--red-muted);
+        }
+
+        .solution .governance-column-icon {
+            background: rgba(46, 125, 50, 0.1);
+        }
+
+        .solution .governance-column-icon svg {
+            stroke: #2E7D32;
+        }
+
+        .governance-column h3 {
+            font-size: 24px;
+            color: var(--navy);
+        }
+
+        .governance-list {
+            list-style: none;
+        }
+
+        .governance-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .governance-list li:last-child {
+            border-bottom: none;
+        }
+
+        .governance-list-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .problem .governance-list-icon {
+            background: rgba(139, 58, 58, 0.1);
+        }
+
+        .problem .governance-list-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--red-muted);
+        }
+
+        .solution .governance-list-icon {
+            background: rgba(46, 125, 50, 0.1);
+        }
+
+        .solution .governance-list-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: #2E7D32;
+        }
+
+        .governance-list span {
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        .governance-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .governance-arrow-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--amber);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(197, 135, 46, 0.3);
+        }
+
+        .governance-arrow-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--white);
+        }
+
+        /* Standards Section */
+        .standards {
+            background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+        }
+
+        .standards-intro {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .standards-intro-content .section-title {
+            margin-bottom: 24px;
+        }
+
+        .standards-intro-content p {
+            color: var(--text-light);
+            font-size: 17px;
+            margin-bottom: 16px;
+        }
+
+        .standards-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--white);
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-top: 24px;
+        }
+
+        .standards-badge img {
+            height: 40px;
+        }
+
+        .standards-badge span {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .standards-badge span strong {
+            display: block;
+            color: var(--navy);
+            font-size: 14px;
+        }
+
+        .standards-visual {
+            background: var(--navy);
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .standards-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(197, 135, 46, 0.15) 0%, transparent 60%);
+        }
+
+        .standards-pyramid {
+            position: relative;
+            z-index: 1;
+        }
+
+        .standards-pyramid-level {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .standards-pyramid-level:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .standards-pyramid-level.foundation {
+            background: linear-gradient(135deg, rgba(197, 135, 46, 0.2) 0%, rgba(197, 135, 46, 0.05) 100%);
+            border-color: rgba(197, 135, 46, 0.3);
+        }
+
+        .standards-pyramid-num {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .foundation .standards-pyramid-num {
+            background: var(--amber);
+        }
+
+        .standards-pyramid-content h4 {
+            font-size: 16px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .standards-pyramid-content p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin: 0;
+        }
+
+        .standards-pyramid-arrow {
+            text-align: center;
+            color: var(--amber);
+            margin: 16px 0;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .standards-requirements {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .standards-req {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .standards-req:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .standards-req-num {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .standards-req h4 {
+            font-size: 15px;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .standards-req p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(197, 135, 46, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(197, 135, 46, 0.08) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(36px, 5vw, 52px);
+            color: var(--white);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .cta-content h2 em {
+            font-style: italic;
+            color: var(--amber-light);
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+            color: var(--white);
+            box-shadow: 0 8px 30px rgba(197, 135, 46, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(197, 135, 46, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cta-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        .cta-trust-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--amber-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            padding: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--white);
+        }
+
+        .footer-logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-text {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--amber-light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 40px;
+            }
+
+            nav {
+                padding: 16px 30px;
+            }
+
+            .hero-content {
+                padding: 120px 40px 60px;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+
+            .crisis-grid,
+            .standards-intro {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .paradox-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .governance-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .governance-arrow {
+                transform: rotate(90deg);
+                padding: 20px 0;
+            }
+
+            .standards-requirements {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 24px;
+            }
+
+            nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 100px 24px 60px;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero-stat {
+                padding-left: 20px;
+            }
+
+            .hero-stat-number {
+                font-size: 36px;
+            }
+
+            .crisis-quote {
+                padding: 32px;
+            }
+
+            .crisis-quote blockquote {
+                font-size: 20px;
+            }
+
+            .governance-column {
+                padding: 32px;
+            }
+
+            .standards-visual {
+                padding: 32px;
+            }
+
+            .standards-requirements {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cta-trust {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <span class="nav-logo-text">Parents for Safe Schools</span>
+        </a>
+        <div class="nav-links">
+            <a href="#crisis">The Crisis</a>
+            <a href="#paradox">The Paradox</a>
+            <a href="#standards">Standards</a>
+            <a href="#action" class="nav-cta">Take Action</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="hero-eyebrow-dot"></div>
+                <span>A Parent Advocacy Initiative</span>
+            </div>
+            <h1>Beyond Good Intentions: <em>A Governance Imperative</em></h1>
+            <p class="hero-subtitle">Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standards—starting with the adults who spend the most time with our children.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number" id="counter1">13,892</div>
+                    <div class="hero-stat-label">Student suicides in India in 2023</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">65%</div>
+                    <div class="hero-stat-label">Increase over the past decade</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">~1/hour</div>
+                    <div class="hero-stat-label">One student life lost every hour</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to learn more</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Crisis Section -->
+    <section class="crisis" id="crisis">
+        <div class="container">
+            <div class="section-label">
+                <div class="section-label-line"></div>
+                <span>The Reality</span>
+            </div>
+            <h2 class="section-title">This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.</h2>
+            <p class="section-subtitle">Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.</p>
+            
+            <div class="crisis-grid">
+                <div class="crisis-quote">
+                    <blockquote>"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being."</blockquote>
+                    <cite>
+                        <strong>Delhi Education Minister</strong>
+                        Following the November 2025 student tragedy
+                    </cite>
+                </div>
+                <div class="crisis-content">
+                    <h3>The Pattern Repeats</h3>
+                    <p>When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.</p>
+                    <p>We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.</p>
+                    <div class="crisis-highlight">
+                        <div class="crisis-highlight-stat">0 Hours</div>
+                        <p>Mental health training most teachers receive—despite spending 1,000+ hours annually with students</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paradox Section -->
+    <section class="paradox" id="paradox">
+        <div class="container">
+            <div class="section-label">
+                <div class="section-label-line"></div>
+                <span>The Contact Hours Paradox</span>
+            </div>
+            <h2 class="section-title">The People Who See Everything,<br>Trained for Nothing</h2>
+            <p class="section-subtitle">Those who spend the most time with vulnerable populations typically receive zero mental health training.</p>
+            
+            <div class="paradox-cards">
+                <div class="paradox-card">
+                    <div class="paradox-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="paradox-card-hours">1,000+</div>
+                    <h3>Teachers with Students</h3>
+                    <p>More waking hours than parents see their children during school weeks. First to notice changes.</p>
+                    <div class="paradox-card-training">
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                    </div>
+                </div>
+                <div class="paradox-card">
+                    <div class="paradox-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
+                    </div>
+                    <div class="paradox-card-hours">600+</div>
+                    <h3>Faculty with College Students</h3>
+                    <p>The critical 18-25 age group when mental health issues often first emerge.</p>
+                    <div class="paradox-card-training">
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                    </div>
+                </div>
+                <div class="paradox-card">
+                    <div class="paradox-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <div class="paradox-card-hours">2,000+</div>
+                    <h3>Managers with Employees</h3>
+                    <p>Often more time than with family. Positioned to notice distress early.</p>
+                    <div class="paradox-card-training">
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="paradox-bottom">
+                <h3>This Is a Governance Failure</h3>
+                <p>We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governance Section -->
+    <section class="governance" id="governance">
+        <div class="container">
+            <div class="governance-header">
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span>The Shift Required</span>
+                </div>
+                <h2 class="section-title">From Reactive Response to<br>Proactive Governance</h2>
+                <p class="section-subtitle">Student safety must move from an afterthought to a governance priority—with the same rigor we apply to financial audits and building codes.</p>
+            </div>
+            
+            <div class="governance-comparison">
+                <div class="governance-column problem">
+                    <div class="governance-column-header">
+                        <div class="governance-column-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                        </div>
+                        <h3>Today's Reality</h3>
+                    </div>
+                    <ul class="governance-list">
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>No written, board-approved wellbeing policies</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>Teachers untrained in distress recognition</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>No defined crisis response protocols</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>Informal, undocumented escalation paths</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>No third-party verification or audits</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <span>React only after tragedy strikes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="governance-arrow">
+                    <div class="governance-arrow-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="governance-column solution">
+                    <div class="governance-column-header">
+                        <div class="governance-column-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <h3>What We Need</h3>
+                    </div>
+                    <ul class="governance-list">
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Board-approved, annually reviewed policies</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>100% of teachers trained as gatekeepers</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Documented crisis response teams</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Clear escalation protocols and training</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Independent certification and annual audits</span>
+                        </li>
+                        <li>
+                            <div class="governance-list-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Prevention through systematic standards</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standards Section -->
+    <section class="standards" id="standards">
+        <div class="container">
+            <div class="standards-intro">
+                <div class="standards-intro-content">
+                    <div class="section-label">
+                        <div class="section-label-line"></div>
+                        <span>The Solution</span>
+                    </div>
+                    <h2 class="section-title">Institutional Safety Standards:<br>Teacher Training First</h2>
+                    <p>The research is clear: gatekeeper training works. Meta-analysis of 16 randomized controlled trials shows significant improvements in knowledge (effect size 0.72), confidence (0.73), and preparedness (0.69).</p>
+                    <p>When we train teachers to recognize warning signs and respond appropriately, every other safety measure becomes more effective. Without trained teachers, technology generates alerts no one can handle. Students ask for help from unprepared adults.</p>
+                    <div class="standards-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" width="40" height="40">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                        <span><strong>Evidence-Based Approach</strong>Backed by peer-reviewed research</span>
+                    </div>
+                </div>
+                <div class="standards-visual">
+                    <div class="standards-pyramid">
+                        <div class="standards-pyramid-level">
+                            <div class="standards-pyramid-num">3</div>
+                            <div class="standards-pyramid-content">
+                                <h4>Technology Integration</h4>
+                                <p>AI monitoring, analytics, digital tools</p>
+                            </div>
+                        </div>
+                        <div class="standards-pyramid-level">
+                            <div class="standards-pyramid-num">2</div>
+                            <div class="standards-pyramid-content">
+                                <h4>Student Programs</h4>
+                                <p>Peer support, SEL curriculum, awareness</p>
+                            </div>
+                        </div>
+                        <div class="standards-pyramid-arrow">▼ BUILD ON THIS FOUNDATION ▼</div>
+                        <div class="standards-pyramid-level foundation">
+                            <div class="standards-pyramid-num">1</div>
+                            <div class="standards-pyramid-content">
+                                <h4>Trained Teachers</h4>
+                                <p>The essential foundation — start here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="standards-requirements">
+                <div class="standards-req">
+                    <div class="standards-req-num">1</div>
+                    <h4>Gatekeeper Training</h4>
+                    <p>100% of teachers certified in recognizing warning signs and crisis response</p>
+                </div>
+                <div class="standards-req">
+                    <div class="standards-req-num">2</div>
+                    <h4>Ongoing Reinforcement</h4>
+                    <p>Quarterly workshops on psychological safety and burnout prevention</p>
+                </div>
+                <div class="standards-req">
+                    <div class="standards-req-num">3</div>
+                    <h4>Written Policies</h4>
+                    <p>Board-approved wellbeing, grievance, and anti-bullying policies</p>
+                </div>
+                <div class="standards-req">
+                    <div class="standards-req-num">4</div>
+                    <h4>Crisis Response Team</h4>
+                    <p>Trained team with clear protocols and annual simulation exercises</p>
+                </div>
+                <div class="standards-req">
+                    <div class="standards-req-num">5</div>
+                    <h4>Designated Coordinator</h4>
+                    <p>Staff member accountable for program compliance and student wellbeing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="action">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Your Voice <em>Matters</em></h2>
+                <p>Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.</p>
+                
+                <div class="cta-actions">
+                    <a href="mailto:swiss@mysafespaces.org?subject=Parent%20Inquiry%20-%20SWISS%20Certification&body=Hello%2C%0A%0AI%20am%20a%20parent%20interested%20in%20learning%20more%20about%20SWISS%20certification%20standards%20for%20my%20child%27s%20school.%0A%0ASchool%20Name%3A%20%0ACity%3A%20%0A%0APlease%20send%20me%20information%20on%3A%0A-%20How%20to%20introduce%20SWISS%20to%20my%20school%0A-%20Questions%20to%20ask%20school%20leadership%0A-%20Parent%20advocacy%20resources%0A%0AThank%20you." class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        Request School Assessment
+                    </a>
+                    <a href="https://mysafespaces.org/swiss" target="_blank" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                        Learn About SWISS Standards
+                    </a>
+                </div>
+                
+                <div class="cta-trust">
+                    <div class="cta-trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>Internationally Accredited (CPD Standards Office UK)</span>
+                    </div>
+                    <div class="cta-trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>Evidence-Based Research Foundation</span>
+                    </div>
+                    <div class="cta-trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <span>University of Michigan Partnership</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <span>Parents for Safe Schools</span>
+            </div>
+            <p class="footer-text">In partnership with My Safe Spaces | Wellbeing Where It Counts</p>
+            <div class="footer-links">
+                <a href="mailto:swiss@mysafespaces.org">Contact</a>
+                <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Standards</a>
+                <a href="https://mysafespaces.org" target="_blank">My Safe Spaces</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate statistics counter
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Animate counter if it's the stat
+                    if (entry.target.id === 'counter1') {
+                        animateCounter(entry.target, 13892);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.crisis-grid, .paradox-cards, .governance-comparison, .standards-intro, .standards-requirements').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        // Observe the counter
+        const counter1 = document.getElementById('counter1');
+        observer.observe(counter1);
+    </script>
+</body>
+</html>
