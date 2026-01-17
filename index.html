@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parents for Safe Schools | Beyond Good Intentions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #0D1B2A;
@@ -22,15 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
-        body[data-lang="hi"] { font-family: 'Noto Sans Devanagari', 'DM Sans', sans-serif; }
-        body[data-lang="ta"] { font-family: 'Noto Sans Tamil', 'DM Sans', sans-serif; }
-        body[data-lang="te"] { font-family: 'Noto Sans Telugu', 'DM Sans', sans-serif; }
-        body[data-lang="bn"] { font-family: 'Noto Sans Bengali', 'DM Sans', sans-serif; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; }
-        body[data-lang="hi"] h1, body[data-lang="hi"] h2, body[data-lang="hi"] h3 { font-family: 'Noto Sans Devanagari', serif; }
-        body[data-lang="ta"] h1, body[data-lang="ta"] h2, body[data-lang="ta"] h3 { font-family: 'Noto Sans Tamil', serif; }
-        body[data-lang="te"] h1, body[data-lang="te"] h2, body[data-lang="te"] h3 { font-family: 'Noto Sans Telugu', serif; }
-        body[data-lang="bn"] h1, body[data-lang="bn"] h2, body[data-lang="bn"] h3 { font-family: 'Noto Sans Bengali', serif; }
         
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
         nav.scrolled { background: rgba(13, 27, 42, 0.98); padding: 16px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
@@ -43,21 +35,6 @@
         .nav-links a:hover { color: var(--amber-light); }
         .nav-cta { background: var(--amber); color: var(--white) !important; padding: 12px 24px; border-radius: 8px; font-weight: 600 !important; }
         .nav-cta:hover { background: var(--amber-light); transform: translateY(-2px); }
-
-        .language-selector { position: relative; margin-left: 20px; }
-        .language-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
-        .language-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--amber-light); }
-        .language-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; transition: transform 0.3s; }
-        .language-selector.open .language-btn svg { transform: rotate(180deg); }
-        .language-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--white); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s; min-width: 180px; z-index: 1001; overflow: hidden; }
-        .language-selector.open .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        .language-option { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: var(--text); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .language-option:last-child { border-bottom: none; }
-        .language-option:hover { background: var(--cream); }
-        .language-option.active { background: linear-gradient(135deg, rgba(197, 135, 46, 0.1), rgba(197, 135, 46, 0.05)); color: var(--amber-dark); }
-        .language-option .flag { font-size: 20px; }
-        .language-option .check { width: 18px; height: 18px; stroke: var(--amber); opacity: 0; }
-        .language-option.active .check { opacity: 1; }
 
         .hero { min-height: 100vh; background: var(--navy); position: relative; display: flex; align-items: center; overflow: hidden; }
         .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(197, 135, 46, 0.08), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(27, 58, 95, 0.2), transparent 50%); }
@@ -203,7 +180,6 @@
             section { padding: 60px 24px; }
             nav { padding: 16px 20px; }
             .nav-links { display: none; }
-            .language-selector { margin-left: auto; }
             .hero-content { padding: 100px 24px 60px; }
             .hero-stats { grid-template-columns: 1fr; gap: 20px; }
             .hero-stat-number { font-size: 36px; }
@@ -221,48 +197,19 @@
         }
     </style>
 </head>
-<body data-lang="en">
+<body>
     <nav id="navbar">
         <a href="#" class="nav-logo">
             <div class="nav-logo-icon">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             </div>
-            <span class="nav-logo-text" data-i18n="siteName">Parents for Safe Schools</span>
+            <span class="nav-logo-text">Parents for Safe Schools</span>
         </a>
         <div class="nav-links">
-            <a href="#crisis" data-i18n="navCrisis">The Crisis</a>
-            <a href="#paradox" data-i18n="navParadox">The Paradox</a>
-            <a href="#checklist" data-i18n="navChecklist">Checklist</a>
-            <a href="#action" class="nav-cta" data-i18n="navAction">Take Action</a>
-        </div>
-        <div class="language-selector" id="langSelector">
-            <button class="language-btn" onclick="toggleLanguageDropdown()">
-                <span id="currentLangFlag">ðŸ‡¬ðŸ‡§</span>
-                <span id="currentLangName">English</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="language-dropdown">
-                <div class="language-option active" data-lang="en" onclick="changeLanguage('en')">
-                    <span class="flag">ðŸ‡¬ðŸ‡§</span><span class="lang-name">English</span>
-                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">
-                    <span class="flag">ðŸ‡®ðŸ‡³</span><span class="lang-name">à¤¹à¤¿à¤¨à¥à¤¦à¥€</span>
-                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="language-option" data-lang="ta" onclick="changeLanguage('ta')">
-                    <span class="flag">ðŸ‡®ðŸ‡³</span><span class="lang-name">à®¤à®®à®¿à®´à¯</span>
-                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="language-option" data-lang="te" onclick="changeLanguage('te')">
-                    <span class="flag">ðŸ‡®ðŸ‡³</span><span class="lang-name">à°¤à±†à°²à±à°—à±</span>
-                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <div class="language-option" data-lang="bn" onclick="changeLanguage('bn')">
-                    <span class="flag">ðŸ‡®ðŸ‡³</span><span class="lang-name">à¦¬à¦¾à¦‚à¦²à¦¾</span>
-                    <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-            </div>
+            <a href="#crisis">The Crisis</a>
+            <a href="#paradox">The Paradox</a>
+            <a href="#checklist">Checklist</a>
+            <a href="#action" class="nav-cta">Take Action</a>
         </div>
     </nav>
 
@@ -271,27 +218,27 @@
         <div class="hero-content">
             <div class="hero-eyebrow">
                 <div class="hero-eyebrow-dot"></div>
-                <span data-i18n="heroEyebrow">A Parent Advocacy Initiative</span>
+                <span>A Parent Advocacy Initiative</span>
             </div>
-            <h1 data-i18n="heroTitle">Beyond Good Intentions: <em>A Governance Imperative</em></h1>
-            <p class="hero-subtitle" data-i18n="heroSubtitle">Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standardsâ€”starting with the adults who spend the most time with our children.</p>
+            <h1>Beyond Good Intentions: <em>A Governance Imperative</em></h1>
+            <p class="hero-subtitle">Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standardsâ€”starting with the adults who spend the most time with our children.</p>
             <div class="hero-stats">
                 <div class="hero-stat">
                     <div class="hero-stat-number" id="counter1">13,892</div>
-                    <div class="hero-stat-label" data-i18n="stat1Label">Student suicides in India in 2023</div>
+                    <div class="hero-stat-label">Student suicides in India in 2023</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-number">65%</div>
-                    <div class="hero-stat-label" data-i18n="stat2Label">Increase over the past decade</div>
+                    <div class="hero-stat-label">Increase over the past decade</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-number">~1/hr</div>
-                    <div class="hero-stat-label" data-i18n="stat3Label">One student life lost every hour</div>
+                    <div class="hero-stat-label">One student life lost every hour</div>
                 </div>
             </div>
         </div>
         <div class="hero-scroll">
-            <span data-i18n="scrollMore">Scroll to learn more</span>
+            <span>Scroll to learn more</span>
             <div class="hero-scroll-line"></div>
         </div>
     </section>
@@ -300,26 +247,26 @@
         <div class="container">
             <div class="section-label">
                 <div class="section-label-line"></div>
-                <span data-i18n="crisisLabel">The Reality</span>
+                <span>The Reality</span>
             </div>
-            <h2 class="section-title" data-i18n="crisisTitle">This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.</h2>
-            <p class="section-subtitle" data-i18n="crisisSubtitle">Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.</p>
+            <h2 class="section-title">This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.</h2>
+            <p class="section-subtitle">Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.</p>
             
             <div class="crisis-grid">
                 <div class="crisis-quote">
-                    <blockquote data-i18n="crisisQuote">"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being."</blockquote>
+                    <blockquote>"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being."</blockquote>
                     <cite>
-                        <strong data-i18n="crisisQuoteAuthor">Delhi Education Minister</strong>
-                        <span data-i18n="crisisQuoteContext">Following the November 2025 student tragedy</span>
+                        <strong>Delhi Education Minister</strong>
+                        <span>Following the November 2025 student tragedy</span>
                     </cite>
                 </div>
                 <div class="crisis-content">
-                    <h3 data-i18n="crisisPattern">The Pattern Repeats</h3>
-                    <p data-i18n="crisisPatternText1">When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.</p>
-                    <p data-i18n="crisisPatternText2">We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.</p>
+                    <h3>The Pattern Repeats</h3>
+                    <p>When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.</p>
+                    <p>We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.</p>
                     <div class="crisis-highlight">
-                        <div class="crisis-highlight-stat" data-i18n="crisisHighlightStat">0 Hours</div>
-                        <p data-i18n="crisisHighlightText">Mental health training most teachers receiveâ€”despite spending 1,000+ hours annually with students</p>
+                        <div class="crisis-highlight-stat">0 Hours</div>
+                        <p>Mental health training most teachers receiveâ€”despite spending 1,000+ hours annually with students</p>
                     </div>
                 </div>
             </div>
@@ -330,10 +277,10 @@
         <div class="container">
             <div class="section-label">
                 <div class="section-label-line"></div>
-                <span data-i18n="paradoxLabel">The Contact Hours Paradox</span>
+                <span>The Contact Hours Paradox</span>
             </div>
-            <h2 class="section-title" data-i18n="paradoxTitle">The People Who See Everything,<br>Trained for Nothing</h2>
-            <p class="section-subtitle" data-i18n="paradoxSubtitle">Those who spend the most time with vulnerable populations typically receive zero mental health training.</p>
+            <h2 class="section-title">The People Who See Everything,<br>Trained for Nothing</h2>
+            <p class="section-subtitle">Those who spend the most time with vulnerable populations typically receive zero mental health training.</p>
             
             <div class="paradox-cards">
                 <div class="paradox-card">
@@ -341,10 +288,10 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <div class="paradox-card-hours">1,000+</div>
-                    <h3 data-i18n="paradoxCard1Title">Teachers with Students</h3>
-                    <p data-i18n="paradoxCard1Text">More waking hours than parents see their children during school weeks. First to notice changes.</p>
+                    <h3>Teachers with Students</h3>
+                    <p>More waking hours than parents see their children during school weeks. First to notice changes.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
                     </div>
                 </div>
                 <div class="paradox-card">
@@ -352,10 +299,10 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                     </div>
                     <div class="paradox-card-hours">600+</div>
-                    <h3 data-i18n="paradoxCard2Title">Faculty with College Students</h3>
-                    <p data-i18n="paradoxCard2Text">The critical 18-25 age group when mental health issues often first emerge.</p>
+                    <h3>Faculty with College Students</h3>
+                    <p>The critical 18-25 age group when mental health issues often first emerge.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
                     </div>
                 </div>
                 <div class="paradox-card">
@@ -363,17 +310,17 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                     </div>
                     <div class="paradox-card-hours">2,000+</div>
-                    <h3 data-i18n="paradoxCard3Title">Managers with Employees</h3>
-                    <p data-i18n="paradoxCard3Text">Often more time than with family. Positioned to notice distress early.</p>
+                    <h3>Managers with Employees</h3>
+                    <p>Often more time than with family. Positioned to notice distress early.</p>
                     <div class="paradox-card-training">
-                        <span class="paradox-card-training-badge" data-i18n="paradoxBadge">Zero MH Training</span>
+                        <span class="paradox-card-training-badge">Zero MH Training</span>
                     </div>
                 </div>
             </div>
             
             <div class="paradox-bottom">
-                <h3 data-i18n="paradoxBottomTitle">This Is a Governance Failure</h3>
-                <p data-i18n="paradoxBottomText">We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.</p>
+                <h3>This Is a Governance Failure</h3>
+                <p>We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.</p>
             </div>
         </div>
     </section>
@@ -382,31 +329,31 @@
         <div class="container">
             <div class="section-label">
                 <div class="section-label-line"></div>
-                <span data-i18n="checklistLabel">Parent Action Checklist</span>
+                <span>Parent Action Checklist</span>
             </div>
-            <h2 class="section-title" data-i18n="checklistTitle">Ask Your School <em>These Questions</em></h2>
-            <p class="section-subtitle" data-i18n="checklistSubtitle">Complete this checklist and send it to your school. Good intentions are not enough—ask for evidence.</p>
+            <h2 class="section-title">Ask Your School <em>These Questions</em></h2>
+            <p class="section-subtitle">Complete this checklist and send it to your school. Good intentions are not enough—ask for evidence.</p>
             
             <div class="checklist-form-container">
                 <form id="parentChecklist" class="checklist-form">
                     <div class="form-header">
                         <div class="form-row">
                             <div class="form-group required">
-                                <label for="studentGrade" data-i18n="labelGrade">Student's Grade/Class *</label>
+                                <label for="studentGrade">Student's Grade/Class *</label>
                                 <input type="text" id="studentGrade" name="studentGrade" required placeholder="e.g., Grade 8, Class 10">
                             </div>
                             <div class="form-group required">
-                                <label for="schoolName" data-i18n="labelSchool">School Name *</label>
+                                <label for="schoolName">School Name *</label>
                                 <input type="text" id="schoolName" name="schoolName" required placeholder="Enter school name">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="schoolEmail" data-i18n="labelSchoolEmail">School Email (optional)</label>
+                                <label for="schoolEmail">School Email (optional)</label>
                                 <input type="email" id="schoolEmail" name="schoolEmail" placeholder="principal@school.edu">
                             </div>
                             <div class="form-group">
-                                <label for="parentEmail" data-i18n="labelParentEmail">Your Email (for your copy)</label>
+                                <label for="parentEmail">Your Email (for your copy)</label>
                                 <input type="email" id="parentEmail" name="parentEmail" placeholder="your@email.com">
                             </div>
                         </div>
@@ -418,23 +365,23 @@
                                 <div class="category-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                 </div>
-                                <h3 data-i18n="catGovernance">Governance & Policies</h3>
+                                <h3>Governance & Policies</h3>
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check1" value="Written, board-approved policies for student wellbeing exist" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check1">Does the school have written, board-approved policies for student wellbeing?</span>
+                                    <span class="item-text">Does the school have written, board-approved policies for student wellbeing?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check2" value="Grievance redressal mechanisms are documented and accessible" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check2">Are grievance redressal mechanisms documented and accessible?</span>
+                                    <span class="item-text">Are grievance redressal mechanisms documented and accessible?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check3" value="Anti-bullying policy addresses teacher-student interactions" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check3">Is there an anti-bullying policy that addresses teacher-student interactions?</span>
+                                    <span class="item-text">Is there an anti-bullying policy that addresses teacher-student interactions?</span>
                                 </label>
                             </div>
                         </div>
@@ -444,23 +391,23 @@
                                 <div class="category-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                 </div>
-                                <h3 data-i18n="catTraining">Teacher Training</h3>
+                                <h3>Teacher Training</h3>
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check4" value="Teachers have received mental health gatekeeper training" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check4">What percentage of teachers have received mental health gatekeeper training?</span>
+                                    <span class="item-text">What percentage of teachers have received mental health gatekeeper training?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check5" value="Training hours for teachers are documented" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check5">How many hours of training have teachers received?</span>
+                                    <span class="item-text">How many hours of training have teachers received?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check6" value="Training is accredited by a recognized professional body" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check6">Is this training accredited by a recognized professional body?</span>
+                                    <span class="item-text">Is this training accredited by a recognized professional body?</span>
                                 </label>
                             </div>
                         </div>
@@ -470,23 +417,23 @@
                                 <div class="category-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                                 </div>
-                                <h3 data-i18n="catCrisis">Crisis Response</h3>
+                                <h3>Crisis Response</h3>
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check7" value="Documented crisis response protocol exists" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check7">Is there a documented crisis response protocol?</span>
+                                    <span class="item-text">Is there a documented crisis response protocol?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check8" value="Trained crisis response team exists" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check8">Does the school have a trained crisis response team?</span>
+                                    <span class="item-text">Does the school have a trained crisis response team?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check9" value="Crisis simulation exercises are conducted regularly" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check9">When was the last crisis simulation exercise conducted?</span>
+                                    <span class="item-text">When was the last crisis simulation exercise conducted?</span>
                                 </label>
                             </div>
                         </div>
@@ -496,23 +443,23 @@
                                 <div class="category-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                 </div>
-                                <h3 data-i18n="catReporting">Reporting & Escalation</h3>
+                                <h3>Reporting & Escalation</h3>
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check10" value="Confidential reporting mechanisms available for students" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check10">Do students have access to confidential reporting mechanisms?</span>
+                                    <span class="item-text">Do students have access to confidential reporting mechanisms?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check11" value="Escalation paths are clearly defined and documented" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check11">Are escalation paths clearly defined and documented?</span>
+                                    <span class="item-text">Are escalation paths clearly defined and documented?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check12" value="Designated wellbeing coordinator exists" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check12">Who is the designated wellbeing coordinator?</span>
+                                    <span class="item-text">Who is the designated wellbeing coordinator?</span>
                                 </label>
                             </div>
                         </div>
@@ -522,18 +469,18 @@
                                 <div class="category-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
                                 </div>
-                                <h3 data-i18n="catVerification">Verification & Accountability</h3>
+                                <h3>Verification & Accountability</h3>
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check13" value="School is certified by third-party safety standards body" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check13">Is the school certified by any third-party safety standards body?</span>
+                                    <span class="item-text">Is the school certified by any third-party safety standards body?</span>
                                 </label>
                                 <label class="checklist-item">
                                     <input type="checkbox" name="check14" value="Annual audits of safety protocols are conducted" checked>
                                     <span class="checkmark"></span>
-                                    <span class="item-text" data-i18n="check14">Are there annual audits of safety protocols?</span>
+                                    <span class="item-text">Are there annual audits of safety protocols?</span>
                                 </label>
                             </div>
                         </div>
@@ -543,21 +490,21 @@
                         <div class="note-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </div>
-                        <p data-i18n="formNote"><strong>All items are selected by default.</strong> Uncheck any items you are not interested in or do not consider important for your inquiry. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93e0e4fae0e0d3feeae0f2f5f6e0e3f2f0f6e0bdfce1f4">[email&#160;protected]</a>) for advocacy tracking.</p>
+                        <p><strong>All items are selected by default.</strong> Uncheck any items you are not interested in or do not consider important for your inquiry. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93e0e4fae0e0d3feeae0f2f5f6e0e3f2f0f6e0bdfce1f4">[email&#160;protected]</a>) for advocacy tracking.</p>
                     </div>
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-primary" onclick="sendChecklistEmail()">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <span data-i18n="btnSendEmail">Send to School</span>
+                            <span>Send to School</span>
                         </button>
                         <button type="button" class="btn btn-secondary" onclick="sendCopyToSelf()">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-                            <span data-i18n="btnSendSelf">Send Copy to Myself</span>
+                            <span>Send Copy to Myself</span>
                         </button>
                         <button type="button" class="btn btn-tertiary" onclick="downloadChecklistPDF()">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span data-i18n="btnDownload">Download Checklist</span>
+                            <span>Download Checklist</span>
                         </button>
                     </div>
                 </form>
@@ -568,32 +515,32 @@
     <section class="cta" id="action">
         <div class="container">
             <div class="cta-content">
-                <h2 data-i18n="ctaTitle">Your Voice <em>Matters</em></h2>
-                <p data-i18n="ctaText">Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.</p>
+                <h2>Your Voice <em>Matters</em></h2>
+                <p>Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.</p>
                 
                 <div class="cta-actions">
                     <a href="#" class="btn btn-primary" onclick="downloadChecklist(); return false;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        <span data-i18n="ctaBtn1">Download Parent Checklist</span>
+                        <span>Download Parent Checklist</span>
                     </a>
                     <a href="/cdn-cgi/l/email-protection#097a7e607a7a4964707a686f6c7a79686a6c7a27667b6e" class="btn btn-secondary">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        <span data-i18n="ctaBtn2">Contact Us</span>
+                        <span>Contact Us</span>
                     </a>
                 </div>
                 
                 <div class="cta-trust">
                     <div class="cta-trust-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span data-i18n="trust1">International CPD Accreditation</span>
+                        <span>International CPD Accreditation</span>
                     </div>
                     <div class="cta-trust-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                        <span data-i18n="trust2">Evidence-Based Research Foundation</span>
+                        <span>Evidence-Based Research Foundation</span>
                     </div>
                     <div class="cta-trust-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        <span data-i18n="trust3">Mindful Dignity Lab Partnership</span>
+                        <span>Mindful Dignity Lab Partnership</span>
                     </div>
                 </div>
             </div>
@@ -606,336 +553,18 @@
                 <div class="footer-logo-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 </div>
-                <span data-i18n="footerLogo">Parents for Safe Schools</span>
+                <span>Parents for Safe Schools</span>
             </div>
-            <p class="footer-text" data-i18n="footerText">Advocating for evidence-based institutional safety standards</p>
+            <p class="footer-text">Advocating for evidence-based institutional safety standards</p>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#6c1f1b051f1f2c01151f0d0a091f1c0d0f091f42031e0b" data-i18n="footerContact">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#6c1f1b051f1f2c01151f0d0a091f1c0d0f091f42031e0b">Contact</a>
                 <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Certification</a>
-                <a href="https://mindfuldignity.com/" target="_blank" data-i18n="footerLab">Mindful Dignity Lab</a>
+                <a href="https://mindfuldignity.com/" target="_blank">Mindful Dignity Lab</a>
             </div>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const translations = {
-            en: {
-                siteName: "Parents for Safe Schools",
-                navCrisis: "The Crisis",
-                navParadox: "The Paradox",
-                navChecklist: "Checklist",
-                navAction: "Take Action",
-                heroEyebrow: "A Parent Advocacy Initiative",
-                heroTitle: "Beyond Good Intentions: <em>A Governance Imperative</em>",
-                heroSubtitle: "Student safety can no longer rest on individual heroism or reactive measures. It's time for systematic, accountable, and verifiable institutional standardsâ€”starting with the adults who spend the most time with our children.",
-                stat1Label: "Student suicides in India in 2023",
-                stat2Label: "Increase over the past decade",
-                stat3Label: "One student life lost every hour",
-                scrollMore: "Scroll to learn more",
-                crisisLabel: "The Reality",
-                crisisTitle: "This Isn't a Crisis of Caring.<br>It's a Crisis of Capacity.",
-                crisisSubtitle: "Every school has caring teachers. Every principal wants their students safe. But good intentions alone cannot protect our children.",
-                crisisQuote: "\"No child should ever feel unheard or unseen in our schools. We owe them an environment that nurtures not just their intellect, but their emotional well-being.\"",
-                crisisQuoteAuthor: "Delhi Education Minister",
-                crisisQuoteContext: "Following the November 2025 student tragedy",
-                crisisPattern: "The Pattern Repeats",
-                crisisPatternText1: "When tragedy strikes, the response is always the same: suspension of staff, formation of committees, calls for action. Then the headlines fade, and nothing changes systemically.",
-                crisisPatternText2: "We react to crises. We don't prevent them. We train teachers to deliver curriculum, but not to recognize a student in distress.",
-                crisisHighlightStat: "0 Hours",
-                crisisHighlightText: "Mental health training most teachers receiveâ€”despite spending 1,000+ hours annually with students",
-                paradoxLabel: "The Contact Hours Paradox",
-                paradoxTitle: "The People Who See Everything,<br>Trained for Nothing",
-                paradoxSubtitle: "Those who spend the most time with vulnerable populations typically receive zero mental health training.",
-                paradoxCard1Title: "Teachers with Students",
-                paradoxCard1Text: "More waking hours than parents see their children during school weeks. First to notice changes.",
-                paradoxCard2Title: "Faculty with College Students",
-                paradoxCard2Text: "The critical 18-25 age group when mental health issues often first emerge.",
-                paradoxCard3Title: "Managers with Employees",
-                paradoxCard3Text: "Often more time than with family. Positioned to notice distress early.",
-                paradoxBadge: "Zero MH Training",
-                paradoxBottomTitle: "This Is a Governance Failure",
-                paradoxBottomText: "We certify buildings for fire safety. We audit finances quarterly. But we have no systematic standards for the psychological safety of our children. That has to change.",
-                checklistLabel: "Parent Action Checklist",
-                checklistTitle: "Ask Your School <em>These Questions</em>",
-                checklistSubtitle: "Complete this checklist and send it to your school. Good intentions are not enough—ask for evidence.",
-                labelGrade: "Student's Grade/Class *",
-                labelSchool: "School Name *",
-                labelSchoolEmail: "School Email (optional)",
-                labelParentEmail: "Your Email (for your copy)",
-                catGovernance: "Governance & Policies",
-                catTraining: "Teacher Training",
-                catCrisis: "Crisis Response",
-                catReporting: "Reporting & Escalation",
-                catVerification: "Verification & Accountability",
-                check1: "Does the school have written, board-approved policies for student wellbeing?",
-                check2: "Are grievance redressal mechanisms documented and accessible?",
-                check3: "Is there an anti-bullying policy that addresses teacher-student interactions?",
-                check4: "What percentage of teachers have received mental health gatekeeper training?",
-                check5: "How many hours of training have teachers received?",
-                check6: "Is this training accredited by a recognized professional body?",
-                check7: "Is there a documented crisis response protocol?",
-                check8: "Does the school have a trained crisis response team?",
-                check9: "When was the last crisis simulation exercise conducted?",
-                check10: "Do students have access to confidential reporting mechanisms?",
-                check11: "Are escalation paths clearly defined and documented?",
-                check12: "Who is the designated wellbeing coordinator?",
-                check13: "Is the school certified by any third-party safety standards body?",
-                check14: "Are there annual audits of safety protocols?",
-                formNote: "<strong>All items are selected by default.</strong> Uncheck any items you are not interested in or do not consider important for your inquiry. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (swiss@mysafespaces.org) for advocacy tracking.",
-                btnSendEmail: "Send to School",
-                btnSendSelf: "Send Copy to Myself",
-                btnDownload: "Download Checklist",
-                ctaTitle: "Your Voice <em>Matters</em>",
-                ctaText: "Schools respond to parent expectations. When parents ask questions, demand transparency, and advocate for standards, change happens. You don't need to wait for another tragedy to act.",
-                ctaBtn1: "Download Parent Checklist",
-                ctaBtn2: "Contact Us",
-                trust1: "International CPD Accreditation",
-                trust2: "Evidence-Based Research Foundation",
-                trust3: "Mindful Dignity Lab Partnership",
-                footerLogo: "Parents for Safe Schools",
-                footerText: "Advocating for evidence-based institutional safety standards",
-                footerContact: "Contact",
-                footerLab: "Mindful Dignity Lab"
-            },
-            hi: {
-                siteName: "à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤ à¤¸à¥à¤•à¥‚à¤²à¥‹à¤‚ à¤•à¥‡ à¤²à¤¿à¤ à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾",
-                navCrisis: "à¤¸à¤‚à¤•à¤Ÿ",
-                navParadox: "à¤µà¤¿à¤°à¥‹à¤§à¤¾à¤­à¤¾à¤¸",
-                navAction: "à¤•à¤¾à¤°à¥à¤°à¤µà¤¾à¤ˆ à¤•à¤°à¥‡à¤‚",
-                heroEyebrow: "à¤à¤• à¤…à¤­à¤¿à¤­à¤¾à¤µà¤• à¤µà¤•à¤¾à¤²à¤¤ à¤ªà¤¹à¤²",
-                heroTitle: "à¤…à¤šà¥à¤›à¥‡ à¤‡à¤°à¤¾à¤¦à¥‹à¤‚ à¤¸à¥‡ à¤ªà¤°à¥‡: <em>à¤à¤• à¤¶à¤¾à¤¸à¤¨ à¤…à¤¨à¤¿à¤µà¤¾à¤°à¥à¤¯à¤¤à¤¾</em>",
-                heroSubtitle: "à¤›à¤¾à¤¤à¥à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¾ à¤…à¤¬ à¤µà¥à¤¯à¤•à¥à¤¤à¤¿à¤—à¤¤ à¤µà¥€à¤°à¤¤à¤¾ à¤¯à¤¾ à¤ªà¥à¤°à¤¤à¤¿à¤•à¥à¤°à¤¿à¤¯à¤¾à¤¶à¥€à¤² à¤‰à¤ªà¤¾à¤¯à¥‹à¤‚ à¤ªà¤° à¤¨à¤¿à¤°à¥à¤­à¤° à¤¨à¤¹à¥€à¤‚ à¤°à¤¹ à¤¸à¤•à¤¤à¥€à¥¤ à¤µà¥à¤¯à¤µà¤¸à¥à¤¥à¤¿à¤¤, à¤œà¤µà¤¾à¤¬à¤¦à¥‡à¤¹ à¤”à¤° à¤¸à¤¤à¥à¤¯à¤¾à¤ªà¤¨ à¤¯à¥‹à¤—à¥à¤¯ à¤¸à¤‚à¤¸à¥à¤¥à¤¾à¤—à¤¤ à¤®à¤¾à¤¨à¤•à¥‹à¤‚ à¤•à¤¾ à¤¸à¤®à¤¯ à¤† à¤—à¤¯à¤¾ à¤¹à¥ˆà¥¤",
-                stat1Label: "2023 à¤®à¥‡à¤‚ à¤­à¤¾à¤°à¤¤ à¤®à¥‡à¤‚ à¤›à¤¾à¤¤à¥à¤° à¤†à¤¤à¥à¤®à¤¹à¤¤à¥à¤¯à¤¾à¤à¤‚",
-                stat2Label: "à¤ªà¤¿à¤›à¤²à¥‡ à¤¦à¤¶à¤• à¤®à¥‡à¤‚ à¤µà¥ƒà¤¦à¥à¤§à¤¿",
-                stat3Label: "à¤¹à¤° à¤˜à¤‚à¤Ÿà¥‡ à¤à¤• à¤›à¤¾à¤¤à¥à¤° à¤•à¥€ à¤œà¤¾à¤¨",
-                scrollMore: "à¤…à¤§à¤¿à¤• à¤œà¤¾à¤¨à¤¨à¥‡ à¤•à¥‡ à¤²à¤¿à¤ à¤¸à¥à¤•à¥à¤°à¥‰à¤² à¤•à¤°à¥‡à¤‚",
-                crisisLabel: "à¤µà¤¾à¤¸à¥à¤¤à¤µà¤¿à¤•à¤¤à¤¾",
-                crisisTitle: "à¤¯à¤¹ à¤¦à¥‡à¤–à¤­à¤¾à¤² à¤•à¤¾ à¤¸à¤‚à¤•à¤Ÿ à¤¨à¤¹à¥€à¤‚ à¤¹à¥ˆà¥¤<br>à¤¯à¤¹ à¤•à¥à¤·à¤®à¤¤à¤¾ à¤•à¤¾ à¤¸à¤‚à¤•à¤Ÿ à¤¹à¥ˆà¥¤",
-                crisisSubtitle: "à¤¹à¤° à¤¸à¥à¤•à¥‚à¤² à¤®à¥‡à¤‚ à¤¦à¥‡à¤–à¤­à¤¾à¤² à¤•à¤°à¤¨à¥‡ à¤µà¤¾à¤²à¥‡ à¤¶à¤¿à¤•à¥à¤·à¤• à¤¹à¥ˆà¤‚à¥¤ à¤¹à¤° à¤ªà¥à¤°à¤§à¤¾à¤¨à¤¾à¤šà¤¾à¤°à¥à¤¯ à¤šà¤¾à¤¹à¤¤à¥‡ à¤¹à¥ˆà¤‚ à¤•à¤¿ à¤‰à¤¨à¤•à¥‡ à¤›à¤¾à¤¤à¥à¤° à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤ à¤°à¤¹à¥‡à¤‚à¥¤ à¤²à¥‡à¤•à¤¿à¤¨ à¤…à¤šà¥à¤›à¥‡ à¤‡à¤°à¤¾à¤¦à¥‡ à¤…à¤•à¥‡à¤²à¥‡ à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤šà¥à¤šà¥‹à¤‚ à¤•à¥€ à¤°à¤•à¥à¤·à¤¾ à¤¨à¤¹à¥€à¤‚ à¤•à¤° à¤¸à¤•à¤¤à¥‡à¥¤",
-                crisisQuote: "\"à¤•à¤¿à¤¸à¥€ à¤­à¥€ à¤¬à¤šà¥à¤šà¥‡ à¤•à¥‹ à¤¹à¤®à¤¾à¤°à¥‡ à¤¸à¥à¤•à¥‚à¤²à¥‹à¤‚ à¤®à¥‡à¤‚ à¤•à¤­à¥€ à¤­à¥€ à¤…à¤¨à¤¸à¥à¤¨à¤¾ à¤¯à¤¾ à¤…à¤¨à¤¦à¥‡à¤–à¤¾ à¤®à¤¹à¤¸à¥‚à¤¸ à¤¨à¤¹à¥€à¤‚ à¤•à¤°à¤¨à¤¾ à¤šà¤¾à¤¹à¤¿à¤à¥¤ à¤¹à¤® à¤‰à¤¨à¥à¤¹à¥‡à¤‚ à¤à¤• à¤à¤¸à¤¾ à¤µà¤¾à¤¤à¤¾à¤µà¤°à¤£ à¤¦à¥‡à¤¨à¥‡ à¤•à¥‡ à¤²à¤¿à¤ à¤¬à¤¾à¤§à¥à¤¯ à¤¹à¥ˆà¤‚ à¤œà¥‹ à¤‰à¤¨à¤•à¥€ à¤­à¤¾à¤µà¤¨à¤¾à¤¤à¥à¤®à¤• à¤­à¤²à¤¾à¤ˆ à¤•à¤¾ à¤­à¥€ à¤ªà¥‹à¤·à¤£ à¤•à¤°à¥‡à¥¤\"",
-                crisisQuoteAuthor: "à¤¦à¤¿à¤²à¥à¤²à¥€ à¤¶à¤¿à¤•à¥à¤·à¤¾ à¤®à¤‚à¤¤à¥à¤°à¥€",
-                crisisQuoteContext: "à¤¨à¤µà¤‚à¤¬à¤° 2025 à¤•à¥€ à¤›à¤¾à¤¤à¥à¤° à¤¤à¥à¤°à¤¾à¤¸à¤¦à¥€ à¤•à¥‡ à¤¬à¤¾à¤¦",
-                crisisPattern: "à¤ªà¥ˆà¤Ÿà¤°à¥à¤¨ à¤¦à¥‹à¤¹à¤°à¤¾à¤¤à¤¾ à¤¹à¥ˆ",
-                crisisPatternText1: "à¤œà¤¬ à¤¤à¥à¤°à¤¾à¤¸à¤¦à¥€ à¤¹à¥‹à¤¤à¥€ à¤¹à¥ˆ, à¤¤à¥‹ à¤ªà¥à¤°à¤¤à¤¿à¤•à¥à¤°à¤¿à¤¯à¤¾ à¤¹à¤®à¥‡à¤¶à¤¾ à¤à¤• à¤œà¥ˆà¤¸à¥€ à¤¹à¥‹à¤¤à¥€ à¤¹à¥ˆ: à¤•à¤°à¥à¤®à¤šà¤¾à¤°à¤¿à¤¯à¥‹à¤‚ à¤•à¤¾ à¤¨à¤¿à¤²à¤‚à¤¬à¤¨, à¤¸à¤®à¤¿à¤¤à¤¿à¤¯à¥‹à¤‚ à¤•à¤¾ à¤—à¤ à¤¨à¥¤ à¤«à¤¿à¤° à¤¸à¥à¤°à¥à¤–à¤¿à¤¯à¤¾à¤‚ à¤«à¥€à¤•à¥€ à¤ªà¤¡à¤¼ à¤œà¤¾à¤¤à¥€ à¤¹à¥ˆà¤‚à¥¤",
-                crisisPatternText2: "à¤¹à¤® à¤¸à¤‚à¤•à¤Ÿà¥‹à¤‚ à¤ªà¤° à¤ªà¥à¤°à¤¤à¤¿à¤•à¥à¤°à¤¿à¤¯à¤¾ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤ à¤¹à¤® à¤‰à¤¨à¥à¤¹à¥‡à¤‚ à¤°à¥‹à¤•à¤¤à¥‡ à¤¨à¤¹à¥€à¤‚ à¤¹à¥ˆà¤‚à¥¤ à¤¹à¤® à¤¶à¤¿à¤•à¥à¤·à¤•à¥‹à¤‚ à¤•à¥‹ à¤ªà¤¾à¤ à¥à¤¯à¤•à¥à¤°à¤® à¤ªà¤¢à¤¼à¤¾à¤¨à¥‡ à¤•à¥‡ à¤²à¤¿à¤ à¤ªà¥à¤°à¤¶à¤¿à¤•à¥à¤·à¤¿à¤¤ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚, à¤¸à¤‚à¤•à¤Ÿ à¤®à¥‡à¤‚ à¤›à¤¾à¤¤à¥à¤° à¤•à¥‹ à¤ªà¤¹à¤šà¤¾à¤¨à¤¨à¥‡ à¤•à¥‡ à¤²à¤¿à¤ à¤¨à¤¹à¥€à¤‚à¥¤",
-                crisisHighlightStat: "0 à¤˜à¤‚à¤Ÿà¥‡",
-                crisisHighlightText: "à¤…à¤§à¤¿à¤•à¤¾à¤‚à¤¶ à¤¶à¤¿à¤•à¥à¤·à¤•à¥‹à¤‚ à¤•à¥‹ à¤®à¤¿à¤²à¤¨à¥‡ à¤µà¤¾à¤²à¤¾ à¤®à¤¾à¤¨à¤¸à¤¿à¤• à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤ªà¥à¤°à¤¶à¤¿à¤•à¥à¤·à¤£â€”à¤›à¤¾à¤¤à¥à¤°à¥‹à¤‚ à¤•à¥‡ à¤¸à¤¾à¤¥ 1,000+ à¤˜à¤‚à¤Ÿà¥‡ à¤¬à¤¿à¤¤à¤¾à¤¨à¥‡ à¤•à¥‡ à¤¬à¤¾à¤µà¤œà¥‚à¤¦",
-                paradoxLabel: "à¤¸à¤‚à¤ªà¤°à¥à¤• à¤˜à¤‚à¤Ÿà¥‡ à¤µà¤¿à¤°à¥‹à¤§à¤¾à¤­à¤¾à¤¸",
-                paradoxTitle: "à¤œà¥‹ à¤²à¥‹à¤— à¤¸à¤¬ à¤•à¥à¤› à¤¦à¥‡à¤–à¤¤à¥‡ à¤¹à¥ˆà¤‚,<br>à¤•à¤¿à¤¸à¥€ à¤šà¥€à¤œà¤¼ à¤•à¥‡ à¤²à¤¿à¤ à¤ªà¥à¤°à¤¶à¤¿à¤•à¥à¤·à¤¿à¤¤ à¤¨à¤¹à¥€à¤‚",
-                paradoxSubtitle: "à¤œà¥‹ à¤²à¥‹à¤— à¤•à¤®à¤œà¥‹à¤° à¤†à¤¬à¤¾à¤¦à¥€ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤¸à¤¬à¤¸à¥‡ à¤…à¤§à¤¿à¤• à¤¸à¤®à¤¯ à¤¬à¤¿à¤¤à¤¾à¤¤à¥‡ à¤¹à¥ˆà¤‚, à¤‰à¤¨à¥à¤¹à¥‡à¤‚ à¤†à¤®à¤¤à¥Œà¤° à¤ªà¤° à¤¶à¥‚à¤¨à¥à¤¯ à¤®à¤¾à¤¨à¤¸à¤¿à¤• à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤ªà¥à¤°à¤¶à¤¿à¤•à¥à¤·à¤£ à¤®à¤¿à¤²à¤¤à¤¾ à¤¹à¥ˆà¥¤",
-                paradoxCard1Title: "à¤›à¤¾à¤¤à¥à¤°à¥‹à¤‚ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤¶à¤¿à¤•à¥à¤·à¤•",
-                paradoxCard1Text: "à¤¸à¥à¤•à¥‚à¤² à¤•à¥‡ à¤¹à¤«à¥à¤¤à¥‹à¤‚ à¤®à¥‡à¤‚ à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤…à¤ªà¤¨à¥‡ à¤¬à¤šà¥à¤šà¥‹à¤‚ à¤•à¥‹ à¤œà¤¿à¤¤à¤¨à¥‡ à¤œà¤¾à¤—à¤¨à¥‡ à¤•à¥‡ à¤˜à¤‚à¤Ÿà¥‡ à¤¦à¥‡à¤–à¤¤à¥‡ à¤¹à¥ˆà¤‚ à¤‰à¤¸à¤¸à¥‡ à¤…à¤§à¤¿à¤•à¥¤",
-                paradoxCard2Title: "à¤•à¥‰à¤²à¥‡à¤œ à¤›à¤¾à¤¤à¥à¤°à¥‹à¤‚ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤«à¥ˆà¤•à¤²à¥à¤Ÿà¥€",
-                paradoxCard2Text: "à¤®à¤¹à¤¤à¥à¤µà¤ªà¥‚à¤°à¥à¤£ 18-25 à¤†à¤¯à¥ à¤µà¤°à¥à¤— à¤œà¤¬ à¤®à¤¾à¤¨à¤¸à¤¿à¤• à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤¸à¤®à¤¸à¥à¤¯à¤¾à¤à¤‚ à¤…à¤•à¥à¤¸à¤° à¤ªà¤¹à¤²à¥€ à¤¬à¤¾à¤° à¤‰à¤­à¤°à¤¤à¥€ à¤¹à¥ˆà¤‚à¥¤",
-                paradoxCard3Title: "à¤•à¤°à¥à¤®à¤šà¤¾à¤°à¤¿à¤¯à¥‹à¤‚ à¤•à¥‡ à¤¸à¤¾à¤¥ à¤ªà¥à¤°à¤¬à¤‚à¤§à¤•",
-                paradoxCard3Text: "à¤…à¤•à¥à¤¸à¤° à¤ªà¤°à¤¿à¤µà¤¾à¤° à¤•à¥‡ à¤¸à¤¾à¤¥ à¤¬à¤¿à¤¤à¤¾à¤ à¤¸à¤®à¤¯ à¤¸à¥‡ à¤…à¤§à¤¿à¤•à¥¤ à¤œà¤²à¥à¤¦à¥€ à¤¸à¤‚à¤•à¤Ÿ à¤•à¥‹ à¤¨à¥‹à¤Ÿà¤¿à¤¸ à¤•à¤°à¤¨à¥‡ à¤•à¥€ à¤¸à¥à¤¥à¤¿à¤¤à¤¿ à¤®à¥‡à¤‚à¥¤",
-                paradoxBadge: "à¤¶à¥‚à¤¨à¥à¤¯ MH à¤ªà¥à¤°à¤¶à¤¿à¤•à¥à¤·à¤£",
-                paradoxBottomTitle: "à¤¯à¤¹ à¤à¤• à¤¶à¤¾à¤¸à¤¨ à¤µà¤¿à¤«à¤²à¤¤à¤¾ à¤¹à¥ˆ",
-                paradoxBottomText: "à¤¹à¤® à¤…à¤—à¥à¤¨à¤¿ à¤¸à¥à¤°à¤•à¥à¤·à¤¾ à¤•à¥‡ à¤²à¤¿à¤ à¤‡à¤®à¤¾à¤°à¤¤à¥‹à¤‚ à¤•à¥‹ à¤ªà¥à¤°à¤®à¤¾à¤£à¤¿à¤¤ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤ à¤²à¥‡à¤•à¤¿à¤¨ à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤šà¥à¤šà¥‹à¤‚ à¤•à¥€ à¤®à¤¨à¥‹à¤µà¥ˆà¤œà¥à¤žà¤¾à¤¨à¤¿à¤• à¤¸à¥à¤°à¤•à¥à¤·à¤¾ à¤•à¥‡ à¤²à¤¿à¤ à¤•à¥‹à¤ˆ à¤µà¥à¤¯à¤µà¤¸à¥à¤¥à¤¿à¤¤ à¤®à¤¾à¤¨à¤• à¤¨à¤¹à¥€à¤‚ à¤¹à¥ˆà¤‚à¥¤",
-                ctaTitle: "à¤†à¤ªà¤•à¥€ à¤†à¤µà¤¾à¤œà¤¼ <em>à¤®à¤¾à¤¯à¤¨à¥‡ à¤°à¤–à¤¤à¥€ à¤¹à¥ˆ</em>",
-                ctaText: "à¤¸à¥à¤•à¥‚à¤² à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤•à¥€ à¤…à¤ªà¥‡à¤•à¥à¤·à¤¾à¤“à¤‚ à¤•à¤¾ à¤œà¤µà¤¾à¤¬ à¤¦à¥‡à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤ à¤œà¤¬ à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾ à¤¸à¤µà¤¾à¤² à¤ªà¥‚à¤›à¤¤à¥‡ à¤¹à¥ˆà¤‚ à¤”à¤° à¤®à¤¾à¤¨à¤•à¥‹à¤‚ à¤•à¥€ à¤µà¤•à¤¾à¤²à¤¤ à¤•à¤°à¤¤à¥‡ à¤¹à¥ˆà¤‚, à¤¤à¥‹ à¤¬à¤¦à¤²à¤¾à¤µ à¤¹à¥‹à¤¤à¤¾ à¤¹à¥ˆà¥¤",
-                ctaBtn1: "à¤…à¤­à¤¿à¤­à¤¾à¤µà¤• à¤šà¥‡à¤•à¤²à¤¿à¤¸à¥à¤Ÿ à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚",
-                ctaBtn2: "à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚",
-                trust1: "à¤…à¤‚à¤¤à¤°à¥à¤°à¤¾à¤·à¥à¤Ÿà¥à¤°à¥€à¤¯ CPD à¤®à¤¾à¤¨à¥à¤¯à¤¤à¤¾",
-                trust2: "à¤¸à¤¾à¤•à¥à¤·à¥à¤¯-à¤†à¤§à¤¾à¤°à¤¿à¤¤ à¤…à¤¨à¥à¤¸à¤‚à¤§à¤¾à¤¨ à¤¨à¥€à¤‚à¤µ",
-                trust3: "à¤®à¤¾à¤‡à¤‚à¤¡à¤«à¥à¤² à¤¡à¤¿à¤—à¥à¤¨à¤¿à¤Ÿà¥€ à¤²à¥ˆà¤¬ à¤¸à¤¾à¤à¥‡à¤¦à¤¾à¤°à¥€",
-                footerLogo: "à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤ à¤¸à¥à¤•à¥‚à¤²à¥‹à¤‚ à¤•à¥‡ à¤²à¤¿à¤ à¤®à¤¾à¤¤à¤¾-à¤ªà¤¿à¤¤à¤¾",
-                footerText: "à¤¸à¤¾à¤•à¥à¤·à¥à¤¯-à¤†à¤§à¤¾à¤°à¤¿à¤¤ à¤¸à¤‚à¤¸à¥à¤¥à¤¾à¤—à¤¤ à¤¸à¥à¤°à¤•à¥à¤·à¤¾ à¤®à¤¾à¤¨à¤•à¥‹à¤‚ à¤•à¥€ à¤µà¤•à¤¾à¤²à¤¤",
-                footerContact: "à¤¸à¤‚à¤ªà¤°à¥à¤•",
-                footerLab: "à¤®à¤¾à¤‡à¤‚à¤¡à¤«à¥à¤² à¤¡à¤¿à¤—à¥à¤¨à¤¿à¤Ÿà¥€ à¤²à¥ˆà¤¬"
-            },
-            ta: {
-                siteName: "à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà®¾à®© à®ªà®³à¯à®³à®¿à®•à®³à¯à®•à¯à®•à®¾à®© à®ªà¯†à®±à¯à®±à¯‹à®°à¯à®•à®³à¯",
-                navCrisis: "à®¨à¯†à®°à¯à®•à¯à®•à®Ÿà®¿",
-                navParadox: "à®®à¯à®°à®£à¯à®ªà®¾à®Ÿà¯",
-                navAction: "à®¨à®Ÿà®µà®Ÿà®¿à®•à¯à®•à¯ˆ à®Žà®Ÿà¯à®™à¯à®•à®³à¯",
-                heroEyebrow: "à®’à®°à¯ à®ªà¯†à®±à¯à®±à¯‹à®°à¯ à®µà®•à¯à®•à®¾à®²à®¤à¯à®¤à¯ à®®à¯à®¯à®±à¯à®šà®¿",
-                heroTitle: "à®¨à®²à¯à®² à®¨à¯‹à®•à¯à®•à®™à¯à®•à®³à¯à®•à¯à®•à¯ à®…à®ªà¯à®ªà®¾à®²à¯: <em>à®’à®°à¯ à®†à®³à¯à®•à¯ˆ à®•à®Ÿà¯à®Ÿà®¾à®¯à®®à¯</em>",
-                heroSubtitle: "à®®à®¾à®£à®µà®°à¯ à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà¯ à®‡à®©à®¿ à®¤à®©à®¿à®ªà¯à®ªà®Ÿà¯à®Ÿ à®µà¯€à®°à®®à¯ à®…à®²à¯à®²à®¤à¯ à®Žà®¤à®¿à®°à¯à®µà®¿à®©à¯ˆ à®¨à®Ÿà®µà®Ÿà®¿à®•à¯à®•à¯ˆà®•à®³à®¿à®²à¯ à®¤à®™à¯à®•à®¿à®¯à®¿à®°à¯à®•à¯à®• à®®à¯à®Ÿà®¿à®¯à®¾à®¤à¯. à®®à¯à®±à¯ˆà®¯à®¾à®© à®¨à®¿à®±à¯à®µà®© à®¤à®°à®¨à®¿à®²à¯ˆà®•à®³à¯à®•à¯à®•à®¾à®© à®¨à¯‡à®°à®®à¯ à®‡à®¤à¯.",
-                stat1Label: "2023à®²à¯ à®‡à®¨à¯à®¤à®¿à®¯à®¾à®µà®¿à®²à¯ à®®à®¾à®£à®µà®°à¯ à®¤à®±à¯à®•à¯Šà®²à¯ˆà®•à®³à¯",
-                stat2Label: "à®•à®Ÿà®¨à¯à®¤ à®¤à®šà®¾à®ªà¯à®¤à®¤à¯à®¤à®¿à®²à¯ à®…à®¤à®¿à®•à®°à®¿à®ªà¯à®ªà¯",
-                stat3Label: "à®’à®µà¯à®µà¯Šà®°à¯ à®®à®£à®¿ à®¨à¯‡à®°à®®à¯à®®à¯ à®’à®°à¯ à®®à®¾à®£à®µà®°à¯ à®‰à®¯à®¿à®°à¯",
-                scrollMore: "à®®à¯‡à®²à¯à®®à¯ à®…à®±à®¿à®¯ à®¸à¯à®•à¯à®°à¯‹à®²à¯ à®šà¯†à®¯à¯à®¯à®µà¯à®®à¯",
-                crisisLabel: "à®‰à®£à¯à®®à¯ˆ",
-                crisisTitle: "à®‡à®¤à¯ à®…à®•à¯à®•à®±à¯ˆà®¯à®¿à®©à¯ à®¨à¯†à®°à¯à®•à¯à®•à®Ÿà®¿ à®…à®²à¯à®².<br>à®‡à®¤à¯ à®¤à®¿à®±à®©à®¿à®©à¯ à®¨à¯†à®°à¯à®•à¯à®•à®Ÿà®¿.",
-                crisisSubtitle: "à®’à®µà¯à®µà¯Šà®°à¯ à®ªà®³à¯à®³à®¿à®¯à®¿à®²à¯à®®à¯ à®…à®•à¯à®•à®±à¯ˆà®¯à¯à®³à¯à®³ à®†à®šà®¿à®°à®¿à®¯à®°à¯à®•à®³à¯ à®‰à®³à¯à®³à®©à®°à¯. à®†à®©à®¾à®²à¯ à®¨à®²à¯à®² à®¨à¯‹à®•à¯à®•à®™à¯à®•à®³à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯‡ à®¨à®®à¯ à®•à¯à®´à®¨à¯à®¤à¯ˆà®•à®³à¯ˆà®ªà¯ à®ªà®¾à®¤à¯à®•à®¾à®•à¯à®• à®®à¯à®Ÿà®¿à®¯à®¾à®¤à¯.",
-                crisisQuote: "\"à®Žà®¨à¯à®¤ à®•à¯à®´à®¨à¯à®¤à¯ˆà®¯à¯à®®à¯ à®¨à®®à¯ à®ªà®³à¯à®³à®¿à®•à®³à®¿à®²à¯ à®•à¯‡à®Ÿà¯à®•à®ªà¯à®ªà®Ÿà®¾à®®à®²à¯ à®…à®²à¯à®²à®¤à¯ à®ªà®¾à®°à¯à®•à¯à®•à®ªà¯à®ªà®Ÿà®¾à®®à®²à¯ à®‰à®£à®°à®•à¯à®•à¯‚à®Ÿà®¾à®¤à¯. à®…à®µà®°à¯à®•à®³à®¿à®©à¯ à®‰à®£à®°à¯à®šà¯à®šà®¿ à®¨à®²à¯à®µà®¾à®´à¯à®µà¯ˆà®¯à¯à®®à¯ à®µà®³à®°à¯à®•à¯à®•à¯à®®à¯ à®šà¯‚à®´à®²à¯ˆ à®¨à®¾à®®à¯ à®…à®µà®°à¯à®•à®³à¯à®•à¯à®•à¯à®•à¯ à®•à¯Šà®Ÿà¯à®•à¯à®• à®µà¯‡à®£à¯à®Ÿà¯à®®à¯.\"",
-                crisisQuoteAuthor: "à®Ÿà¯†à®²à¯à®²à®¿ à®•à®²à¯à®µà®¿ à®…à®®à¯ˆà®šà¯à®šà®°à¯",
-                crisisQuoteContext: "à®¨à®µà®®à¯à®ªà®°à¯ 2025 à®®à®¾à®£à®µà®°à¯ à®šà¯‹à®•à®¤à¯à®¤à¯ˆà®¤à¯ à®¤à¯Šà®Ÿà®°à¯à®¨à¯à®¤à¯",
-                crisisPattern: "à®®à¯à®±à¯ˆ à®®à¯€à®£à¯à®Ÿà¯à®®à¯ à®®à¯€à®£à¯à®Ÿà¯à®®à¯ à®µà®°à¯à®•à®¿à®±à®¤à¯",
-                crisisPatternText1: "à®šà¯‹à®•à®®à¯ à®¨à®¿à®•à®´à¯à®®à¯à®ªà¯‹à®¤à¯, à®ªà®¤à®¿à®²à¯ à®Žà®ªà¯à®ªà¯‹à®¤à¯à®®à¯ à®’à®©à¯à®±à¯‡: à®Šà®´à®¿à®¯à®°à¯à®•à®³à¯ˆ à®‡à®Ÿà¯ˆà®¨à¯€à®•à¯à®•à®®à¯, à®•à¯à®´à¯à®•à¯à®•à®³à¯ˆ à®…à®®à¯ˆà®ªà¯à®ªà®¤à¯. à®ªà®¿à®©à¯à®©à®°à¯ à®¤à®²à¯ˆà®ªà¯à®ªà¯à®šà¯ à®šà¯†à®¯à¯à®¤à®¿à®•à®³à¯ à®®à®±à¯ˆà®¨à¯à®¤à¯à®µà®¿à®Ÿà¯à®®à¯.",
-                crisisPatternText2: "à®¨à®¾à®®à¯ à®¨à¯†à®°à¯à®•à¯à®•à®Ÿà®¿à®•à®³à¯à®•à¯à®•à¯ à®Žà®¤à®¿à®°à¯à®µà®¿à®©à¯ˆà®¯à®¾à®±à¯à®±à¯à®•à®¿à®±à¯‹à®®à¯. à®¨à®¾à®®à¯ à®…à®µà®±à¯à®±à¯ˆà®¤à¯ à®¤à®Ÿà¯à®ªà¯à®ªà®¤à®¿à®²à¯à®²à¯ˆ.",
-                crisisHighlightStat: "0 à®®à®£à®¿ à®¨à¯‡à®°à®®à¯",
-                crisisHighlightText: "à®ªà¯†à®°à¯à®®à¯à®ªà®¾à®²à®¾à®© à®†à®šà®¿à®°à®¿à®¯à®°à¯à®•à®³à¯ à®ªà¯†à®±à¯à®®à¯ à®®à®©à®¨à®² à®ªà®¯à®¿à®±à¯à®šà®¿â€”à®®à®¾à®£à®µà®°à¯à®•à®³à¯à®Ÿà®©à¯ 1,000+ à®®à®£à®¿ à®¨à¯‡à®°à®®à¯ à®šà¯†à®²à®µà®´à®¿à®¤à¯à®¤à®¾à®²à¯à®®à¯",
-                paradoxLabel: "à®¤à¯Šà®Ÿà®°à¯à®ªà¯ à®¨à¯‡à®° à®®à¯à®°à®£à¯à®ªà®¾à®Ÿà¯",
-                paradoxTitle: "à®Žà®²à¯à®²à®¾à®µà®±à¯à®±à¯ˆà®¯à¯à®®à¯ à®ªà®¾à®°à¯à®•à¯à®•à¯à®®à¯ à®®à®•à¯à®•à®³à¯,<br>à®Žà®¤à®±à¯à®•à¯à®®à¯ à®ªà®¯à®¿à®±à¯à®šà®¿ à®ªà¯†à®±à®µà®¿à®²à¯à®²à¯ˆ",
-                paradoxSubtitle: "à®ªà®¾à®¤à®¿à®•à¯à®•à®ªà¯à®ªà®Ÿà®•à¯à®•à¯‚à®Ÿà®¿à®¯ à®®à®•à¯à®•à®³à¯à®Ÿà®©à¯ à®…à®¤à®¿à®• à®¨à¯‡à®°à®®à¯ à®šà¯†à®²à®µà®¿à®Ÿà¯à®ªà®µà®°à¯à®•à®³à¯ à®ªà¯Šà®¤à¯à®µà®¾à®• à®®à®©à®¨à®² à®ªà®¯à®¿à®±à¯à®šà®¿ à®ªà¯†à®±à¯à®µà®¤à®¿à®²à¯à®²à¯ˆ.",
-                paradoxCard1Title: "à®®à®¾à®£à®µà®°à¯à®•à®³à¯à®Ÿà®©à¯ à®†à®šà®¿à®°à®¿à®¯à®°à¯à®•à®³à¯",
-                paradoxCard1Text: "à®ªà®³à¯à®³à®¿ à®µà®¾à®°à®™à¯à®•à®³à®¿à®²à¯ à®ªà¯†à®±à¯à®±à¯‹à®°à¯ à®¤à®™à¯à®•à®³à¯ à®•à¯à®´à®¨à¯à®¤à¯ˆà®•à®³à¯ˆà®ªà¯ à®ªà®¾à®°à¯à®ªà¯à®ªà®¤à¯ˆ à®µà®¿à®Ÿ à®…à®¤à®¿à®• à®µà®¿à®´à®¿à®ªà¯à®ªà¯ à®¨à¯‡à®°à®®à¯.",
-                paradoxCard2Title: "à®•à®²à¯à®²à¯‚à®°à®¿ à®®à®¾à®£à®µà®°à¯à®•à®³à¯à®Ÿà®©à¯ à®†à®šà®¿à®°à®¿à®¯à®°à¯ à®•à¯à®´à¯",
-                paradoxCard2Text: "à®®à®©à®¨à®² à®ªà®¿à®°à®šà¯à®šà®¿à®©à¯ˆà®•à®³à¯ à®®à¯à®¤à®²à®¿à®²à¯ à®µà¯†à®³à®¿à®ªà¯à®ªà®Ÿà¯à®®à¯ à®®à¯à®•à¯à®•à®¿à®¯à®®à®¾à®© 18-25 à®µà®¯à®¤à¯ à®•à¯à®´à¯.",
-                paradoxCard3Title: "à®ªà®£à®¿à®¯à®¾à®³à®°à¯à®•à®³à¯à®Ÿà®©à¯ à®®à¯‡à®²à®¾à®³à®°à¯à®•à®³à¯",
-                paradoxCard3Text: "à®ªà¯†à®°à¯à®®à¯à®ªà®¾à®²à¯à®®à¯ à®•à¯à®Ÿà¯à®®à¯à®ªà®¤à¯à®¤à¯à®Ÿà®©à¯ à®šà¯†à®²à®µà®¿à®Ÿà¯à®®à¯ à®¨à¯‡à®°à®¤à¯à®¤à¯ˆ à®µà®¿à®Ÿ à®…à®¤à®¿à®•à®®à¯.",
-                paradoxBadge: "à®®à®©à®¨à®² à®ªà®¯à®¿à®±à¯à®šà®¿ à®‡à®²à¯à®²à¯ˆ",
-                paradoxBottomTitle: "à®‡à®¤à¯ à®’à®°à¯ à®†à®³à¯à®•à¯ˆ à®¤à¯‹à®²à¯à®µà®¿",
-                paradoxBottomText: "à®¤à¯€ à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà¯à®•à¯à®•à¯ à®•à®Ÿà¯à®Ÿà®¿à®Ÿà®™à¯à®•à®³à¯ˆ à®šà®¾à®©à¯à®±à®³à®¿à®•à¯à®•à®¿à®±à¯‹à®®à¯. à®†à®©à®¾à®²à¯ à®¨à®®à¯ à®•à¯à®´à®¨à¯à®¤à¯ˆà®•à®³à®¿à®©à¯ à®‰à®³à®µà®¿à®¯à®²à¯ à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà¯à®•à¯à®•à¯ à®®à¯à®±à¯ˆà®¯à®¾à®© à®¤à®°à®¨à®¿à®²à¯ˆà®•à®³à¯ à®‡à®²à¯à®²à¯ˆ.",
-                ctaTitle: "à®‰à®™à¯à®•à®³à¯ à®•à¯à®°à®²à¯ <em>à®®à¯à®•à¯à®•à®¿à®¯à®®à¯</em>",
-                ctaText: "à®ªà®³à¯à®³à®¿à®•à®³à¯ à®ªà¯†à®±à¯à®±à¯‹à®°à¯ à®Žà®¤à®¿à®°à¯à®ªà®¾à®°à¯à®ªà¯à®ªà¯à®•à®³à¯à®•à¯à®•à¯ à®ªà®¤à®¿à®²à®³à®¿à®•à¯à®•à®¿à®©à¯à®±à®©. à®ªà¯†à®±à¯à®±à¯‹à®°à¯ à®•à¯‡à®³à¯à®µà®¿à®•à®³à¯ à®•à¯‡à®Ÿà¯à®•à¯à®®à¯à®ªà¯‹à®¤à¯, à®®à®¾à®±à¯à®±à®®à¯ à®¨à®¿à®•à®´à¯à®•à®¿à®±à®¤à¯.",
-                ctaBtn1: "à®ªà¯†à®±à¯à®±à¯‹à®°à¯ à®šà®°à®¿à®ªà®¾à®°à¯à®ªà¯à®ªà¯ à®ªà®Ÿà¯à®Ÿà®¿à®¯à®²à¯ à®ªà®¤à®¿à®µà®¿à®±à®•à¯à®•à®®à¯",
-                ctaBtn2: "à®¤à¯Šà®Ÿà®°à¯à®ªà¯ à®•à¯Šà®³à¯à®³à¯à®™à¯à®•à®³à¯",
-                trust1: "à®šà®°à¯à®µà®¤à¯‡à®š CPD à®…à®™à¯à®•à¯€à®•à®¾à®°à®®à¯",
-                trust2: "à®šà®¾à®©à¯à®±à¯-à®…à®Ÿà®¿à®ªà¯à®ªà®Ÿà¯ˆà®¯à®¿à®²à®¾à®© à®†à®°à®¾à®¯à¯à®šà¯à®šà®¿",
-                trust3: "à®®à¯ˆà®£à¯à®Ÿà¯à®ƒà®ªà¯à®²à¯ à®Ÿà®¿à®•à¯à®©à®¿à®Ÿà¯à®Ÿà®¿ à®²à¯‡à®ªà¯ à®•à¯‚à®Ÿà¯à®Ÿà®¾à®£à¯à®®à¯ˆ",
-                footerLogo: "à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà®¾à®© à®ªà®³à¯à®³à®¿à®•à®³à¯à®•à¯à®•à®¾à®© à®ªà¯†à®±à¯à®±à¯‹à®°à¯à®•à®³à¯",
-                footerText: "à®šà®¾à®©à¯à®±à¯-à®…à®Ÿà®¿à®ªà¯à®ªà®Ÿà¯ˆà®¯à®¿à®²à®¾à®© à®¨à®¿à®±à¯à®µà®© à®ªà®¾à®¤à¯à®•à®¾à®ªà¯à®ªà¯ à®¤à®°à®¨à®¿à®²à¯ˆà®•à®³à¯à®•à¯à®•à¯ à®µà®•à¯à®•à®¾à®²à®¤à¯à®¤à¯",
-                footerContact: "à®¤à¯Šà®Ÿà®°à¯à®ªà¯",
-                footerLab: "à®®à¯ˆà®£à¯à®Ÿà¯à®ƒà®ªà¯à®²à¯ à®Ÿà®¿à®•à¯à®©à®¿à®Ÿà¯à®Ÿà®¿ à®²à¯‡à®ªà¯"
-            },
-            te: {
-                siteName: "à°¸à±à°°à°•à±à°·à°¿à°¤ à°ªà°¾à° à°¶à°¾à°²à°² à°•à±‹à°¸à°‚ à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°²à±",
-                navCrisis: "à°¸à°‚à°•à±à°·à±‹à°­à°‚",
-                navParadox: "à°µà°¿à°°à±à°¦à±à°§à°¤",
-                navAction: "à°šà°°à±à°¯ à°¤à±€à°¸à±à°•à±‹à°‚à°¡à°¿",
-                heroEyebrow: "à°’à°• à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°² à°¨à±à°¯à°¾à°¯à°µà°¾à°¦ à°šà±Šà°°à°µ",
-                heroTitle: "à°®à°‚à°šà°¿ à°‰à°¦à±à°¦à±‡à°¶à°¾à°²à°•à± à°…à°¤à±€à°¤à°‚à°—à°¾: <em>à°’à°• à°ªà°¾à°²à°¨à°¾ à°…à°µà°¸à°°à°‚</em>",
-                heroSubtitle: "à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à°¿ à°­à°¦à±à°°à°¤ à°‡à°•à°ªà±ˆ à°µà±à°¯à°•à±à°¤à°¿à°—à°¤ à°µà±€à°°à°¤à±à°µà°‚ à°²à±‡à°¦à°¾ à°ªà±à°°à°¤à°¿à°¸à±à°ªà°‚à°¦à°¨ à°šà°°à±à°¯à°²à°ªà±ˆ à°†à°§à°¾à°°à°ªà°¡à°²à±‡à°¦à±. à°•à±à°°à°®à°¬à°¦à±à°§à°®à±ˆà°¨ à°¸à°‚à°¸à±à°¥à°¾à°—à°¤ à°ªà±à°°à°®à°¾à°£à°¾à°² à°¸à°®à°¯à°‚ à°µà°šà±à°šà°¿à°‚à°¦à°¿.",
-                stat1Label: "2023à°²à±‹ à°­à°¾à°°à°¤à°¦à±‡à°¶à°‚à°²à±‹ à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à°¿ à°†à°¤à±à°®à°¹à°¤à±à°¯à°²à±",
-                stat2Label: "à°—à°¤ à°¦à°¶à°¾à°¬à±à°¦à°‚à°²à±‹ à°ªà±†à°°à±à°—à±à°¦à°²",
-                stat3Label: "à°ªà±à°°à°¤à°¿ à°—à°‚à°Ÿà°•à± à°’à°• à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à°¿ à°ªà±à°°à°¾à°£à°¾à°²à±",
-                scrollMore: "à°®à°°à°¿à°‚à°¤ à°¤à±†à°²à±à°¸à±à°•à±‹à°µà°¡à°¾à°¨à°¿à°•à°¿ à°¸à±à°•à±à°°à±‹à°²à± à°šà±‡à°¯à°‚à°¡à°¿",
-                crisisLabel: "à°µà°¾à°¸à±à°¤à°µà°¿à°•à°¤",
-                crisisTitle: "à°‡à°¦à°¿ à°¶à±à°°à°¦à±à°§ à°¯à±Šà°•à±à°• à°¸à°‚à°•à±à°·à±‹à°­à°‚ à°•à°¾à°¦à±.<br>à°‡à°¦à°¿ à°¸à°¾à°®à°°à±à°¥à±à°¯à°‚ à°¯à±Šà°•à±à°• à°¸à°‚à°•à±à°·à±‹à°­à°‚.",
-                crisisSubtitle: "à°ªà±à°°à°¤à°¿ à°ªà°¾à° à°¶à°¾à°²à°²à±‹ à°¶à±à°°à°¦à±à°§à°—à°² à°‰à°ªà°¾à°§à±à°¯à°¾à°¯à±à°²à± à°‰à°¨à±à°¨à°¾à°°à±. à°•à°¾à°¨à±€ à°®à°‚à°šà°¿ à°‰à°¦à±à°¦à±‡à°¶à°¾à°²à± à°®à°¾à°¤à±à°°à°®à±‡ à°®à°¨ à°ªà°¿à°²à±à°²à°²à°¨à± à°°à°•à±à°·à°¿à°‚à°šà°²à±‡à°µà±.",
-                crisisQuote: "\"à° à°ªà°¿à°²à±à°²à°µà°¾à°¡à± à°®à°¨ à°ªà°¾à° à°¶à°¾à°²à°²à±à°²à±‹ à°µà°¿à°¨à°¬à°¡à°•à±à°‚à°¡à°¾ à°²à±‡à°¦à°¾ à°šà±‚à°¡à°¬à°¡à°•à±à°‚à°¡à°¾ à°‰à°‚à°¡à°•à±‚à°¡à°¦à±. à°µà°¾à°°à°¿ à°­à°¾à°µà±‹à°¦à±à°µà±‡à°— à°¶à±à°°à±‡à°¯à°¸à±à°¸à±à°¨à± à°•à±‚à°¡à°¾ à°ªà±†à°‚à°ªà±Šà°‚à°¦à°¿à°‚à°šà±‡ à°µà°¾à°¤à°¾à°µà°°à°£à°¾à°¨à±à°¨à°¿ à°®à±‡à°®à± à°µà°¾à°°à°¿à°•à°¿ à°…à°‚à°¦à°¿à°‚à°šà°¾à°²à°¿.\"",
-                crisisQuoteAuthor: "à°¢à°¿à°²à±à°²à±€ à°µà°¿à°¦à±à°¯à°¾ à°®à°‚à°¤à±à°°à°¿",
-                crisisQuoteContext: "à°¨à°µà°‚à°¬à°°à± 2025 à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à°¿ à°µà°¿à°·à°¾à°¦à°‚ à°¤à°°à±à°µà°¾à°¤",
-                crisisPattern: "à°¨à°®à±‚à°¨à°¾ à°ªà±à°¨à°°à°¾à°µà±ƒà°¤à°®à°µà±à°¤à±‹à°‚à°¦à°¿",
-                crisisPatternText1: "à°µà°¿à°·à°¾à°¦à°‚ à°œà°°à°¿à°—à°¿à°¨à°ªà±à°ªà±à°¡à±, à°¸à±à°ªà°‚à°¦à°¨ à°Žà°²à±à°²à°ªà±à°ªà±à°¡à±‚ à°’à°•à±‡ à°µà°¿à°§à°‚à°—à°¾ à°‰à°‚à°Ÿà±à°‚à°¦à°¿: à°¸à°¿à°¬à±à°¬à°‚à°¦à°¿ à°¸à°¸à±à°ªà±†à°¨à±à°·à°¨à±, à°•à°®à°¿à°Ÿà±€à°² à°à°°à±à°ªà°¾à°Ÿà±.",
-                crisisPatternText2: "à°®à±‡à°®à± à°¸à°‚à°•à±à°·à±‹à°­à°¾à°²à°•à± à°¸à±à°ªà°‚à°¦à°¿à°¸à±à°¤à°¾à°®à±. à°®à±‡à°®à± à°µà°¾à°Ÿà°¿à°¨à°¿ à°¨à°¿à°µà°¾à°°à°¿à°‚à°šà°®à±.",
-                crisisHighlightStat: "0 à°—à°‚à°Ÿà°²à±",
-                crisisHighlightText: "à°šà°¾à°²à°¾ à°®à°‚à°¦à°¿ à°‰à°ªà°¾à°§à±à°¯à°¾à°¯à±à°²à± à°ªà±Šà°‚à°¦à±‡ à°®à°¾à°¨à°¸à°¿à°• à°†à°°à±‹à°—à±à°¯ à°¶à°¿à°•à±à°·à°£â€”à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à±à°²à°¤à±‹ 1,000+ à°—à°‚à°Ÿà°²à± à°—à°¡à°¿à°ªà°¿à°¨à°ªà±à°ªà°Ÿà°¿à°•à±€",
-                paradoxLabel: "à°¸à°‚à°ªà°°à±à°• à°—à°‚à°Ÿà°² à°µà°¿à°°à±à°¦à±à°§à°¤",
-                paradoxTitle: "à°ªà±à°°à°¤à°¿à°¦à±€ à°šà±‚à°¸à±‡ à°µà±à°¯à°•à±à°¤à±à°²à±,<br>à°à°¦à°¾à°¨à°¿à°•à±€ à°¶à°¿à°•à±à°·à°£ à°ªà±Šà°‚à°¦à°²à±‡à°¦à±",
-                paradoxSubtitle: "à°¦à±à°°à±à°¬à°² à°œà°¨à°¾à°­à°¾à°¤à±‹ à°Žà°•à±à°•à±à°µ à°¸à°®à°¯à°‚ à°—à°¡à°¿à°ªà±‡à°µà°¾à°°à± à°¸à°¾à°§à°¾à°°à°£à°‚à°—à°¾ à°®à°¾à°¨à°¸à°¿à°• à°†à°°à±‹à°—à±à°¯ à°¶à°¿à°•à±à°·à°£ à°ªà±Šà°‚à°¦à°°à±.",
-                paradoxCard1Title: "à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à±à°²à°¤à±‹ à°‰à°ªà°¾à°§à±à°¯à°¾à°¯à±à°²à±",
-                paradoxCard1Text: "à°ªà°¾à° à°¶à°¾à°² à°µà°¾à°°à°¾à°²à±à°²à±‹ à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°²à± à°¤à°® à°ªà°¿à°²à±à°²à°²à°¨à± à°šà±‚à°¡à°Ÿà°‚ à°•à°‚à°Ÿà±‡ à°Žà°•à±à°•à±à°µ à°®à±‡à°²à±à°•à±Šà°¨à±à°¨ à°—à°‚à°Ÿà°²à±.",
-                paradoxCard2Title: "à°•à°³à°¾à°¶à°¾à°² à°µà°¿à°¦à±à°¯à°¾à°°à±à°¥à±à°²à°¤à±‹ à°…à°§à±à°¯à°¾à°ªà°•à±à°²à±",
-                paradoxCard2Text: "à°®à°¾à°¨à°¸à°¿à°• à°†à°°à±‹à°—à±à°¯ à°¸à°®à°¸à±à°¯à°²à± à°¤à°°à°šà±à°—à°¾ à°®à±Šà°¦à°Ÿ à°•à°¨à°¿à°ªà°¿à°‚à°šà±‡ à°•à±€à°²à°•à°®à±ˆà°¨ 18-25 à°µà°¯à°¸à±à°¸à± à°µà°°à±à°—à°‚.",
-                paradoxCard3Title: "à°‰à°¦à±à°¯à±‹à°—à±à°²à°¤à±‹ à°®à±‡à°¨à±‡à°œà°°à±à°²à±",
-                paradoxCard3Text: "à°¤à°°à°šà±à°—à°¾ à°•à±à°Ÿà±à°‚à°¬à°‚à°¤à±‹ à°•à°‚à°Ÿà±‡ à°Žà°•à±à°•à±à°µ à°¸à°®à°¯à°‚.",
-                paradoxBadge: "à°®à°¾à°¨à°¸à°¿à°• à°†à°°à±‹à°—à±à°¯ à°¶à°¿à°•à±à°·à°£ à°²à±‡à°¦à±",
-                paradoxBottomTitle: "à°‡à°¦à°¿ à°’à°• à°ªà°¾à°²à°¨à°¾ à°µà±ˆà°«à°²à±à°¯à°‚",
-                paradoxBottomText: "à°®à±‡à°®à± à°…à°—à±à°¨à°¿ à°­à°¦à±à°°à°¤ à°•à±‹à°¸à°‚ à°­à°µà°¨à°¾à°²à°¨à± à°§à±ƒà°µà±€à°•à°°à°¿à°¸à±à°¤à°¾à°®à±. à°•à°¾à°¨à±€ à°®à°¨ à°ªà°¿à°²à±à°²à°² à°®à°¾à°¨à°¸à°¿à°• à°­à°¦à±à°°à°¤ à°•à±‹à°¸à°‚ à°•à±à°°à°®à°¬à°¦à±à°§à°®à±ˆà°¨ à°ªà±à°°à°®à°¾à°£à°¾à°²à± à°²à±‡à°µà±.",
-                ctaTitle: "à°®à±€ à°—à±Šà°‚à°¤à± <em>à°®à±à°–à±à°¯à°‚</em>",
-                ctaText: "à°ªà°¾à° à°¶à°¾à°²à°²à± à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°² à°…à°‚à°šà°¨à°¾à°²à°•à± à°¸à±à°ªà°‚à°¦à°¿à°¸à±à°¤à°¾à°¯à°¿. à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°²à± à°ªà±à°°à°¶à±à°¨à°²à± à°…à°¡à°¿à°—à°¿à°¨à°ªà±à°ªà±à°¡à±, à°®à°¾à°°à±à°ªà± à°œà°°à±à°—à±à°¤à±à°‚à°¦à°¿.",
-                ctaBtn1: "à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°² à°šà±†à°•à±â€Œà°²à°¿à°¸à±à°Ÿà± à°¡à±Œà°¨à±â€Œà°²à±‹à°¡à±",
-                ctaBtn2: "à°¸à°‚à°ªà±à°°à°¦à°¿à°‚à°šà°‚à°¡à°¿",
-                trust1: "à°…à°‚à°¤à°°à±à°œà°¾à°¤à±€à°¯ CPD à°—à±à°°à±à°¤à°¿à°‚à°ªà±",
-                trust2: "à°¸à°¾à°•à±à°·à±à°¯à°‚-à°†à°§à°¾à°°à°¿à°¤ à°ªà°°à°¿à°¶à±‹à°§à°¨",
-                trust3: "à°®à±ˆà°‚à°¡à±â€Œà°«à±à°²à± à°¡à°¿à°—à±à°¨à°¿à°Ÿà±€ à°²à°¾à°¬à± à°­à°¾à°—à°¸à±à°µà°¾à°®à±à°¯à°‚",
-                footerLogo: "à°¸à±à°°à°•à±à°·à°¿à°¤ à°ªà°¾à° à°¶à°¾à°²à°² à°•à±‹à°¸à°‚ à°¤à°²à±à°²à°¿à°¦à°‚à°¡à±à°°à±à°²à±",
-                footerText: "à°¸à°¾à°•à±à°·à±à°¯à°‚-à°†à°§à°¾à°°à°¿à°¤ à°¸à°‚à°¸à±à°¥à°¾à°—à°¤ à°­à°¦à±à°°à°¤à°¾ à°ªà±à°°à°®à°¾à°£à°¾à°² à°•à±‹à°¸à°‚ à°µà°¾à°¦à°¿à°‚à°šà°¡à°‚",
-                footerContact: "à°¸à°‚à°ªà±à°°à°¦à°¿à°‚à°šà°‚à°¡à°¿",
-                footerLab: "à°®à±ˆà°‚à°¡à±â€Œà°«à±à°²à± à°¡à°¿à°—à±à°¨à°¿à°Ÿà±€ à°²à°¾à°¬à±"
-            },
-            bn: {
-                siteName: "à¦¨à¦¿à¦°à¦¾à¦ªà¦¦ à¦¸à§à¦•à§à¦²à§‡à¦° à¦œà¦¨à§à¦¯ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦•",
-                navCrisis: "à¦¸à¦‚à¦•à¦Ÿ",
-                navParadox: "à¦¬à¦¿à¦°à§‹à¦§à¦¾à¦­à¦¾à¦¸",
-                navAction: "à¦ªà¦¦à¦•à§à¦·à§‡à¦ª à¦¨à¦¿à¦¨",
-                heroEyebrow: "à¦à¦•à¦Ÿà¦¿ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦• à¦¸à¦®à¦°à§à¦¥à¦¨ à¦‰à¦¦à§à¦¯à§‹à¦—",
-                heroTitle: "à¦­à¦¾à¦²à§‹ à¦‰à¦¦à§à¦¦à§‡à¦¶à§à¦¯à§‡à¦° à¦¬à¦¾à¦‡à¦°à§‡: <em>à¦à¦•à¦Ÿà¦¿ à¦¶à¦¾à¦¸à¦¨ à¦…à¦ªà¦°à¦¿à¦¹à¦¾à¦°à§à¦¯à¦¤à¦¾</em>",
-                heroSubtitle: "à¦›à¦¾à¦¤à§à¦° à¦¨à¦¿à¦°à¦¾à¦ªà¦¤à§à¦¤à¦¾ à¦†à¦° à¦¬à§à¦¯à¦•à§à¦¤à¦¿à¦—à¦¤ à¦¬à§€à¦°à¦¤à§à¦¬ à¦¬à¦¾ à¦ªà§à¦°à¦¤à¦¿à¦•à§à¦°à¦¿à¦¯à¦¼à¦¾à¦¶à§€à¦² à¦ªà¦¦à¦•à§à¦·à§‡à¦ªà§‡à¦° à¦‰à¦ªà¦° à¦¨à¦¿à¦°à§à¦­à¦° à¦•à¦°à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦¨à¦¾à¥¤ à¦ªà¦¦à§à¦§à¦¤à¦¿à¦—à¦¤ à¦ªà§à¦°à¦¾à¦¤à¦¿à¦·à§à¦ à¦¾à¦¨à¦¿à¦• à¦®à¦¾à¦¨à¦¦à¦£à§à¦¡à§‡à¦° à¦¸à¦®à¦¯à¦¼ à¦à¦¸à§‡à¦›à§‡à¥¤",
-                stat1Label: "à§¨à§¦à§¨à§© à¦¸à¦¾à¦²à§‡ à¦­à¦¾à¦°à¦¤à§‡ à¦›à¦¾à¦¤à§à¦° à¦†à¦¤à§à¦®à¦¹à¦¤à§à¦¯à¦¾",
-                stat2Label: "à¦—à¦¤ à¦¦à¦¶à¦•à§‡ à¦¬à§ƒà¦¦à§à¦§à¦¿",
-                stat3Label: "à¦ªà§à¦°à¦¤à¦¿ à¦˜à¦£à§à¦Ÿà¦¾à¦¯à¦¼ à¦à¦•à¦œà¦¨ à¦›à¦¾à¦¤à§à¦°à§‡à¦° à¦œà§€à¦¬à¦¨",
-                scrollMore: "à¦†à¦°à¦“ à¦œà¦¾à¦¨à¦¤à§‡ à¦¸à§à¦•à§à¦°à§‹à¦² à¦•à¦°à§à¦¨",
-                crisisLabel: "à¦¬à¦¾à¦¸à§à¦¤à¦¬à¦¤à¦¾",
-                crisisTitle: "à¦à¦Ÿà¦¿ à¦¯à¦¤à§à¦¨à§‡à¦° à¦¸à¦‚à¦•à¦Ÿ à¦¨à¦¯à¦¼à¥¤<br>à¦à¦Ÿà¦¿ à¦¸à¦•à§à¦·à¦®à¦¤à¦¾à¦° à¦¸à¦‚à¦•à¦Ÿà¥¤",
-                crisisSubtitle: "à¦ªà§à¦°à¦¤à¦¿à¦Ÿà¦¿ à¦¸à§à¦•à§à¦²à§‡ à¦¯à¦¤à§à¦¨à¦¶à§€à¦² à¦¶à¦¿à¦•à§à¦·à¦• à¦†à¦›à§‡à¦¨à¥¤ à¦•à¦¿à¦¨à§à¦¤à§ à¦¶à§à¦§à§ à¦­à¦¾à¦²à§‹ à¦‰à¦¦à§à¦¦à§‡à¦¶à§à¦¯ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦¸à¦¨à§à¦¤à¦¾à¦¨à¦¦à§‡à¦° à¦°à¦•à§à¦·à¦¾ à¦•à¦°à¦¤à§‡ à¦ªà¦¾à¦°à§‡ à¦¨à¦¾à¥¤",
-                crisisQuote: "\"à¦•à§‹à¦¨à§‹ à¦¶à¦¿à¦¶à§ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦¸à§à¦•à§à¦²à§‡ à¦•à¦–à¦¨à§‹à¦‡ à¦…à¦¶à§à¦°à§à¦¤ à¦¬à¦¾ à¦…à¦¦à§‡à¦–à¦¾ à¦…à¦¨à§à¦­à¦¬ à¦•à¦°à¦¾ à¦‰à¦šà¦¿à¦¤ à¦¨à¦¯à¦¼à¥¤ à¦†à¦®à¦°à¦¾ à¦¤à¦¾à¦¦à§‡à¦° à¦à¦®à¦¨ à¦à¦•à¦Ÿà¦¿ à¦ªà¦°à¦¿à¦¬à§‡à¦¶ à¦¦à¦¿à¦¤à§‡ à¦¬à¦¾à¦§à§à¦¯ à¦¯à¦¾ à¦¤à¦¾à¦¦à§‡à¦° à¦®à¦¾à¦¨à¦¸à¦¿à¦• à¦•à¦²à§à¦¯à¦¾à¦£à¦•à§‡à¦“ à¦²à¦¾à¦²à¦¨ à¦•à¦°à§‡à¥¤\"",
-                crisisQuoteAuthor: "à¦¦à¦¿à¦²à§à¦²à¦¿ à¦¶à¦¿à¦•à§à¦·à¦¾à¦®à¦¨à§à¦¤à§à¦°à§€",
-                crisisQuoteContext: "à¦¨à¦­à§‡à¦®à§à¦¬à¦° à§¨à§¦à§¨à§« à¦›à¦¾à¦¤à§à¦° à¦Ÿà§à¦°à§à¦¯à¦¾à¦œà§‡à¦¡à¦¿à¦° à¦ªà¦°à§‡",
-                crisisPattern: "à¦ªà§à¦¯à¦¾à¦Ÿà¦¾à¦°à§à¦¨ à¦ªà§à¦¨à¦°à¦¾à¦¬à§ƒà¦¤à§à¦¤à¦¿ à¦¹à¦¯à¦¼",
-                crisisPatternText1: "à¦¯à¦–à¦¨ à¦Ÿà§à¦°à§à¦¯à¦¾à¦œà§‡à¦¡à¦¿ à¦˜à¦Ÿà§‡, à¦ªà§à¦°à¦¤à¦¿à¦•à§à¦°à¦¿à¦¯à¦¼à¦¾ à¦¸à¦¬à¦¸à¦®à¦¯à¦¼ à¦à¦•à¦‡: à¦•à¦°à§à¦®à¦šà¦¾à¦°à§€à¦¦à§‡à¦° à¦¸à¦¾à¦¸à¦ªà§‡à¦¨à¦¶à¦¨, à¦•à¦®à¦¿à¦Ÿà¦¿ à¦—à¦ à¦¨à¥¤ à¦¤à¦¾à¦°à¦ªà¦° à¦¶à¦¿à¦°à§‹à¦¨à¦¾à¦® à¦®à§à¦²à¦¾à¦¨ à¦¹à¦¯à¦¼à§‡ à¦¯à¦¾à¦¯à¦¼à¥¤",
-                crisisPatternText2: "à¦†à¦®à¦°à¦¾ à¦¸à¦‚à¦•à¦Ÿà§‡ à¦ªà§à¦°à¦¤à¦¿à¦•à§à¦°à¦¿à¦¯à¦¼à¦¾ à¦•à¦°à¦¿à¥¤ à¦†à¦®à¦°à¦¾ à¦¤à¦¾à¦¦à§‡à¦° à¦ªà§à¦°à¦¤à¦¿à¦°à§‹à¦§ à¦•à¦°à¦¿ à¦¨à¦¾à¥¤",
-                crisisHighlightStat: "à§¦ à¦˜à¦£à§à¦Ÿà¦¾",
-                crisisHighlightText: "à¦¬à§‡à¦¶à¦¿à¦°à¦­à¦¾à¦— à¦¶à¦¿à¦•à§à¦·à¦• à¦¯à§‡ à¦®à¦¾à¦¨à¦¸à¦¿à¦• à¦¸à§à¦¬à¦¾à¦¸à§à¦¥à§à¦¯ à¦ªà§à¦°à¦¶à¦¿à¦•à§à¦·à¦£ à¦ªà¦¾à¦¨â€”à¦›à¦¾à¦¤à§à¦°à¦¦à§‡à¦° à¦¸à¦¾à¦¥à§‡ à§§,à§¦à§¦à§¦+ à¦˜à¦£à§à¦Ÿà¦¾ à¦•à¦¾à¦Ÿà¦¾à¦¨à§‹ à¦¸à¦¤à§à¦¤à§à¦¬à§‡à¦“",
-                paradoxLabel: "à¦¯à§‹à¦—à¦¾à¦¯à§‹à¦— à¦¸à¦®à¦¯à¦¼à§‡à¦° à¦¬à¦¿à¦°à§‹à¦§à¦¾à¦­à¦¾à¦¸",
-                paradoxTitle: "à¦¯à¦¾à¦°à¦¾ à¦¸à¦¬à¦•à¦¿à¦›à§ à¦¦à§‡à¦–à§‡à¦¨,<br>à¦•à¦¿à¦›à§à¦° à¦œà¦¨à§à¦¯ à¦ªà§à¦°à¦¶à¦¿à¦•à§à¦·à¦¿à¦¤ à¦¨à¦¨",
-                paradoxSubtitle: "à¦¯à¦¾à¦°à¦¾ à¦¦à§à¦°à§à¦¬à¦² à¦œà¦¨à¦—à§‹à¦·à§à¦ à§€à¦° à¦¸à¦¾à¦¥à§‡ à¦¸à¦¬à¦šà§‡à¦¯à¦¼à§‡ à¦¬à§‡à¦¶à¦¿ à¦¸à¦®à¦¯à¦¼ à¦•à¦¾à¦Ÿà¦¾à¦¨ à¦¤à¦¾à¦°à¦¾ à¦¸à¦¾à¦§à¦¾à¦°à¦£à¦¤ à¦•à§‹à¦¨à§‹ à¦®à¦¾à¦¨à¦¸à¦¿à¦• à¦¸à§à¦¬à¦¾à¦¸à§à¦¥à§à¦¯ à¦ªà§à¦°à¦¶à¦¿à¦•à§à¦·à¦£ à¦ªà¦¾à¦¨ à¦¨à¦¾à¥¤",
-                paradoxCard1Title: "à¦›à¦¾à¦¤à§à¦°à¦¦à§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦¶à¦¿à¦•à§à¦·à¦•",
-                paradoxCard1Text: "à¦¸à§à¦•à§à¦² à¦¸à¦ªà§à¦¤à¦¾à¦¹à§‡ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦•à¦°à¦¾ à¦¤à¦¾à¦¦à§‡à¦° à¦¸à¦¨à§à¦¤à¦¾à¦¨à¦¦à§‡à¦° à¦¯à¦¤à¦Ÿà¦¾ à¦œà¦¾à¦—à§à¦°à¦¤ à¦¸à¦®à¦¯à¦¼ à¦¦à§‡à¦–à§‡à¦¨ à¦¤à¦¾à¦° à¦šà§‡à¦¯à¦¼à§‡ à¦¬à§‡à¦¶à¦¿à¥¤",
-                paradoxCard2Title: "à¦•à¦²à§‡à¦œ à¦›à¦¾à¦¤à§à¦°à¦¦à§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦…à¦¨à§à¦·à¦¦",
-                paradoxCard2Text: "à¦—à§à¦°à§à¦¤à§à¦¬à¦ªà§‚à¦°à§à¦£ à§§à§®-à§¨à§« à¦¬à¦¯à¦¼à¦¸à§‡à¦° à¦—à§à¦°à§à¦ª à¦¯à¦–à¦¨ à¦®à¦¾à¦¨à¦¸à¦¿à¦• à¦¸à§à¦¬à¦¾à¦¸à§à¦¥à§à¦¯ à¦¸à¦®à¦¸à§à¦¯à¦¾ à¦ªà§à¦°à¦¾à¦¯à¦¼à¦‡ à¦ªà§à¦°à¦¥à¦® à¦¦à§‡à¦–à¦¾ à¦¦à§‡à¦¯à¦¼à¥¤",
-                paradoxCard3Title: "à¦•à¦°à§à¦®à¦šà¦¾à¦°à§€à¦¦à§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦®à§à¦¯à¦¾à¦¨à§‡à¦œà¦¾à¦°",
-                paradoxCard3Text: "à¦ªà§à¦°à¦¾à¦¯à¦¼à¦‡ à¦ªà¦°à¦¿à¦¬à¦¾à¦°à§‡à¦° à¦¸à¦¾à¦¥à§‡ à¦šà§‡à¦¯à¦¼à§‡ à¦¬à§‡à¦¶à¦¿ à¦¸à¦®à¦¯à¦¼à¥¤",
-                paradoxBadge: "à¦•à§‹à¦¨à§‹ MH à¦ªà§à¦°à¦¶à¦¿à¦•à§à¦·à¦£ à¦¨à§‡à¦‡",
-                paradoxBottomTitle: "à¦à¦Ÿà¦¿ à¦à¦•à¦Ÿà¦¿ à¦¶à¦¾à¦¸à¦¨ à¦¬à§à¦¯à¦°à§à¦¥à¦¤à¦¾",
-                paradoxBottomText: "à¦†à¦®à¦°à¦¾ à¦…à¦—à§à¦¨à¦¿ à¦¨à¦¿à¦°à¦¾à¦ªà¦¤à§à¦¤à¦¾à¦° à¦œà¦¨à§à¦¯ à¦­à¦¬à¦¨ à¦¸à¦¾à¦°à§à¦Ÿà¦¿à¦«à¦¾à¦‡ à¦•à¦°à¦¿à¥¤ à¦•à¦¿à¦¨à§à¦¤à§ à¦†à¦®à¦¾à¦¦à§‡à¦° à¦¸à¦¨à§à¦¤à¦¾à¦¨à¦¦à§‡à¦° à¦®à¦¾à¦¨à¦¸à¦¿à¦• à¦¨à¦¿à¦°à¦¾à¦ªà¦¤à§à¦¤à¦¾à¦° à¦œà¦¨à§à¦¯ à¦•à§‹à¦¨à§‹ à¦ªà¦¦à§à¦§à¦¤à¦¿à¦—à¦¤ à¦®à¦¾à¦¨à¦¦à¦£à§à¦¡ à¦¨à§‡à¦‡à¥¤",
-                ctaTitle: "à¦†à¦ªà¦¨à¦¾à¦° à¦•à¦£à§à¦ à¦¸à§à¦¬à¦° <em>à¦—à§à¦°à§à¦¤à§à¦¬à¦ªà§‚à¦°à§à¦£</em>",
-                ctaText: "à¦¸à§à¦•à§à¦²à¦—à§à¦²à¦¿ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦•à¦¦à§‡à¦° à¦ªà§à¦°à¦¤à§à¦¯à¦¾à¦¶à¦¾à¦¯à¦¼ à¦¸à¦¾à¦¡à¦¼à¦¾ à¦¦à§‡à¦¯à¦¼à¥¤ à¦¯à¦–à¦¨ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦•à¦°à¦¾ à¦ªà§à¦°à¦¶à§à¦¨ à¦•à¦°à§‡à¦¨, à¦ªà¦°à¦¿à¦¬à¦°à§à¦¤à¦¨ à¦¹à¦¯à¦¼à¥¤",
-                ctaBtn1: "à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦• à¦šà§‡à¦•à¦²à¦¿à¦¸à§à¦Ÿ à¦¡à¦¾à¦‰à¦¨à¦²à§‹à¦¡",
-                ctaBtn2: "à¦¯à§‹à¦—à¦¾à¦¯à§‹à¦— à¦•à¦°à§à¦¨",
-                trust1: "à¦†à¦¨à§à¦¤à¦°à§à¦œà¦¾à¦¤à¦¿à¦• CPD à¦¸à§à¦¬à§€à¦•à§ƒà¦¤à¦¿",
-                trust2: "à¦ªà§à¦°à¦®à¦¾à¦£-à¦­à¦¿à¦¤à§à¦¤à¦¿à¦• à¦—à¦¬à§‡à¦·à¦£à¦¾",
-                trust3: "à¦®à¦¾à¦‡à¦¨à§à¦¡à¦«à§à¦² à¦¡à¦¿à¦—à¦¨à¦¿à¦Ÿà¦¿ à¦²à§à¦¯à¦¾à¦¬ à¦…à¦‚à¦¶à§€à¦¦à¦¾à¦°à¦¿à¦¤à§à¦¬",
-                footerLogo: "à¦¨à¦¿à¦°à¦¾à¦ªà¦¦ à¦¸à§à¦•à§à¦²à§‡à¦° à¦œà¦¨à§à¦¯ à¦…à¦­à¦¿à¦­à¦¾à¦¬à¦•",
-                footerText: "à¦ªà§à¦°à¦®à¦¾à¦£-à¦­à¦¿à¦¤à§à¦¤à¦¿à¦• à¦ªà§à¦°à¦¾à¦¤à¦¿à¦·à§à¦ à¦¾à¦¨à¦¿à¦• à¦¨à¦¿à¦°à¦¾à¦ªà¦¤à§à¦¤à¦¾ à¦®à¦¾à¦¨à¦¦à¦£à§à¦¡à§‡à¦° à¦ªà¦•à§à¦·à§‡ à¦•à¦¥à¦¾ à¦¬à¦²à¦¾",
-                footerContact: "à¦¯à§‹à¦—à¦¾à¦¯à§‹à¦—",
-                footerLab: "à¦®à¦¾à¦‡à¦¨à§à¦¡à¦«à§à¦² à¦¡à¦¿à¦—à¦¨à¦¿à¦Ÿà¦¿ à¦²à§à¦¯à¦¾à¦¬"
-            }
-        };
-
-        const languageNames = {
-            en: { name: "English", flag: "ðŸ‡¬ðŸ‡§" },
-            hi: { name: "à¤¹à¤¿à¤¨à¥à¤¦à¥€", flag: "ðŸ‡®ðŸ‡³" },
-            ta: { name: "à®¤à®®à®¿à®´à¯", flag: "ðŸ‡®ðŸ‡³" },
-            te: { name: "à°¤à±†à°²à±à°—à±", flag: "ðŸ‡®ðŸ‡³" },
-            bn: { name: "à¦¬à¦¾à¦‚à¦²à¦¾", flag: "ðŸ‡®ðŸ‡³" }
-        };
-
-        function toggleLanguageDropdown() {
-            document.getElementById('langSelector').classList.toggle('open');
-        }
-
-        document.addEventListener('click', function(event) {
-            const selector = document.getElementById('langSelector');
-            if (!selector.contains(event.target)) {
-                selector.classList.remove('open');
-            }
-        });
-
-        function changeLanguage(lang) {
-            document.body.setAttribute('data-lang', lang);
-            
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
-            });
-            
-            document.getElementById('currentLangFlag').textContent = languageNames[lang].flag;
-            document.getElementById('currentLangName').textContent = languageNames[lang].name;
-            
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                }
-            });
-            
-            document.getElementById('langSelector').classList.remove('open');
-            localStorage.setItem('preferredLanguage', lang);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang && translations[savedLang]) {
-                changeLanguage(savedLang);
-            }
-        });
+    <script>
 
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
