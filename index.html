@@ -28,10 +28,8 @@
         nav.scrolled { background: rgba(13, 27, 42, 0.98); padding: 16px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-img { height: 50px; width: auto; transition: transform 0.3s; }
-        .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
-        .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-        .logo-line1 { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 1px; text-transform: uppercase; }
-        .logo-line2 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
+        .nav-logo-text-img { height: 40px; width: auto; transition: transform 0.3s; }
+        .nav-logo:hover .nav-logo-img, .nav-logo:hover .nav-logo-text-img { transform: scale(1.05); }
         .nav-links { display: flex; align-items: center; gap: 40px; }
         .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--amber-light); }
@@ -158,9 +156,7 @@
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .footer-logo { display: flex; align-items: center; gap: 12px; }
         .footer-logo-img { height: 60px; width: auto; }
-        .footer-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-        .footer-line1 { font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 1px; text-transform: uppercase; }
-        .footer-line2 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
+        .footer-logo-text-img { height: 45px; width: auto; }
         .footer-text { color: rgba(255,255,255,0.5); font-size: 14px; }
         .footer-links { display: flex; gap: 32px; }
         .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
@@ -184,8 +180,7 @@
             nav { padding: 16px 20px; }
             .nav-links { display: none; }
             .nav-logo-img { height: 40px; }
-            .logo-line1 { font-size: 11px; }
-            .logo-line2 { font-size: 16px; }
+            .nav-logo-text-img { height: 30px; }
             .hero-content { padding: 100px 24px 60px; }
             .hero-stats { grid-template-columns: 1fr; gap: 20px; }
             .hero-stat-number { font-size: 36px; }
@@ -197,8 +192,7 @@
             .footer-content { flex-direction: column; gap: 24px; text-align: center; }
             .footer-logo { justify-content: center; }
             .footer-logo-img { height: 50px; }
-            .footer-line1 { font-size: 10px; }
-            .footer-line2 { font-size: 14px; }
+            .footer-logo-text-img { height: 35px; }
             .checklist-form { padding: 24px; }
             .checklist-category { padding: 20px; }
             .category-header { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -211,10 +205,7 @@
     <nav id="navbar">
         <a href="#" class="nav-logo">
             <img src="logo.png" alt="Parents for Safe Schools" class="nav-logo-img">
-            <div class="nav-logo-text">
-                <span class="logo-line1">Parents for</span>
-                <span class="logo-line2">Safe Schools</span>
-            </div>
+            <img src="logo2.png" alt="Parents for Safe Schools" class="nav-logo-text-img">
         </a>
         <div class="nav-links">
             <a href="#crisis">The Crisis</a>
@@ -562,10 +553,7 @@
         <div class="footer-content">
             <div class="footer-logo">
                 <img src="logo.png" alt="Parents for Safe Schools" class="footer-logo-img">
-                <div class="footer-logo-text">
-                    <span class="footer-line1">Parents for</span>
-                    <span class="footer-line2">Safe Schools</span>
-                </div>
+                <img src="logo2.png" alt="Parents for Safe Schools" class="footer-logo-text-img">
             </div>
             <p class="footer-text">Advocating for evidence-based institutional safety standards</p>
             <div class="footer-links">
@@ -576,7 +564,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -812,11 +800,4 @@ SWISS Certification | mysafespaces.org/swiss`;
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el);
-        });
-
-        const counter = document.getElementById('counter1');
-        if (counter) observer.observe(counter);
-    </script>
-</body>
-</html>
+            observer.observe(el)
