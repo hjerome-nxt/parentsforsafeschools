@@ -160,9 +160,12 @@
         .footer-line1 { font-family: 'Pinyon Script', cursive; font-size: 20px; color: rgba(255,255,255,0.6); }
         .footer-line2 { font-family: 'Pinyon Script', cursive; font-size: 30px; color: var(--white); }
         .footer-text { color: rgba(255,255,255,0.5); font-size: 14px; }
+        .footer-text a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-text a:hover { color: var(--amber-light); }
         .footer-links { display: flex; gap: 32px; }
         .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
         .footer-links a:hover { color: var(--amber-light); }
+        .footer-copyright { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 20px; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
@@ -561,16 +564,16 @@
                     <span class="footer-line2">Safe Schools</span>
                 </div>
             </div>
-            <p class="footer-text">Advocating for evidence-based institutional safety standards</p>
+            <p class="footer-text">Student Advocacy by <a href="https://www.safespacesfoundation.org" target="_blank">Safe Spaces Foundation</a></p>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#116266786262517c68627077746261707274623f7e6376">Contact</a>
-                <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Certification</a>
-                <a href="https://mindfuldignity.com/" target="_blank">Mindful Dignity Lab</a>
+                <a href="mailto:swiss@mysafespaces.org">Contact</a>
+                <a href="https://www.safespaces.org/swiss" target="_blank">SWISS Certification</a>
             </div>
+            <p class="footer-copyright">© 2025 Safe Spaces Foundation. All rights reserved.</p>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
 
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -619,7 +622,7 @@ VERIFICATION & ACCOUNTABILITY
 Remember: Good intentions are not enough. Ask for evidence.
 
 Parents for Safe Schools | swiss@mysafespaces.org
-SWISS Certification | mysafespaces.org/swiss`;
+SWISS Certification | www.safespaces.org/swiss`;
 
             const blob = new Blob([content], { type: 'text/plain; charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
@@ -714,7 +717,7 @@ SWISS Certification | mysafespaces.org/swiss`;
             body += `A Concerned Parent\n\n`;
             body += `---------------------------------------------------------------\n`;
             body += `This inquiry was generated using the Parents for Safe Schools checklist.\n`;
-            body += `Learn more: https://mysafespaces.org/swiss\n`;
+            body += `Learn more: https://www.safespaces.org/swiss\n`;
             body += `Contact: swiss@mysafespaces.org\n`;
 
             return body;
