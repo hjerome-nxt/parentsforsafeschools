@@ -174,13 +174,6 @@
         .form-actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
         .btn-tertiary { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
         .btn-tertiary:hover { background: var(--navy); color: var(--white); }
-        .btn.loading { opacity: 0.7; pointer-events: none; }
-        .btn.loading span { display: none; }
-        .btn.loading::after { content: 'Sending...'; }
-        .form-message { margin-top: 20px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.5; }
-        .form-message.success { background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(34, 139, 34, 0.05)); border: 1px solid rgba(34, 139, 34, 0.3); color: #1a5c1a; }
-        .form-message.error { background: linear-gradient(135deg, rgba(139, 58, 58, 0.1), rgba(139, 58, 58, 0.05)); border: 1px solid rgba(139, 58, 58, 0.3); color: #8B3A3A; }
-        .form-message svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
 
         footer { background: var(--navy-light); padding: 40px 60px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -554,11 +547,11 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn btn-primary" id="btnSendSchool" onclick="sendChecklistEmail('school')">
+                        <button type="button" class="btn btn-primary" onclick="sendChecklistEmail()">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             <span data-i18n="btnSendEmail">Send to School</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" id="btnSendSelf" onclick="sendChecklistEmail('self')">
+                        <button type="button" class="btn btn-secondary" onclick="sendCopyToSelf()">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
                             <span data-i18n="btnSendSelf">Send Copy to Myself</span>
                         </button>
@@ -567,8 +560,6 @@
                             <span data-i18n="btnDownload">Download Checklist</span>
                         </button>
                     </div>
-
-                    <div id="formMessage" class="form-message" style="display: none;"></div>
                 </form>
             </div>
         </div>
@@ -1094,124 +1085,42 @@ SWISS Certification | mysafespaces.org/swiss`;
             return body;
         }
 
-        function showMessage(type, message) {
-            const msgDiv = document.getElementById('formMessage');
-            msgDiv.className = `form-message ${type}`;
-            const icon = type === 'success' 
-                ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
-                : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
-            msgDiv.innerHTML = icon + message;
-            msgDiv.style.display = 'block';
-            msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function setButtonLoading(buttonId, loading) {
-            const btn = document.getElementById(buttonId);
-            if (loading) {
-                btn.classList.add('loading');
-                btn.disabled = true;
-            } else {
-                btn.classList.remove('loading');
-                btn.disabled = false;
-            }
-        }
-
-        async function sendChecklistEmail(type) {
+        function sendChecklistEmail() {
             if (!validateMandatoryFields()) return;
 
-            const grade = document.getElementById('studentGrade').value.trim();
             const school = document.getElementById('schoolName').value.trim();
             const schoolEmail = document.getElementById('schoolEmail').value.trim();
-            const parentEmail = document.getElementById('parentEmail').value.trim();
+            const body = generateChecklistEmailBody();
+            const subject = `Student Safety Standards Inquiry - ${school}`;
+            
+            let mailtoLink = `mailto:${schoolEmail || ''}?`;
+            mailtoLink += `cc=swiss@mysafespaces.org&`;
+            mailtoLink += `subject=${encodeURIComponent(subject)}&`;
+            mailtoLink += `body=${encodeURIComponent(body)}`;
 
-            if (type === 'self' && !parentEmail) {
+            window.location.href = mailtoLink;
+        }
+
+        function sendCopyToSelf() {
+            if (!validateMandatoryFields()) return;
+
+            const school = document.getElementById('schoolName').value.trim();
+            const parentEmail = document.getElementById('parentEmail').value.trim();
+            
+            if (!parentEmail) {
                 alert('Please enter your email address to send a copy to yourself.');
                 document.getElementById('parentEmail').focus();
                 return;
             }
 
-            const buttonId = type === 'school' ? 'btnSendSchool' : 'btnSendSelf';
-            setButtonLoading(buttonId, true);
-
-            const emailBody = generateChecklistEmailBody();
-            const subject = type === 'self' 
-                ? `[Your Copy] Student Safety Standards Inquiry - ${school}`
-                : `Student Safety Standards Inquiry - ${school}`;
-
-            // Determine recipients
-            const recipients = [];
-            if (type === 'school' && schoolEmail) {
-                recipients.push(schoolEmail);
-            }
-            if (type === 'self' && parentEmail) {
-                recipients.push(parentEmail);
-            }
-
-            const emailData = {
-                from: 'safetyteam@parentsforsafeschools.in',
-                to: recipients,
-                cc: ['swiss@mysafespaces.org'],
-                subject: subject,
-                body: emailBody,
-                studentGrade: grade,
-                schoolName: school,
-                schoolEmail: schoolEmail || 'Not provided',
-                parentEmail: parentEmail || 'Not provided',
-                timestamp: new Date().toISOString(),
-                type: type
-            };
-
-            try {
-                // Send via API endpoint
-                const response = await fetch('https://api.parentsforsafeschools.in/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(emailData)
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    if (type === 'school') {
-                        showMessage('success', schoolEmail 
-                            ? `Your inquiry has been sent to <strong>${school}</strong> (${schoolEmail}) and copied to SWISS. You should receive a confirmation shortly.`
-                            : `Your inquiry has been sent to SWISS (swiss@mysafespaces.org). They will help forward it to your school.`);
-                    } else {
-                        showMessage('success', `A copy of your inquiry has been sent to <strong>${parentEmail}</strong>. Please check your inbox (and spam folder).`);
-                    }
-                } else {
-                    throw new Error('Server responded with an error');
-                }
-            } catch (error) {
-                console.error('Email sending failed:', error);
-                // Fallback to mailto if API fails
-                showMessage('error', `We couldn't send the email automatically. <a href="#" onclick="fallbackToMailto('${type}'); return false;">Click here</a> to open your email client instead.`);
-            } finally {
-                setButtonLoading(buttonId, false);
-            }
-        }
-
-        function fallbackToMailto(type) {
-            const school = document.getElementById('schoolName').value.trim();
-            const schoolEmail = document.getElementById('schoolEmail').value.trim();
-            const parentEmail = document.getElementById('parentEmail').value.trim();
             const body = generateChecklistEmailBody();
+            const subject = `[Your Copy] Student Safety Standards Inquiry - ${school}`;
             
-            let subject, toEmail;
-            if (type === 'school') {
-                subject = `Student Safety Standards Inquiry - ${school}`;
-                toEmail = schoolEmail || '';
-            } else {
-                subject = `[Your Copy] Student Safety Standards Inquiry - ${school}`;
-                toEmail = parentEmail || '';
-            }
-            
-            let mailtoLink = `mailto:${toEmail}?`;
+            let mailtoLink = `mailto:${parentEmail}?`;
             mailtoLink += `cc=swiss@mysafespaces.org&`;
             mailtoLink += `subject=${encodeURIComponent(subject)}&`;
             mailtoLink += `body=${encodeURIComponent(body)}`;
-            
+
             window.location.href = mailtoLink;
         }
 
@@ -1253,4 +1162,20 @@ SWISS Certification | mysafespaces.org/swiss`;
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    if (entry.target.id === 'counter1') anim
+                    if (entry.target.id === 'counter1') animateCounter(entry.target, 13892);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.crisis-grid, .paradox-cards, .paradox-bottom, .checklist-form-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        const counter = document.getElementById('counter1');
+        if (counter) observer.observe(counter);
+    </script>
+</body>
+</html>
