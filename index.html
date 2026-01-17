@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parents for Safe Schools | Beyond Good Intentions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #0D1B2A;
@@ -26,10 +26,11 @@
         
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
         nav.scrolled { background: rgba(13, 27, 42, 0.98); padding: 16px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
-        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo-img { height: 50px; width: auto; transition: transform 0.3s; }
-        .nav-logo-text-img { height: 40px; width: auto; transition: transform 0.3s; }
-        .nav-logo:hover .nav-logo-img, .nav-logo:hover .nav-logo-text-img { transform: scale(1.05); }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo-text { display: flex; flex-direction: column; line-height: 0.9; }
+        .logo-line1 { font-family: 'Pinyon Script', cursive; font-size: 24px; color: rgba(255,255,255,0.7); }
+        .logo-line2 { font-family: 'Pinyon Script', cursive; font-size: 36px; color: var(--white); }
+        .nav-logo:hover .logo-line1, .nav-logo:hover .logo-line2 { color: var(--amber-light); }
         .nav-links { display: flex; align-items: center; gap: 40px; }
         .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--amber-light); }
@@ -154,9 +155,10 @@
 
         footer { background: var(--navy-light); padding: 40px 60px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .footer-logo { display: flex; align-items: center; gap: 12px; }
-        .footer-logo-img { height: 60px; width: auto; }
-        .footer-logo-text-img { height: 45px; width: auto; }
+        .footer-logo { display: flex; align-items: center; }
+        .footer-logo-text { display: flex; flex-direction: column; line-height: 0.9; }
+        .footer-line1 { font-family: 'Pinyon Script', cursive; font-size: 20px; color: rgba(255,255,255,0.6); }
+        .footer-line2 { font-family: 'Pinyon Script', cursive; font-size: 30px; color: var(--white); }
         .footer-text { color: rgba(255,255,255,0.5); font-size: 14px; }
         .footer-links { display: flex; gap: 32px; }
         .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
@@ -179,8 +181,8 @@
             section { padding: 60px 24px; }
             nav { padding: 16px 20px; }
             .nav-links { display: none; }
-            .nav-logo-img { height: 40px; }
-            .nav-logo-text-img { height: 30px; }
+            .logo-line1 { font-size: 18px; }
+            .logo-line2 { font-size: 26px; }
             .hero-content { padding: 100px 24px 60px; }
             .hero-stats { grid-template-columns: 1fr; gap: 20px; }
             .hero-stat-number { font-size: 36px; }
@@ -191,8 +193,8 @@
             .cta-trust { flex-direction: column; gap: 20px; }
             .footer-content { flex-direction: column; gap: 24px; text-align: center; }
             .footer-logo { justify-content: center; }
-            .footer-logo-img { height: 50px; }
-            .footer-logo-text-img { height: 35px; }
+            .footer-line1 { font-size: 16px; }
+            .footer-line2 { font-size: 24px; }
             .checklist-form { padding: 24px; }
             .checklist-category { padding: 20px; }
             .category-header { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -204,8 +206,10 @@
 <body>
     <nav id="navbar">
         <a href="#" class="nav-logo">
-            <img src="logo.png" alt="Parents for Safe Schools" class="nav-logo-img">
-            <img src="logo2.png" alt="Parents for Safe Schools" class="nav-logo-text-img">
+            <div class="nav-logo-text">
+                <span class="logo-line1">Parents for</span>
+                <span class="logo-line2">Safe Schools</span>
+            </div>
         </a>
         <div class="nav-links">
             <a href="#crisis">The Crisis</a>
@@ -552,19 +556,21 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="logo.png" alt="Parents for Safe Schools" class="footer-logo-img">
-                <img src="logo2.png" alt="Parents for Safe Schools" class="footer-logo-text-img">
+                <div class="footer-logo-text">
+                    <span class="footer-line1">Parents for</span>
+                    <span class="footer-line2">Safe Schools</span>
+                </div>
             </div>
             <p class="footer-text">Advocating for evidence-based institutional safety standards</p>
             <div class="footer-links">
-                <a href="mailto:swiss@mysafespaces.org">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#116266786262517c68627077746261707274623f7e6376">Contact</a>
                 <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Certification</a>
                 <a href="https://mindfuldignity.com/" target="_blank">Mindful Dignity Lab</a>
             </div>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -797,7 +803,4 @@ SWISS Certification | mysafespaces.org/swiss`;
         }, { threshold: 0.2 });
 
         document.querySelectorAll('.crisis-grid, .paradox-cards, .paradox-bottom, .checklist-form-container').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el)
+            el.style.op
