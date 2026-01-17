@@ -169,10 +169,18 @@
         .note-icon { width: 24px; height: 24px; min-width: 24px; }
         .note-icon svg { width: 24px; height: 24px; stroke: var(--amber-dark); }
         .form-note p { font-size: 14px; color: var(--text); margin: 0; line-height: 1.6; }
+        .form-note p strong { color: var(--amber-dark); }
         
         .form-actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
         .btn-tertiary { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
         .btn-tertiary:hover { background: var(--navy); color: var(--white); }
+        .btn.loading { opacity: 0.7; pointer-events: none; }
+        .btn.loading span { display: none; }
+        .btn.loading::after { content: 'Sending...'; }
+        .form-message { margin-top: 20px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.5; }
+        .form-message.success { background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(34, 139, 34, 0.05)); border: 1px solid rgba(34, 139, 34, 0.3); color: #1a5c1a; }
+        .form-message.error { background: linear-gradient(135deg, rgba(139, 58, 58, 0.1), rgba(139, 58, 58, 0.05)); border: 1px solid rgba(139, 58, 58, 0.3); color: #8B3A3A; }
+        .form-message svg { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
 
         footer { background: var(--navy-light); padding: 40px 60px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -421,17 +429,17 @@
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check1" value="Written, board-approved policies for student wellbeing exist">
+                                    <input type="checkbox" name="check1" value="Written, board-approved policies for student wellbeing exist" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check1">Does the school have written, board-approved policies for student wellbeing?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check2" value="Grievance redressal mechanisms are documented and accessible">
+                                    <input type="checkbox" name="check2" value="Grievance redressal mechanisms are documented and accessible" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check2">Are grievance redressal mechanisms documented and accessible?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check3" value="Anti-bullying policy addresses teacher-student interactions">
+                                    <input type="checkbox" name="check3" value="Anti-bullying policy addresses teacher-student interactions" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check3">Is there an anti-bullying policy that addresses teacher-student interactions?</span>
                                 </label>
@@ -447,17 +455,17 @@
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check4" value="Teachers have received mental health gatekeeper training">
+                                    <input type="checkbox" name="check4" value="Teachers have received mental health gatekeeper training" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check4">What percentage of teachers have received mental health gatekeeper training?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check5" value="Training hours for teachers are documented">
+                                    <input type="checkbox" name="check5" value="Training hours for teachers are documented" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check5">How many hours of training have teachers received?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check6" value="Training is accredited by a recognized professional body">
+                                    <input type="checkbox" name="check6" value="Training is accredited by a recognized professional body" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check6">Is this training accredited by a recognized professional body?</span>
                                 </label>
@@ -473,17 +481,17 @@
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check7" value="Documented crisis response protocol exists">
+                                    <input type="checkbox" name="check7" value="Documented crisis response protocol exists" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check7">Is there a documented crisis response protocol?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check8" value="Trained crisis response team exists">
+                                    <input type="checkbox" name="check8" value="Trained crisis response team exists" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check8">Does the school have a trained crisis response team?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check9" value="Crisis simulation exercises are conducted regularly">
+                                    <input type="checkbox" name="check9" value="Crisis simulation exercises are conducted regularly" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check9">When was the last crisis simulation exercise conducted?</span>
                                 </label>
@@ -499,17 +507,17 @@
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check10" value="Confidential reporting mechanisms available for students">
+                                    <input type="checkbox" name="check10" value="Confidential reporting mechanisms available for students" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check10">Do students have access to confidential reporting mechanisms?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check11" value="Escalation paths are clearly defined and documented">
+                                    <input type="checkbox" name="check11" value="Escalation paths are clearly defined and documented" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check11">Are escalation paths clearly defined and documented?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check12" value="Designated wellbeing coordinator exists">
+                                    <input type="checkbox" name="check12" value="Designated wellbeing coordinator exists" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check12">Who is the designated wellbeing coordinator?</span>
                                 </label>
@@ -525,12 +533,12 @@
                             </div>
                             <div class="checklist-items">
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check13" value="School is certified by third-party safety standards body">
+                                    <input type="checkbox" name="check13" value="School is certified by third-party safety standards body" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check13">Is the school certified by any third-party safety standards body?</span>
                                 </label>
                                 <label class="checklist-item">
-                                    <input type="checkbox" name="check14" value="Annual audits of safety protocols are conducted">
+                                    <input type="checkbox" name="check14" value="Annual audits of safety protocols are conducted" checked>
                                     <span class="checkmark"></span>
                                     <span class="item-text" data-i18n="check14">Are there annual audits of safety protocols?</span>
                                 </label>
@@ -542,15 +550,15 @@
                         <div class="note-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </div>
-                        <p data-i18n="formNote">Check the items you want to inquire about. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (swiss@mysafespaces.org) for advocacy tracking.</p>
+                        <p data-i18n="formNote"><strong>All items are selected by default.</strong> Uncheck any items you are not interested in or do not consider important for your inquiry. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93e0e4fae0e0d3feeae0f2f5f6e0e3f2f0f6e0bdfce1f4">[email&#160;protected]</a>) for advocacy tracking.</p>
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn btn-primary" onclick="sendChecklistEmail()">
+                        <button type="button" class="btn btn-primary" id="btnSendSchool" onclick="sendChecklistEmail('school')">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             <span data-i18n="btnSendEmail">Send to School</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" onclick="sendCopyToSelf()">
+                        <button type="button" class="btn btn-secondary" id="btnSendSelf" onclick="sendChecklistEmail('self')">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
                             <span data-i18n="btnSendSelf">Send Copy to Myself</span>
                         </button>
@@ -559,6 +567,8 @@
                             <span data-i18n="btnDownload">Download Checklist</span>
                         </button>
                     </div>
+
+                    <div id="formMessage" class="form-message" style="display: none;"></div>
                 </form>
             </div>
         </div>
@@ -575,7 +585,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         <span data-i18n="ctaBtn1">Download Parent Checklist</span>
                     </a>
-                    <a href="mailto:swiss@mysafespaces.org" class="btn btn-secondary">
+                    <a href="/cdn-cgi/l/email-protection#097a7e607a7a4964707a686f6c7a79686a6c7a27667b6e" class="btn btn-secondary">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         <span data-i18n="ctaBtn2">Contact Us</span>
                     </a>
@@ -609,14 +619,14 @@
             </div>
             <p class="footer-text" data-i18n="footerText">Advocating for evidence-based institutional safety standards</p>
             <div class="footer-links">
-                <a href="mailto:swiss@mysafespaces.org" data-i18n="footerContact">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#6c1f1b051f1f2c01151f0d0a091f1c0d0f091f42031e0b" data-i18n="footerContact">Contact</a>
                 <a href="https://mysafespaces.org/swiss" target="_blank">SWISS Certification</a>
                 <a href="https://mindfuldignity.com/" target="_blank" data-i18n="footerLab">Mindful Dignity Lab</a>
             </div>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const translations = {
             en: {
                 siteName: "Parents for Safe Schools",
@@ -680,7 +690,7 @@
                 check12: "Who is the designated wellbeing coordinator?",
                 check13: "Is the school certified by any third-party safety standards body?",
                 check14: "Are there annual audits of safety protocols?",
-                formNote: "Check the items you want to inquire about. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (swiss@mysafespaces.org) for advocacy tracking.",
+                formNote: "<strong>All items are selected by default.</strong> Uncheck any items you are not interested in or do not consider important for your inquiry. Your completed checklist will be included in the email body. A copy will also be sent to SWISS (swiss@mysafespaces.org) for advocacy tracking.",
                 btnSendEmail: "Send to School",
                 btnSendSelf: "Send Copy to Myself",
                 btnDownload: "Download Checklist",
@@ -1084,42 +1094,124 @@ SWISS Certification | mysafespaces.org/swiss`;
             return body;
         }
 
-        function sendChecklistEmail() {
-            if (!validateMandatoryFields()) return;
-
-            const school = document.getElementById('schoolName').value.trim();
-            const schoolEmail = document.getElementById('schoolEmail').value.trim();
-            const body = generateChecklistEmailBody();
-            const subject = `Student Safety Standards Inquiry - ${school}`;
-            
-            let mailtoLink = `mailto:${schoolEmail || ''}?`;
-            mailtoLink += `cc=swiss@mysafespaces.org&`;
-            mailtoLink += `subject=${encodeURIComponent(subject)}&`;
-            mailtoLink += `body=${encodeURIComponent(body)}`;
-
-            window.location.href = mailtoLink;
+        function showMessage(type, message) {
+            const msgDiv = document.getElementById('formMessage');
+            msgDiv.className = `form-message ${type}`;
+            const icon = type === 'success' 
+                ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+                : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+            msgDiv.innerHTML = icon + message;
+            msgDiv.style.display = 'block';
+            msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        function sendCopyToSelf() {
+        function setButtonLoading(buttonId, loading) {
+            const btn = document.getElementById(buttonId);
+            if (loading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+
+        async function sendChecklistEmail(type) {
             if (!validateMandatoryFields()) return;
 
+            const grade = document.getElementById('studentGrade').value.trim();
             const school = document.getElementById('schoolName').value.trim();
+            const schoolEmail = document.getElementById('schoolEmail').value.trim();
             const parentEmail = document.getElementById('parentEmail').value.trim();
-            
-            if (!parentEmail) {
+
+            if (type === 'self' && !parentEmail) {
                 alert('Please enter your email address to send a copy to yourself.');
                 document.getElementById('parentEmail').focus();
                 return;
             }
 
+            const buttonId = type === 'school' ? 'btnSendSchool' : 'btnSendSelf';
+            setButtonLoading(buttonId, true);
+
+            const emailBody = generateChecklistEmailBody();
+            const subject = type === 'self' 
+                ? `[Your Copy] Student Safety Standards Inquiry - ${school}`
+                : `Student Safety Standards Inquiry - ${school}`;
+
+            // Determine recipients
+            const recipients = [];
+            if (type === 'school' && schoolEmail) {
+                recipients.push(schoolEmail);
+            }
+            if (type === 'self' && parentEmail) {
+                recipients.push(parentEmail);
+            }
+
+            const emailData = {
+                from: 'safetyteam@parentsforsafeschools.in',
+                to: recipients,
+                cc: ['swiss@mysafespaces.org'],
+                subject: subject,
+                body: emailBody,
+                studentGrade: grade,
+                schoolName: school,
+                schoolEmail: schoolEmail || 'Not provided',
+                parentEmail: parentEmail || 'Not provided',
+                timestamp: new Date().toISOString(),
+                type: type
+            };
+
+            try {
+                // Send via API endpoint
+                const response = await fetch('https://api.parentsforsafeschools.in/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(emailData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (type === 'school') {
+                        showMessage('success', schoolEmail 
+                            ? `Your inquiry has been sent to <strong>${school}</strong> (${schoolEmail}) and copied to SWISS. You should receive a confirmation shortly.`
+                            : `Your inquiry has been sent to SWISS (swiss@mysafespaces.org). They will help forward it to your school.`);
+                    } else {
+                        showMessage('success', `A copy of your inquiry has been sent to <strong>${parentEmail}</strong>. Please check your inbox (and spam folder).`);
+                    }
+                } else {
+                    throw new Error('Server responded with an error');
+                }
+            } catch (error) {
+                console.error('Email sending failed:', error);
+                // Fallback to mailto if API fails
+                showMessage('error', `We couldn't send the email automatically. <a href="#" onclick="fallbackToMailto('${type}'); return false;">Click here</a> to open your email client instead.`);
+            } finally {
+                setButtonLoading(buttonId, false);
+            }
+        }
+
+        function fallbackToMailto(type) {
+            const school = document.getElementById('schoolName').value.trim();
+            const schoolEmail = document.getElementById('schoolEmail').value.trim();
+            const parentEmail = document.getElementById('parentEmail').value.trim();
             const body = generateChecklistEmailBody();
-            const subject = `[Your Copy] Student Safety Standards Inquiry - ${school}`;
             
-            let mailtoLink = `mailto:${parentEmail}?`;
+            let subject, toEmail;
+            if (type === 'school') {
+                subject = `Student Safety Standards Inquiry - ${school}`;
+                toEmail = schoolEmail || '';
+            } else {
+                subject = `[Your Copy] Student Safety Standards Inquiry - ${school}`;
+                toEmail = parentEmail || '';
+            }
+            
+            let mailtoLink = `mailto:${toEmail}?`;
             mailtoLink += `cc=swiss@mysafespaces.org&`;
             mailtoLink += `subject=${encodeURIComponent(subject)}&`;
             mailtoLink += `body=${encodeURIComponent(body)}`;
-
+            
             window.location.href = mailtoLink;
         }
 
@@ -1161,20 +1253,4 @@ SWISS Certification | mysafespaces.org/swiss`;
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    if (entry.target.id === 'counter1') animateCounter(entry.target, 13892);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.crisis-grid, .paradox-cards, .paradox-bottom, .checklist-form-container').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el);
-        });
-
-        const counter = document.getElementById('counter1');
-        if (counter) observer.observe(counter);
-    </script>
-</body>
-</html>
+                    if (entry.target.id === 'counter1') anim
